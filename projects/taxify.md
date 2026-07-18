@@ -4,7 +4,7 @@
 
 ## Snapshot
 
-Project details are not yet documented in this hub. The repository is tracked so approved product context and brainstorming can be preserved here over time.
+Taxify is archived. No further discovery or implementation is planned unless the project is explicitly reactivated.
 
 ## Links
 
@@ -14,13 +14,13 @@ Project details are not yet documented in this hub. The repository is tracked so
 
 ## Current State
 
-- Lifecycle: Not documented
+- Lifecycle: Archived
 - Stack: Not documented
-- Current priority: Not documented
+- Current priority: None
 
 ## Current Focus
 
-Not documented.
+None. Project archived by user decision.
 
 ## Brainstorming
 
@@ -28,20 +28,18 @@ _No durable brainstorming notes captured yet._
 
 ## Decisions
 
-- None documented.
+- Archive Taxify.
+- Ignore the previously identified seeded-credential remediation task while the project remains archived.
+- Do not resume work without explicit reactivation.
 
 ## Assumptions
 
-- None recorded. Do not infer the product scope from the project name alone.
+- Archiving does not verify or remediate any previously identified security risk.
 
 ## Open Questions
 
-- What problem does Taxify solve?
-- Who is the intended user?
-- What is the current lifecycle state?
-- What is the next meaningful milestone?
+- None while archived.
 
 ## Next Actions
 
-- Add a concise overview after repository review or confirmed user context.
-- Record current status, focus, blockers, and next actions.
+- None. Reassess security and deployment state before any future reactivation.
