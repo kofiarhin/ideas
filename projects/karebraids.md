@@ -24,7 +24,7 @@ The business is based in Birmingham, UK.
 
 ## Current Focus
 
-Not documented.
+Continue from the current live/main design. The superseded dark-theme redesign is closed.
 
 ## Brainstorming
 
@@ -36,10 +36,11 @@ _No durable brainstorming notes captured yet._
 - Booking slots are protected against duplicates by service, date, and time.
 - Services are seeded through an idempotent database workflow.
 - Production uses same-origin `/api` requests in the normal Vercel deployment.
+- PR #1 was closed without merging; do not revive the broad dark salon redesign without a new approved direction.
 
 ## Assumptions
 
-- None recorded.
+- Current `main` and the live site remain the accepted visual baseline.
 
 ## Open Questions
 
@@ -50,4 +51,4 @@ _No durable brainstorming notes captured yet._
 ## Next Actions
 
 - Document the current booking and operational priorities.
-- Record the next approved customer-facing or admin improvement.
+- Define any future redesign as a fresh, bounded request based on current `main`.
