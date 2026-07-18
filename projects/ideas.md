@@ -20,7 +20,7 @@ Ideas Hub is this Markdown-first repository for brainstorming, project context, 
 
 ## Current Focus
 
-Not documented.
+Review and operate the first durable Architect portfolio run while preserving approval, specification, discovery, security, and verification gates.
 
 ## Architect Command System
 
@@ -29,7 +29,9 @@ Not documented.
 - [`architect/README.md`](../architect/README.md)
 - [`architect/commands/good-morning.md`](../architect/commands/good-morning.md)
 - [`architect/commands/run-all-tasks.md`](../architect/commands/run-all-tasks.md)
-- `architect/runs/<run-id>/`
+- [`architect/runs/2026-07-18-001/audit.md`](../architect/runs/2026-07-18-001/audit.md)
+- [`architect/runs/2026-07-18-001/tasks.md`](../architect/runs/2026-07-18-001/tasks.md)
+- [`architect/runs/2026-07-18-001/report.md`](../architect/runs/2026-07-18-001/report.md)
 
 ### Decisions
 
@@ -46,17 +48,19 @@ Not documented.
 
 ### Current State
 
-- Initial command definitions are documented.
-- No operational Architect run has been executed yet.
+- The first operational Architect run is `2026-07-18-001`.
+- Its portfolio audit and durable task queue exist on the default branch.
+- `run all tasks` began processing the queue on 2026-07-18.
+- Connector-backed context updates can be isolated and proposed through a draft pull request.
+- Local clean-checkout verification is currently limited because the execution environment cannot resolve `github.com`; tasks requiring installed dependencies and command execution remain unverified rather than being marked complete.
 
 ### Next Actions
 
-1. Add the compact command-resolution instructions to the ChatGPT Architect project settings.
-2. Invoke `good morning`.
-3. Review generated classifications and approval gates.
-4. Invoke `run all tasks` on the durable queue.
-5. Refine workflows based on the first completed run.
-
+1. Review the run report and the draft Ideas Hub context-update pull request.
+2. Resolve the P0 security approval packets before security-sensitive mutation.
+3. Provide an execution environment with repository checkout and dependency access for ProjectOS and Brain verification tasks.
+4. Approve or answer the remaining discovery, specification, PR, product, and policy gates.
+5. Resume with `run all tasks` after approvals or verification access changes.
 
 ## Brainstorming
 
@@ -74,8 +78,9 @@ _No durable brainstorming notes captured yet._
 ## Open Questions
 
 - What maintenance cadence should this hub follow?
-- Which project notes need the next documentation pass?
+- Which project should be the daily focus after critical security work is resolved or explicitly deferred?
 
 ## Next Actions
 
-- Keep project context and links current as approved project information changes.
+- Keep project context and links current as approved and verified project information changes.
+- Use the active run report as the exact resume point for execution.
