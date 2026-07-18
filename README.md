@@ -1,53 +1,49 @@
-# Project List
+# Ideas Hub
 
-A central index of active projects and their GitHub repositories.
+A Markdown-first, tool-independent workspace for brainstorming, project context, and durable reference notes.
 
-## Piano360
+GitHub is the source of truth. AI chats and coding agents are working interfaces: they can read this repository for context, help develop ideas, and save approved outcomes back here.
 
-- HTTPS: https://github.com/kofiarhin/piano360
-- SSH: `git@github.com:kofiarhin/piano360.git`
+## Start Here
 
-## Brain
+1. [`AGENTS.md`](AGENTS.md) — rules for ChatGPT, Codex, Claude, Copilot, and other agents.
+2. [`CONTEXT.md`](CONTEXT.md) — quick overview of the workspace and current landscape.
+3. [`PROJECTS.md`](PROJECTS.md) — canonical index of all tracked projects.
+4. [`INBOX.md`](INBOX.md) — raw brainstorming and unorganized notes.
+5. [`projects/`](projects/) — detailed notes for each project.
 
-- HTTPS: https://github.com/kofiarhin/brain
-- SSH: `git@github.com:kofiarhin/brain.git`
+## Simple Workflow
 
-## KareBraids
+### Load the hub
 
-- HTTPS: https://github.com/kofiarhin/karebraids
-- SSH: `git@github.com:kofiarhin/karebraids.git`
+Ask an agent to read `AGENTS.md`, `CONTEXT.md`, and `PROJECTS.md`, then open only the project files relevant to the task.
 
-## Amas Kitchen
+### Brainstorm
 
-- HTTPS: https://github.com/kofiarhin/amas-kitchen
-- SSH: `git@github.com:kofiarhin/amas-kitchen.git`
+Use chat to explore ideas, compare options, research questions, or refine a project direction. Rough thoughts can be proposed for `INBOX.md`.
 
-## DevKofi
+### Save useful outcomes
 
-- HTTPS: https://github.com/kofiarhin/devkofi
-- SSH: `git@github.com:kofiarhin/devkofi.git`
+After reviewing the proposed notes, explicitly approve the write with language such as:
 
-## Codex Workflow
+- `capture this`
+- `save to Brain`
+- `update the hub`
+- `commit these notes`
 
-- HTTPS: https://github.com/kofiarhin/codex-workflow-kit
-- SSH: `git@github.com:kofiarhin/codex-workflow-kit.git`
+Agents must not write to this repository without explicit approval.
 
-## Taxify
+## Source-of-Truth Rules
 
-- HTTPS: https://github.com/kofiarhin/taxify
-- SSH: `git@github.com:kofiarhin/taxify.git`
+- `PROJECTS.md` is the only canonical project index.
+- `CONTEXT.md` is the fast workspace briefing and should stay concise.
+- `INBOX.md` contains unprocessed thoughts, not confirmed plans.
+- `projects/<project>.md` contains durable project-specific context.
+- Repository history provides change tracking and recovery.
 
-## Kflix
+## Design Principles
 
-- HTTPS: https://github.com/kofiarhin/kflix
-- SSH: `git@github.com:kofiarhin/kflix.git`
-
-## Banging Prices
-
-- HTTPS: https://github.com/kofiarhin/banging-prices
-- SSH: `git@github.com:kofiarhin/banging-prices.git`
-
-## MoggOff
-
-- HTTPS: https://github.com/kofiarhin/moggedoff
-- SSH: `git@github.com:kofiarhin/moggedoff.git`
+- Simple Markdown over custom software.
+- Useful to humans and any GitHub-enabled AI agent.
+- Facts, decisions, assumptions, and ideas stay clearly separated.
+- Start small and add structure only when the workspace needs it.
