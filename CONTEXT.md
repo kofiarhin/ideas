@@ -45,6 +45,10 @@ Default engineering preferences unless a project says otherwise:
 - **Piano360** — a guided piano-learning course application.
 - **DevKofi** — a MERN mentorship and learning platform.
 
+### Games and interactive experiences
+
+- **Memory Sequence Game** — an exploring responsive browser game where players memorize and reconstruct increasingly long visual card sequences.
+
 ### Business and product projects
 
 - **KareBraids** — a braid-service browsing and booking platform.
