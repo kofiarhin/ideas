@@ -6,17 +6,21 @@
 
 - **Lifecycle:** Exploring
 - **Working title:** Memory Sequence Game
-- **Planned repository name:** `memory-game`
+- **Repository:** `kofiarhin/memory-game`
 - **Type:** Responsive browser game
 - **Audience:** General players aged 8+
 - **Purpose:** A casual visual memory-training game where players memorize and reconstruct increasingly long card sequences.
-- **Status:** MVP concept and detailed PRD completed; application repository creation remains blocked.
+- **Status:** MVP concept and detailed PRD completed; application repository created and awaiting its first commit.
 
 ## Links
 
-- **Planned repository:** `https://github.com/kofiarhin/memory-game` — not created as of 2026-07-18
+- **Repository:** https://github.com/kofiarhin/memory-game
+- **HTTPS clone:** https://github.com/kofiarhin/memory-game.git
+- **SSH remote:** `git@github.com:kofiarhin/memory-game.git`
+- **Default branch:** `main`
+- **Visibility:** Public
 - **Live application:** Not available
-- **Product requirements document:** `memory-game-PRD.md` generated outside GitHub; awaiting commit to the planned repository's `main` branch
+- **Product requirements document:** `memory-game-PRD.md` generated outside GitHub; awaiting commit as `PRD.md` on `main`
 - **Ideas Hub:** [Project index](../PROJECTS.md)
 - **Ideas Hub draft PR:** https://github.com/kofiarhin/ideas/pull/1
 
@@ -30,7 +34,7 @@ The game begins with three cards. Every correct round adds one card. The player 
 
 A detailed 669-line product requirements document was generated on 2026-07-18. It covers product goals, non-goals, audience, gameplay rules, scoring, state management, persistence, screens, accessibility, responsiveness, technical direction, functional requirements, acceptance criteria, testing, risks, milestones, and definition of done.
 
-The planned application repository is `kofiarhin/memory-game`. Multiple GitHub lookups returned `404 Not Found`, confirming that the repository does not currently exist or is not accessible to the connected GitHub app. The available connector actions can edit existing repositories but do not expose repository creation. The PRD has therefore not been committed to a repository or to a `main` branch.
+The public application repository `kofiarhin/memory-game` has now been created. GitHub reports `main` as the default branch and confirms that the connected GitHub app has administrative and push access. The repository is currently empty and has not received its first commit, so the completed PRD and application implementation are not yet stored there.
 
 No application implementation currently exists.
 
@@ -43,14 +47,16 @@ No application implementation currently exists.
 - Added the project to the Ideas Hub project index and workspace landscape.
 - Created this durable project note with decisions, assumptions, scope, acceptance criteria, risks, and future ideas.
 - Generated a full PRD as `memory-game-PRD.md`.
-- Selected `memory-game` as the planned GitHub repository name.
-- Attempted repository creation and access through the connected GitHub tooling.
-- Verified that `kofiarhin/memory-game` does not currently exist or is not available to the connected GitHub app.
+- Selected `memory-game` as the GitHub repository name.
+- Created the public repository `kofiarhin/memory-game`.
+- Configured `main` as the repository's default branch.
+- Confirmed the connected GitHub app has administrative and push access.
+- Recorded the HTTPS clone URL and SSH remote.
 - Opened Ideas Hub draft PR #1 to review the project documentation.
 
 ## Current Focus
 
-Unblock repository creation, commit the completed PRD to the new repository's `main` branch, then begin the responsive web MVP.
+Commit the completed PRD to the new repository's `main` branch, initialise the project, and begin the responsive web MVP.
 
 ## Core Gameplay
 
@@ -75,7 +81,8 @@ Unblock repository creation, commit the completed PRD to the new repository's `m
 - Position the product as casual memory training, not a medical or therapeutic tool.
 - Use one endless progression mode for the MVP.
 - Do not require an account.
-- Use `memory-game` as the planned repository name.
+- Use `memory-game` as the repository name.
+- Use `main` as the default branch.
 
 ### Cards and playback
 
@@ -205,8 +212,8 @@ Store the following locally in the browser:
 
 ## Risks And Edge Cases
 
-- Repository creation is currently blocked because the connected GitHub tooling cannot create repositories and `kofiarhin/memory-game` does not yet exist.
-- The completed PRD is not yet stored in a durable GitHub repository.
+- The repository is empty until the initial `main` commit is created.
+- The completed PRD is not yet stored in the application repository.
 - Repeated cards must remain independently selectable when duplicates are required.
 - The shuffled recall pool must include the exact card quantities needed to rebuild the sequence.
 - Rapid taps, clicks, or key presses must not bypass playback or transition locks.
@@ -242,10 +249,10 @@ These are ideas only and are not approved scope.
 
 ## Next Actions
 
-1. Create `kofiarhin/memory-game` with `main` as the default branch and initialise it with a README.
-2. Grant the connected ChatGPT GitHub app access to the repository if required.
-3. Commit the completed `memory-game-PRD.md` as `PRD.md` directly to `main`.
-4. Update this project note and `PROJECTS.md` with the confirmed repository link.
+1. Create the repository's initial commit on `main`.
+2. Commit the completed `memory-game-PRD.md` as `PRD.md` directly to `main`.
+3. Add a README describing the project and local setup.
+4. Initialise React, Vite, TypeScript, Tailwind CSS, Vitest, and React Testing Library.
 5. Produce the responsive UX and visual direction.
 6. Confirm the scoring formula and maximum sequence length.
 7. Implement sequence-generation and validation logic test-first.
