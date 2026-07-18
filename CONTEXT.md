@@ -42,6 +42,7 @@ Default engineering preferences unless a project says otherwise:
 - **Codex Workflow Kit** — a reusable workflow system for AI coding agents.
 - **Ideas Hub** — this repository; the shared reference and brainstorming layer across tools.
 - **Architect Command System** — Ideas Hub-backed workflows for portfolio auditing, durable task queues, approval-aware execution, verification, reporting, and context maintenance.
+- **Archon** — an active AI-powered software architecture studio with an approved MVP specification; Phase 1 foundation implementation is next.
 
 ### Learning and mentorship
 
