@@ -11,6 +11,7 @@ This is the only canonical project index for the Ideas Hub.
 | [KareBraids](projects/karebraids.md) | Braid services, availability, booking, enquiries, and admin management | https://github.com/kofiarhin/karebraids | https://karebraids.vercel.app/ | MERN booking platform |
 | [Amas Kitchen](projects/amas-kitchen.md) | Project details not yet documented | https://github.com/kofiarhin/amas-kitchen | — | Needs overview and current status |
 | [DevKofi](projects/devkofi.md) | MERN mentorship and learning platform | https://github.com/kofiarhin/devkofi | https://devkofi.com/ | Includes mentee onboarding and internal tooling |
+| [Memory Sequence Game](projects/memory-sequence-game.md) | Responsive visual sequence-recall browser game | — | — | Exploring; approved MVP concept |
 | [Ideas Hub](projects/ideas.md) | Markdown-first brainstorming workspace and durable cross-tool reference layer | https://github.com/kofiarhin/ideas | — | This repository |
 | [Codex Workflow Kit](projects/codex-workflow.md) | Reusable AI engineering workflow system | https://github.com/kofiarhin/codex-workflow-kit | — | Supports Codex, Claude Code, Cursor, and similar agents |
 | [Taxify](projects/taxify.md) | Project details not yet documented | https://github.com/kofiarhin/taxify | — | Needs overview and current status |
