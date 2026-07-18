@@ -19,7 +19,7 @@ This is the only canonical project index for the Ideas Hub.
 | [Banging Prices](projects/banging-prices.md) | Project details not yet documented | https://github.com/kofiarhin/banging-prices | — | Needs overview and current status |
 | [MoggOff](projects/moggoff.md) | Project details not yet documented | https://github.com/kofiarhin/moggedoff | — | Repository slug differs from project display name |
 | [ProjectOS](projects/projectos.md) | CLI-first autonomous development operating system for a multi-repository local workspace | https://github.com/kofiarhin/projectos | — | Phase 0 foundation validated; Phase 1 Domain and Persistence is next |
-| [Archon](projects/archon.md) | AI-powered software architecture studio that turns product ideas into implementation blueprints | Not created | — | Exploring; repository and PRD setup are pending |
+| [Archon](projects/archon.md) | AI-powered software architecture studio that turns product ideas into implementation blueprints | https://github.com/kofiarhin/archon | — | Exploring; initial PRD and architecture are proposed in repository PR #1 |
 
 ## Lifecycle Guidance
 
