@@ -6,7 +6,7 @@ This is the only canonical project index for the Ideas Hub.
 
 | Project | Summary | Repository | Live | Notes |
 | --- | --- | --- | --- | --- |
-| [Piano360](projects/piano360.md) | Guided piano-learning course application | https://github.com/kofiarhin/piano360 | — | MongoDB-backed course MVP |
+| [Piano360](projects/piano360.md) | Guided piano-learning course application | https://github.com/kofiarhin/piano360 | — | Guided Learning Mode specified and planned; implementation audit next |
 | [Brain](projects/brain.md) | MERN personal operating system with AI-assisted workflows | https://github.com/kofiarhin/brain | https://brain-pi-black.vercel.app/ | MongoDB is the durable application memory |
 | [KareBraids](projects/karebraids.md) | Braid services, availability, booking, enquiries, and admin management | https://github.com/kofiarhin/karebraids | https://karebraids.vercel.app/ | MERN booking platform |
 | [Amas Kitchen](projects/amas-kitchen.md) | Project details not yet documented | https://github.com/kofiarhin/amas-kitchen | — | Needs overview and current status |
