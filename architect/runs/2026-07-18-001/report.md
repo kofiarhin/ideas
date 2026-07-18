@@ -5,136 +5,124 @@
 - **Run ID:** `2026-07-18-001`
 - **Command:** `run all tasks`
 - **Execution date:** 2026-07-18 Europe/London
-- **Run status:** Paused — approvals, discovery, specification, dependencies, and executable verification access remain
+- **Run status:** Paused — no remaining eligible implementation can be safely completed in the current environment
 - **Source audit:** [`audit.md`](audit.md)
 - **Task queue:** [`tasks.md`](tasks.md)
-- **Ideas Hub execution branch:** `architect/2026-07-18-001/ideas`
-- **Source-code implementation:** None
-- **Pull-request merges or closures:** None
+- **Source-code implementation in this resume pass:** None
 - **Security-sensitive mutation:** None
 
-## Queue Validation
+## Resume Validation
 
-The durable queue exists and contains 24 tasks. Four were marked `ready` at execution start:
+The durable queue and prior execution report were re-read under the registered `run all tasks` workflow. Repository and pull-request state has changed since the original audit and earlier execution pass.
 
-1. `2026-07-18-001-projectos-T003` — independently verify ProjectOS Phase 0 from a clean checkout.
-2. `2026-07-18-001-brain-T006` — verify Brain PR #9 against current main.
-3. `2026-07-18-001-amas-kitchen-T012` — sync confirmed Amas Kitchen context into Ideas Hub.
-4. `2026-07-18-001-ideas-T017` — record the first operational Architect run in Ideas Hub context.
+The task queue remains the historical authoritative queue, while this report records the latest execution delta where the connector cannot safely patch individual task entries in the 585-line queue.
 
-The queue remains valid. Security, product, PR disposition, lifecycle, specification, deployment, and dependency-policy gates were preserved.
+## User-Approved Dispositions Applied
 
-## Execution Order And Outcomes
+### Archived projects
 
-### 1. `2026-07-18-001-projectos-T003`
+- **Taxify:** archived by explicit user decision. `taxify-T001` and dependent Taxify discovery work are skipped while the project remains archived. The documented credential risk is deferred, not represented as remediated.
+- **ProjectOS:** archived by explicit user decision. `projectos-T002`, `projectos-T003`, `projectos-T004`, and `projectos-T005` are skipped while the project remains archived. The documented credential risk and Phase 0 verification gap are deferred, not represented as resolved.
 
-- **Attempted transition:** `ready` → `running`
-- **Result:** Blocked before verification execution.
-- **Audited repository revision:** `583f005d33649d033622bf037256fd0499e7040c`
-- **Attempted command:** clone the repository, check out the audited commit, then run the documented Phase 0 matrix.
-- **Environment failure:** local runner returned `Could not resolve host: github.com` while cloning.
-- **Checks not executed:** `npm ci`, lint, typecheck, tests, build, CLI `--help`, `--version`, `doctor`, and clean-tree verification.
-- **Outcome:** `blocked` — independent verification cannot be claimed.
-- **Recovery action:** resume in an execution environment with GitHub checkout and dependency-registry access, then run the exact queue-defined matrix against the audited commit.
-- **Downstream impact:** `projectos-T004` remains blocked; no ProjectOS canonical context update was made.
+### Pull-request dispositions
 
-### 2. `2026-07-18-001-brain-T006`
+- **Brain PR #10:** closed without merge as superseded.
+- **Brain PR #6:** closed without merge as superseded.
+- **KareBraids PR #1:** closed without merge as superseded.
 
-- **Attempted transition:** `ready` → `running`
-- **Connector evidence:** PR #9 remains open and mergeable; its branch is 4 commits ahead and 19 commits behind current main.
-- **Current main revision confirmed by comparison:** `c86d02828cae92943460f8124d2eb7ddddaac767`.
-- **PR head:** `9d0f97658a7bfb440f2781c1476c20002785e605`.
-- **Changed files:** `client/src/components/List.jsx`, `client/src/components/List.test.jsx`, `client/src/pages/Dashboard.jsx`, `server/services/dashboardSummary.js`.
-- **Current-main finding:** the shared `List` still renders raw values directly, so the structured-object rendering defect remains materially relevant.
-- **Verification limitation:** the same DNS/network restriction prevents repository checkout, dependency installation, focused tests, full client tests, lint/typecheck/build, and executable Europe/London boundary checks.
-- **Recommendation:** do not merge as-is. Refresh/rebase the focused four-file patch onto current main, then execute the required regression and build matrix before a merge decision.
-- **Outcome:** `blocked` — evidence supports an update-before-merge recommendation, but acceptance criteria are not fully verified.
-- **Mutation performed:** none; PR #9 was not updated, merged, or closed.
+These dispositions satisfy the user-decision portion of `brain-T007`, `brain-T008`, and `karebraids-T013`. No source implementation was performed.
 
-### 3. `2026-07-18-001-amas-kitchen-T012`
+### Memory Game deployment direction
 
-- **Transition:** `ready` → `running` → `verifying` → `completed`.
-- **Evidence reviewed:** current `projects/amas-kitchen.md`; root and client package manifests; PR #4 and PR #5 metadata and validation notes.
-- **Verified facts recorded:** React/Vite/Tailwind/Vitest client; Express/Mongoose/Jest/Supertest server; Ghanaian kitchen ordering/service/contact/checkout context; Accra/Lapaz delivery language; two unresolved design PRs and their approval/verification states.
-- **Preserved unknowns:** lifecycle, current priority, live URL, final brand tone, primary CTA, delivery wording, approved logo/photography, and PR consolidation decision.
-- **Changed file:** `projects/amas-kitchen.md`.
-- **Commit:** `3aed4cb1632102f8f0ad8f7ce7bade9f506bf7c3`.
-- **Verification:** standard project structure preserved; links included; speculative facts were not promoted; no Amas Kitchen source repository changed.
-- **Outcome:** completed on the isolated Ideas Hub branch, pending draft-PR review/merge.
+- **Frontend target:** Vercel.
+- **Backend target:** Heroku only if a backend is introduced later. The current MVP has no backend.
 
-### 4. `2026-07-18-001-ideas-T017`
+This resolves the hosting-platform choice in `memory-sequence-game-T014`, but an actual deployment cannot be performed because no Vercel deployment connector or authenticated deployment environment is available in this run. Production URL, project ownership, smoke evidence, and rollback evidence remain outstanding.
 
-- **Transition:** `ready` → `running` → `verifying` → `completed`.
-- **Evidence reviewed:** run audit and task queue on main; registered Architect workflows; execution evidence from this command.
-- **Changed file:** `projects/ideas.md`.
-- **Commit:** `3b5e381a72f35d19b2cde2f1dd33705dd44c752f`.
-- **Recorded facts:** first operational run ID and links; audit/queue existence; execution has begun; current verification limitation; next actions and resume command.
-- **Preserved unknowns:** portfolio lifecycle and daily focus remain unapproved.
-- **Outcome:** completed on the isolated Ideas Hub branch, pending draft-PR review/merge.
+## Revalidated Ready Work
 
-## Approval Packets Preserved
+### `2026-07-18-001-projectos-T003`
 
-### Critical security approvals
+- **Current disposition:** skipped while ProjectOS is archived.
+- **Prior evidence:** repository checkout failed because the execution environment could not resolve `github.com`.
+- **Verification not performed:** install, lint, typecheck, tests, build, CLI checks, and clean-tree check.
 
-- `taxify-T001`: approval is required to identify affected environments, rotate seeded credentials, invalidate sessions/tokens, change seed behavior, and separately approve any destructive history remediation.
-- `projectos-T002`: approval and provider access are required to identify, rotate, revoke, and verify the potentially exposed MongoDB credential.
+### `2026-07-18-001-brain-T006`
 
-No credential value was repeated or changed during this run.
+- **Current repository state:** Brain PR #9 is now merged into `main`.
+- **Merge commit:** `1302ad67912091ab806f0b08b607e8c14d4f3d93`.
+- **Connector-visible status:** Vercel succeeded.
+- **Verification limitation:** the required focused tests, full client suite, lint/typecheck/build, and executable Europe/London boundary checks could not be run in this environment.
+- **Current disposition:** blocked for independent verification. The merge is a fact, but the queue acceptance criteria are not fully verified.
 
-### Product, PR, authority, and policy approvals
+### `2026-07-18-001-amas-kitchen-T012`
 
-Approval remains required for Brain PR #10 and PR #6 disposition, Piano360 PR #2 specification/merge, Amas Kitchen PR #4/#5 direction, KareBraids PR #1 direction, Memory Game dependency-locking policy, and the portfolio daily-focus choice.
+- **Current disposition:** completed.
+- **Verified context is present in:** [`projects/amas-kitchen.md`](../../../projects/amas-kitchen.md).
+- **Remaining gate:** product/design direction in `amas-kitchen-T011` still needs explicit client decisions.
 
-## Discovery And Specification Work
+### `2026-07-18-001-ideas-T017`
 
-The queue includes discovery and specification tasks. They were not converted into implementation work. Full project-specific handoffs still require user/product answers; no inferred priority or lifecycle was written.
+- **Current disposition:** completed.
+- **Verified run context is present in:** [`projects/ideas.md`](../../../projects/ideas.md).
 
-`projectos-T005` remains `needs_spec`. Phase 1 implementation must not begin until an implementation-ready domain and persistence specification is drafted and explicitly approved.
+## Remaining Independent Work
 
-## Ideas Hub Updates
+No source-code implementation task is both `ready` and executable with the current access.
 
-Written on branch `architect/2026-07-18-001/ideas`:
+The following work remains gated:
 
-- `projects/amas-kitchen.md`
-- `projects/ideas.md`
-- `architect/runs/2026-07-18-001/report.md`
-
-No `PROJECTS.md` or `CONTEXT.md` update was necessary because no name, repository, live URL, lifecycle, or broad portfolio direction changed.
+- **Piano360:** specification/merge authority and any resulting implementation tasks remain approval-dependent. The separate project record states the Phase 0 audit is complete, but the historical queue has not been safely rewritten to reconcile that later outcome.
+- **Amas Kitchen:** homepage design direction requires brand, CTA, delivery-language, asset, and PR-disposition decisions.
+- **Memory Game:** deployment execution requires authenticated Vercel access; manual accessibility/device verification requires a deployed candidate and representative browser/assistive-technology access; dependency-locking policy remains unapproved.
+- **Portfolio focus:** no single daily focus and fallback have been durably selected.
+- **Other project discovery tasks:** lifecycle, milestone, audience, and priority questions remain unresolved and are not implementation-authorized.
 
 ## Task Queue Status Persistence Limitation
 
-The execution evidence above is durable in this report. The connector available during this run supports only full-file replacement for `tasks.md`, not targeted patching. To avoid reconstructing or truncating the 585-line authoritative queue unsafely, its inline statuses were not rewritten during this pass.
+The GitHub connector available in this run replaces complete files and does not provide safe targeted edits for `tasks.md`. Reconstructing the full 585-line queue from truncated connector responses risks damaging the authoritative queue, so inline task statuses were not rewritten.
 
-Exact status updates that must be applied to `tasks.md` on resume:
+The latest execution deltas to apply when safe queue patching is available are:
 
-- `projectos-T003`: `ready` → `blocked`; evidence: local clone failed because `github.com` could not be resolved; no required verification command ran.
-- `brain-T006`: `ready` → `blocked`; evidence: connector review completed, branch is 19 commits behind and defect remains relevant, but executable verification could not run.
-- `amas-kitchen-T012`: `ready` → `completed`; branch `architect/2026-07-18-001/ideas`; commit `3aed4cb1632102f8f0ad8f7ce7bade9f506bf7c3`; pending PR merge.
-- `ideas-T017`: `ready` → `completed`; branch `architect/2026-07-18-001/ideas`; commit `3b5e381a72f35d19b2cde2f1dd33705dd44c752f`; pending PR merge.
+- `taxify-T001`: `needs_approval` → `skipped` while archived; security risk explicitly deferred.
+- `projectos-T002`: `needs_approval` → `skipped` while archived; security risk explicitly deferred.
+- `projectos-T003`: `ready`/`blocked` → `skipped` while archived.
+- `projectos-T004`: `blocked` → `skipped` while archived.
+- `projectos-T005`: `needs_spec` → `skipped` while archived.
+- `brain-T006`: `ready` → `blocked`; PR #9 merged and Vercel passed, but required independent executable verification did not run.
+- `brain-T007`: `needs_approval` → `completed`; PR #10 closed without merge as superseded.
+- `brain-T008`: `needs_approval` → `completed`; PR #6 closed without merge as superseded.
+- `amas-kitchen-T012`: `ready` → `completed`.
+- `karebraids-T013`: `needs_approval` → `completed`; PR #1 closed without merge as superseded.
+- `memory-sequence-game-T014`: `needs_discovery` → `blocked`; Vercel selected, but deployment ownership, production URL, authenticated execution, smoke evidence, and rollback evidence remain missing.
+- `ideas-T017`: `ready` → `completed`.
+- Taxify and ProjectOS dependent discovery tasks: `skipped` while archived.
 
-Until those queue lines are safely updated, this report is the authoritative execution delta and the run must remain paused.
+Until those queue lines are safely patched, this report is the authoritative execution delta.
 
-## Branches, Commits, And Pull Requests
+## Verification And Mutation Evidence
 
-- **Ideas Hub branch:** `architect/2026-07-18-001/ideas`
-- **Commits:**
-  - `3aed4cb1632102f8f0ad8f7ce7bade9f506bf7c3` — Amas Kitchen verified context sync.
-  - `3b5e381a72f35d19b2cde2f1dd33705dd44c752f` — first Architect run context sync.
-- **Draft pull request:** to be created after this report commit.
-- **Other repository branches/commits:** none.
+- Brain PR #9 is merged at `1302ad67912091ab806f0b08b607e8c14d4f3d93` with connector-visible Vercel success.
+- Brain PRs #10 and #6 are closed without merge.
+- KareBraids PR #1 is closed without merge.
+- Taxify and ProjectOS project records state archived status and deferred risks.
+- Memory Game project context records Vercel as the frontend target and Heroku only for a future backend.
+- No credentials were repeated, rotated, or changed.
+- No deployment was claimed.
+- No unverified implementation was marked complete.
 
 ## Remaining Risks
 
-- Two P0 credential risks remain uncontained pending explicit approval and provider access.
-- ProjectOS Phase 0 remains independently unverified.
-- Brain PR #9 remains diverged and untested against current main.
-- Approval-gated and discovery/specification tasks remain unresolved.
-- Context-update commits are not canonical until their draft pull request is reviewed and merged.
+- Deferred credential findings remain unresolved in archived Taxify and ProjectOS repositories.
+- Brain PR #9 lacks independent executable verification against its queue acceptance matrix.
+- Memory Game is not yet deployed and has no production smoke or accessibility evidence.
+- Amas Kitchen product/design direction remains unresolved.
+- Historical `tasks.md` inline statuses lag behind approved and verified events recorded here.
 
 ## Exact Resume Point
 
-1. Review and merge or revise the Ideas Hub draft PR for `architect/2026-07-18-001/ideas`.
-2. Safely apply the four exact task-status/evidence updates listed above to `tasks.md`.
-3. Resolve or explicitly defer the two P0 security approval packets.
-4. Provide executable repository/dependency access, then rerun `projectos-T003` and `brain-T006` verification.
-5. Resume the queue with `run all tasks`; process independent discovery/specification/approval tasks without bypassing their gates.
+1. Provide safe queue-patching access and apply the status deltas above.
+2. Provide authenticated Vercel deployment access to deploy Memory Game and record its production URL, smoke results, ownership, and rollback procedure.
+3. Provide a repository/dependency execution environment to independently verify Brain PR #9's merged behavior.
+4. Resolve Amas Kitchen design decisions and Memory Game dependency-locking policy.
+5. Select one portfolio daily focus and one fallback before beginning further discovery or specification work.
