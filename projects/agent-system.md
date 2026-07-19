@@ -12,6 +12,8 @@
 ## Links
 
 - Repository: https://github.com/kofiarhin/agent-system
+- HTTPS clone URL: `https://github.com/kofiarhin/agent-system.git`
+- SSH clone URL: `git@github.com:kofiarhin/agent-system.git`
 - Initial implementation commit: https://github.com/kofiarhin/agent-system/commit/6cbcc589ff0eb6fdc7f09df2922b4d259f7f8894
 
 ## Current State
