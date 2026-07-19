@@ -15,6 +15,7 @@
 - Repository: https://github.com/kofiarhin/agent-system
 - Product requirements: https://github.com/kofiarhin/agent-system/blob/main/docs/PRD.md
 - Installation guide: https://github.com/kofiarhin/agent-system/blob/main/docs/INSTALLATION.md
+- Operations guide: https://github.com/kofiarhin/agent-system/blob/main/docs/OPERATIONS.md
 
 ## Current State
 
@@ -24,29 +25,65 @@ A code-to-PRD audit rated the implementation approximately 7.6/10 overall. The s
 
 The v1.0.1 MVP safety-hardening backlog is approved and ready for implementation. The product should remain an MVP, prioritize simple high-value safety improvements, and avoid enterprise transaction infrastructure.
 
+Operational convenience scripts are now implemented on `main`:
+
+```text
+scripts/update-codex-agent.ps1
+scripts/update-claude-agent.ps1
+scripts/update-all-agents.ps1
+```
+
+The runtime-specific wrappers each build, verify generated output, preview installation, install, and verify the installed artifact. The combined wrapper runs Codex first and Claude Code second, stopping on the first failure. It is intentionally sequential rather than transactional.
+
+The combined workflow was run locally and user-confirmed on Windows. Codex and Claude Code both passed installed-artifact verification, with their installed files matching the generated artifacts. Already-current installations were safely skipped.
+
+Recommended routine update workflow:
+
+```powershell
+git pull --rebase origin main
+.\scripts\update-all-agents.ps1
+```
+
+From Git Bash:
+
+```bash
+powershell.exe -ExecutionPolicy Bypass -File ./scripts/update-all-agents.ps1
+```
+
+After success, restart Codex and Claude Code so new sessions load the installed instructions.
+
 ## Current Focus
 
 Deliver a focused `v1.0.1` MVP safety-hardening release.
 
-Recommended usage remains one runtime per installation command:
+For normal use, prefer the combined convenience wrapper when both runtimes should be refreshed:
 
 ```powershell
-.\scripts\install-agent.ps1 -Runtime codex
-.\scripts\install-agent.ps1 -Runtime claude
+.\scripts\update-all-agents.ps1
 ```
 
-Build and verification may continue to support `-Runtime All`. Installation must reject `-Runtime All` and require one runtime per command.
+The individual wrappers remain available when only one runtime needs updating:
+
+```powershell
+.\scripts\update-codex-agent.ps1
+.\scripts\update-claude-agent.ps1
+```
+
+Build and verification may continue to support `-Runtime All`. Runtime installation remains one runtime at a time internally; the combined wrapper simply invokes those approved single-runtime workflows sequentially.
 
 ## Decisions
 
 - Keep the application MVP-sized and understandable.
 - Prioritize safe single-runtime installation and restore over multi-runtime transactions.
-- Reject `install-agent.ps1 -Runtime All` during the MVP; retain `-Runtime All` for build and verification.
+- Retain `-Runtime All` for build and verification.
+- Keep installation one runtime at a time internally.
+- Provide runtime-specific wrappers for Codex and Claude Code.
+- Provide `update-all-agents.ps1` as the recommended combined convenience command.
+- The combined command must remain sequential, fail fast, and avoid claiming all-or-nothing behavior.
 - Do not build transaction journals, recovery engines, dashboards, or enterprise deployment tooling for the MVP.
 - Keep the current staged temporary-file replacement approach, but describe its guarantees accurately rather than calling it fully atomic.
 - Add only the failure tests needed to cover material MVP risks.
 - Use Windows CI to prove compatibility with Windows PowerShell 5.1 and current PowerShell 7.
-- Recommend one runtime per installation command.
 - The v1.0.1 MVP safety-hardening backlog was approved on 2026-07-19.
 
 ## Assumptions
@@ -55,6 +92,7 @@ Build and verification may continue to support `-Runtime All`. Installation must
 - Users can manually inspect backups when a rare rollback failure occurs.
 - Cross-runtime all-or-nothing deployment is not required for the MVP.
 - New runtime expansion is lower priority than hardening the existing supported runtimes.
+- Codex and Claude Code are the primary installed runtimes for the current workflow.
 
 ## Brainstorming
 
@@ -220,8 +258,8 @@ Acceptance criteria:
 
 Document:
 
-- one-runtime-at-a-time installation is required;
-- `-Runtime All` is rejected for MVP installation;
+- one-runtime-at-a-time installation remains the internal deployment model;
+- combined convenience wrappers are sequential and non-transactional;
 - install and restore use staged replacement and hash verification;
 - interrupted-operation recovery is not included;
 - rare rollback failure may require manual recovery from the backup directory.
@@ -237,7 +275,8 @@ Acceptance criteria:
 The MVP hardening release is complete when:
 
 - deterministic build and verification pass;
-- Codex and Claude install successfully one runtime at a time;
+- Codex and Claude install successfully one runtime at a time internally;
+- the combined wrapper successfully verifies both installed runtimes sequentially;
 - an existing target is backed up before replacement;
 - failed installation restores the previous file where possible;
 - failed restore restores the pre-restore file;
