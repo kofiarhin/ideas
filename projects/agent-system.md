@@ -7,7 +7,7 @@
 - **Lifecycle:** Active
 - **Repository:** https://github.com/kofiarhin/agent-system
 - **Current version:** v1.0.0
-- **Current focus:** Keep the product MVP-sized while hardening the highest-risk install and restore paths.
+- **Current focus:** Deliver the approved v1.0.1 MVP safety-hardening release.
 - **Product position:** A universal, runtime-agnostic agent instruction system that compiles shared behavior into native instruction files for Codex, Claude Code, Gemini CLI, and generic agents.
 
 ## Links
@@ -22,7 +22,7 @@ Version 1.0.0 is implemented with shared instruction modules, runtime adapters, 
 
 A code-to-PRD audit rated the implementation approximately 7.6/10 overall. The shared-source architecture, build isolation, deterministic output, and verification model are strong. The main risks are concentrated in installation, restore rollback, backup manifest durability, approved-path validation, and missing Windows CI evidence.
 
-The product should remain an MVP. The hardening work must prioritize simple, high-value safety improvements and avoid enterprise transaction infrastructure.
+The v1.0.1 MVP safety-hardening backlog is approved and ready for implementation. The product should remain an MVP, prioritize simple high-value safety improvements, and avoid enterprise transaction infrastructure.
 
 ## Current Focus
 
@@ -35,17 +35,19 @@ Recommended usage remains one runtime per installation command:
 .\scripts\install-agent.ps1 -Runtime claude
 ```
 
-Build and verification may continue to support `-Runtime All`. Installation must not claim all-or-nothing multi-runtime behavior.
+Build and verification may continue to support `-Runtime All`. Installation must reject `-Runtime All` and require one runtime per command.
 
 ## Decisions
 
 - Keep the application MVP-sized and understandable.
 - Prioritize safe single-runtime installation and restore over multi-runtime transactions.
+- Reject `install-agent.ps1 -Runtime All` during the MVP; retain `-Runtime All` for build and verification.
 - Do not build transaction journals, recovery engines, dashboards, or enterprise deployment tooling for the MVP.
 - Keep the current staged temporary-file replacement approach, but describe its guarantees accurately rather than calling it fully atomic.
 - Add only the failure tests needed to cover material MVP risks.
 - Use Windows CI to prove compatibility with Windows PowerShell 5.1 and current PowerShell 7.
 - Recommend one runtime per installation command.
+- The v1.0.1 MVP safety-hardening backlog was approved on 2026-07-19.
 
 ## Assumptions
 
@@ -71,9 +73,7 @@ Deferred ideas that should not be implemented during MVP hardening:
 
 ## Open Questions
 
-- Should `install-agent.ps1 -Runtime All` remain available with an explicit warning, or be rejected so installation requires one runtime per command?
-
-Recommended answer: reject `-Runtime All` for installation during the MVP while retaining it for build and verification.
+None currently documented.
 
 ## Next Actions
 
@@ -81,7 +81,8 @@ Recommended answer: reject `-Runtime All` for installation during the MVP while 
 
 **Target release:** `v1.0.1`  
 **Priority:** High  
-**Status:** `proposed`
+**Status:** `ready`  
+**Approved:** 2026-07-19
 
 #### 1. Make backup manifests durable
 
@@ -219,8 +220,8 @@ Acceptance criteria:
 
 Document:
 
-- one-runtime-at-a-time installation is recommended;
-- `-Runtime All` installation is sequential and not transactional, or is rejected for MVP installs;
+- one-runtime-at-a-time installation is required;
+- `-Runtime All` is rejected for MVP installation;
 - install and restore use staged replacement and hash verification;
 - interrupted-operation recovery is not included;
 - rare rollback failure may require manual recovery from the backup directory.

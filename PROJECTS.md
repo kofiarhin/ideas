@@ -14,7 +14,7 @@ This is the only canonical project index for the Ideas Hub.
 | [Memory Sequence Game](projects/memory-sequence-game.md) | Responsive visual sequence-recall browser game | https://github.com/kofiarhin/memory-game | — | Exploring; MVP audited and fixes merged; CI passing; deployment pending |
 | [Ideas Hub](projects/ideas.md) | Markdown-first brainstorming workspace and durable cross-tool reference layer | https://github.com/kofiarhin/ideas | — | This repository |
 | [Codex Workflow Kit](projects/codex-workflow.md) | Reusable AI engineering workflow system | https://github.com/kofiarhin/codex-workflow-kit | — | Supports Codex, Claude Code, Cursor, and similar agents |
-| [Agent System](projects/agent-system.md) | Runtime-agnostic agent instruction system with deterministic generation and native runtime outputs | https://github.com/kofiarhin/agent-system | — | Active; v1.0.1 MVP safety hardening is proposed |
+| [Agent System](projects/agent-system.md) | Runtime-agnostic agent instruction system with deterministic generation and native runtime outputs | https://github.com/kofiarhin/agent-system | — | Active; v1.0.1 MVP safety hardening approved and ready |
 | [Archon](projects/archon.md) | AI-powered software architecture studio that turns ideas into implementation-ready engineering blueprints | https://github.com/kofiarhin/archon | — | Active; MVP specification approved; Phase 1 foundation is next |
 | [Taxify](projects/taxify.md) | Project details not yet documented | https://github.com/kofiarhin/taxify | — | Needs overview and current status |
 | [Kflix](projects/kflix.md) | Project details not yet documented | https://github.com/kofiarhin/kflix | — | Needs overview and current status |
