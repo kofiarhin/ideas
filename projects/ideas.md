@@ -1,6 +1,6 @@
 # Ideas Hub
 
-**Last updated:** 2026-07-18
+**Last updated:** 2026-07-19
 
 ## Snapshot
 
@@ -17,6 +17,7 @@ Ideas Hub is this Markdown-first repository for brainstorming, project context, 
 - Lifecycle: Not documented
 - Stack: Markdown
 - Current priority: Not documented
+- Deterministic Ideas Hub update routing is defined in [`AGENTS.md`](../AGENTS.md).
 
 ## Current Focus
 
@@ -42,7 +43,7 @@ Review and operate the first durable Architect portfolio run while preserving ap
 - `good morning` writes only run-scoped audit/task files.
 - `run all tasks` implements only `ready` tasks.
 - Discovery/specification work pauses for approval.
-- Repositories are isolated by branch, commit, and pull request.
+- Repositories are isolated by branch, commit, and pull request unless the user explicitly authorizes a permitted direct-main update.
 - Ideas Hub project truth updates only after verified work.
 - Commands never silently approve scope, direction, migrations, security-sensitive changes, lifecycle changes, or direct-main work.
 
@@ -62,6 +63,45 @@ Review and operate the first durable Architect portfolio run while preserving ap
 4. Approve or answer the remaining discovery, specification, PR, product, and policy gates.
 5. Resume with `run all tasks` after approvals or verification access changes.
 
+## Ideas Hub Update Workflow
+
+Requests such as `update Ideas Hub`, `update the hub`, or `save to <project>` use the repository routing rules in [`AGENTS.md`](../AGENTS.md). They do not create a new Architect command or bypass normal discovery, approval, security, and verification gates.
+
+### Context Resolution
+
+Resolve the applicable destination from the recognized command or run, named project, active project, referenced repository or work item, and the best matching `PROJECTS.md` entry. Ask one focused question only when the destination remains materially ambiguous after inspecting available context.
+
+### Information Routing
+
+- Verified current behavior belongs in `Current State`.
+- Confirmed work being pursued now belongs in `Current Focus`.
+- Proposed features and unapproved directions belong in `Brainstorming`.
+- Explicitly approved choices belong in `Decisions`.
+- Unverified beliefs belong in `Assumptions`.
+- Unresolved matters belong in `Open Questions`.
+- Concrete approved follow-up work belongs in `Next Actions`.
+- Approved raw capture with no clear durable destination belongs in `INBOX.md`.
+
+Statements containing multiple information types are split across the relevant sections rather than being forced into one category.
+
+### Feature Request Promotion
+
+1. Capture a proposed feature under the target project's `Brainstorming` section.
+2. Move the approved direction into `Decisions` and its approved follow-up into `Next Actions`.
+3. Use Architect discovery, specification, and approval statuses until scope and acceptance criteria are sufficient.
+4. Mark implementation work `ready` only when it is eligible to execute.
+5. Implement through the permitted Architect workflow.
+6. After verification, update `Current State`, durable decisions, and remaining actions.
+
+GitHub Issues are optional for this MVP. They may be created when requested or when a project already uses Issues for execution, but they do not replace the durable project record.
+
+### File Boundaries
+
+- Routine project updates change only the relevant `projects/<project>.md` file.
+- `PROJECTS.md` changes only for project index fields such as name, summary, repository, live URL, or lifecycle.
+- `CONTEXT.md` changes only when broad workspace context changes.
+- Architect operational history remains under `architect/runs/`.
+
 ## Brainstorming
 
 _No durable brainstorming notes captured yet._
@@ -70,6 +110,12 @@ _No durable brainstorming notes captured yet._
 
 - GitHub is the source of truth for this workspace.
 - `PROJECTS.md` is the only canonical project index.
+- Ideas Hub updates use deterministic project and information-type routing.
+- Proposed features remain ideas until explicitly approved.
+- Approved features do not become implementation-ready until scope and acceptance criteria are sufficient.
+- GitHub Issues are optional execution records, not a second source of project truth.
+- Verified implementation updates project current state; unverified claims do not.
+- `update Ideas Hub` remains a governed write request rather than a registered Architect command.
 
 ## Assumptions
 
@@ -82,5 +128,6 @@ _No durable brainstorming notes captured yet._
 
 ## Next Actions
 
+- Apply the routing rules whenever approved project knowledge is captured or updated.
 - Keep project context and links current as approved and verified project information changes.
 - Use the active run report as the exact resume point for execution.
