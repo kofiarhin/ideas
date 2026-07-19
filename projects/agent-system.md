@@ -7,7 +7,7 @@
 - **Lifecycle:** Active
 - **Purpose:** A model-agnostic, runtime-independent instruction system that preserves the existing Codex workflow and compiles the same shared behavior into native instruction files for multiple AI coding runtimes.
 - **Repository:** https://github.com/kofiarhin/agent-system
-- **Current status:** Version 1.0.0 is implemented and committed. Shared modules, adapters, deterministic generation, verification, backup, installation, restoration, tests, and documentation exist. Production installation has not been executed.
+- **Current status:** Version 1.0.0 is implemented and committed. The shared architecture, adapters, deterministic generation, verification, backup, installation, restoration, tests, and documentation exist. Codex and Claude Code have now been installed and verified against the generated runtime artifacts. Gemini remains generated but not installed.
 
 ## Links
 
@@ -35,9 +35,17 @@ Implemented architecture:
 
 The original Codex instruction structure and behavior were migrated into runtime-neutral modules. This includes instruction precedence, request classification, Discovery, the Shared Understanding approval gate, implementation rules, repository inspection, continuity, coding preferences, TDD and verification, safety, output requirements, global learnings, fallback behavior, and global invariants.
 
+Deployment milestones completed:
+
+- the generated Codex artifact was reviewed, installed to the active global `.codex/AGENTS.md`, backed up, and hash-verified;
+- the generated Claude Code artifact was reviewed, installed to the active global `.claude/CLAUDE.md`, backed up, and hash-verified;
+- both Codex and Claude Code now consume runtime-native files generated from the same shared source modules;
+- separate timestamped backup manifests were created for both production installations;
+- the generic and Gemini artifacts remain generated and verified, but Gemini has not yet been installed.
+
 ## Current Focus
 
-Harden deployment safety before treating multi-runtime installation and restoration as production-ready.
+Harden deployment safety before treating multi-runtime installation and restoration as fully production-ready.
 
 The latest audit approved the architecture and generation system but identified deployment-layer risks:
 
@@ -64,20 +72,22 @@ The latest audit approved the architecture and generation system but identified 
 - Build and installation are separate operations.
 - Generated runtime files are committed so changes are reviewable and stale output is detectable.
 - The first supported targets are Codex, Claude Code, Gemini CLI, and Generic.
-- Initial production installation was intentionally not executed.
+- Production installation was performed one runtime at a time for Codex and Claude Code after successful review and verification.
+- `-Runtime All` should not be used for production installation until the multi-runtime transaction and rollback behavior is hardened.
 - The next release should focus on safety hardening rather than architectural redesign.
 
 ## Assumptions
 
 - PowerShell remains the primary implementation language for build and deployment tooling on Windows.
 - Runtime-specific differences remain limited to instruction entry points, headers, precedence notes, and installation paths.
-- The active global runtime files should be installed only after generated output has been reviewed and deployment defects are resolved or consciously accepted.
+- Active global runtime files should be installed only after generated output has been reviewed.
+- Codex and Claude Code sessions should be restarted after installation so the updated global instructions are loaded.
 
 ## Open Questions
 
 - Should `-Runtime All` provide full transaction semantics across every runtime, or explicitly operate as independent per-runtime deployments?
 - Should the next release be tagged `v1.0.1` after deployment-safety fixes?
-- Which runtime should be added next after the initial four targets?
+- Which runtime should be added or installed next after Codex and Claude Code?
 - Should generated artifacts remain committed if automated release packaging is introduced later?
 
 ## Next Actions
@@ -90,4 +100,5 @@ The latest audit approved the architecture and generation system but identified 
 6. Harden approved-root checks against reparse points in parent paths.
 7. Add a Windows GitHub Actions workflow running build freshness, verification, and the full test suite.
 8. Re-audit deployment safety.
-9. Preview and perform production installation only after approval and successful verification.
+9. Install Gemini only after reviewing the generated artifact and confirming the target path.
+10. Continue maintaining shared behavior only through `agent-system` source modules, then rebuild and reinstall runtime outputs as needed.
