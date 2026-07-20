@@ -1,14 +1,14 @@
 # Agent System
 
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-20
 
 ## Snapshot
 
 - **Lifecycle:** Active
 - **Repository:** https://github.com/kofiarhin/agent-system
-- **Current version:** v1.0.0
-- **Current focus:** Deliver the approved v1.0.1 MVP safety-hardening release.
-- **Product position:** A universal, runtime-agnostic agent instruction system that compiles shared behavior into native instruction files for Codex, Claude Code, Gemini CLI, and generic agents.
+- **Current version:** v1.0.0; a later release tag has not been documented
+- **Current focus:** Complete release verification and CI coverage for the streamlined setup/sync workflow.
+- **Product position:** A runtime-agnostic agent instruction system that compiles shared behavior into native instruction files for Codex, Claude Code, Gemini CLI, and generic agents.
 
 ## Links
 
@@ -16,272 +16,115 @@
 - Product requirements: https://github.com/kofiarhin/agent-system/blob/main/docs/PRD.md
 - Installation guide: https://github.com/kofiarhin/agent-system/blob/main/docs/INSTALLATION.md
 - Operations guide: https://github.com/kofiarhin/agent-system/blob/main/docs/OPERATIONS.md
+- Setup and sync specification: https://github.com/kofiarhin/agent-system/blob/main/docs/SETUP_AND_SYNC_SPEC.md
+- Verified refresh hardening commit: https://github.com/kofiarhin/agent-system/commit/45d6393af0fcc0acb743535b3332be5aeea24b23
 
 ## Current State
 
-Version 1.0.0 is implemented with shared instruction modules, runtime adapters, deterministic PowerShell generation, verification, installation, backup, restore, and a Pester-independent test suite.
+The shared-source architecture, deterministic generation, runtime adapters, source/generated/installed verification, approved-path installation, backups, rollback, restore, and Pester-independent test suite remain implemented.
 
-A code-to-PRD audit rated the implementation approximately 7.6/10 overall. The shared-source architecture, build isolation, deterministic output, and verification model are strong. The main risks are concentrated in installation, restore rollback, backup manifest durability, approved-path validation, and missing Windows CI evidence.
-
-The v1.0.1 MVP safety-hardening backlog is approved and ready for implementation. The product should remain an MVP, prioritize simple high-value safety improvements, and avoid enterprise transaction infrastructure.
-
-Operational convenience scripts are now implemented on `main`:
-
-```text
-scripts/update-codex-agent.ps1
-scripts/update-claude-agent.ps1
-scripts/update-all-agents.ps1
-```
-
-The runtime-specific wrappers each build, verify generated output, preview installation, install, and verify the installed artifact. The combined wrapper runs Codex first and Claude Code second, stopping on the first failure. It is intentionally sequential rather than transactional.
-
-The combined workflow was run locally and user-confirmed on Windows. Codex and Claude Code both passed installed-artifact verification, with their installed files matching the generated artifacts. Already-current installations were safely skipped.
-
-Recommended routine update workflow:
+The primary user workflow has been simplified to two commands:
 
 ```powershell
-git pull --rebase origin main
-.\scripts\update-all-agents.ps1
+# First-time installation into detected runtimes.
+.\scripts\setup-agent-system.ps1
+
+# Ongoing repository and runtime synchronization.
+.\scripts\sync-agent-system.ps1
 ```
 
-From Git Bash:
+`sync-agent-system.ps1 -SkipPull` is available for development against the current checkout. Both high-level commands support PowerShell preview and confirmation semantics, use adapter-derived runtime detection, process Codex, Claude Code, and Gemini CLI sequentially, stop on the first failure, and report only changed runtimes as requiring restart.
 
-```bash
-powershell.exe -ExecutionPolicy Bypass -File ./scripts/update-all-agents.ps1
-```
+Runtime detection is based on the existing parent directory of each adapter-defined install target. Missing runtime directories are not created automatically.
 
-After success, restart Codex and Claude Code so new sessions load the installed instructions.
+The documentation set was aligned with this product direction, including the README, PRD, installation guide, operations guide, runtime adapter guide, setup/sync specification, and implementation record.
+
+A local PowerShell verification pass found and fixed three implementation issues:
+
+- PowerShell parsed `$code:` as an invalid drive-qualified variable in the child-script error message; it now uses `${code}`.
+- The no-detected-runtime path could not receive an empty collection; `RuntimeRecords` now permits empty collections and returns structured exit code `2` behavior.
+- Test counters leaked between repeated runs in the same PowerShell session; the harness now starts each run with fresh state.
+
+Commit `45d6393af0fcc0acb743535b3332be5aeea24b23` records these fixes and targeted tests.
+
+User-confirmed verification on Windows:
+
+- the full test suite passed after the fixes, including repeated execution in the same PowerShell session;
+- setup preview detected Codex, Claude Code, and Gemini CLI without writing installed files;
+- real setup completed successfully;
+- Codex and Claude Code were already current;
+- Gemini CLI was updated and installed-hash verification passed;
+- generated and installed Codex hashes matched;
+- fresh Codex and Claude Code sessions demonstrated repository inspection, discovery-first behavior, explicit approval gates, and verification-oriented workflow.
+
+Observed runtime style difference:
+
+- Codex tended to provide a concise audit of concrete repository facts before explaining the workflow.
+- Claude Code tended to provide a richer architecture summary before explaining the workflow.
+- Both followed the same installed discovery, handoff, approval, implementation, and verification lifecycle.
 
 ## Current Focus
 
-Deliver a focused `v1.0.1` MVP safety-hardening release.
+Finish release-quality evidence for the implemented setup/sync direction rather than redesigning the architecture.
 
-For normal use, prefer the combined convenience wrapper when both runtimes should be refreshed:
+Priority areas:
 
-```powershell
-.\scripts\update-all-agents.ps1
-```
-
-The individual wrappers remain available when only one runtime needs updating:
-
-```powershell
-.\scripts\update-codex-agent.ps1
-.\scripts\update-claude-agent.ps1
-```
-
-Build and verification may continue to support `-Runtime All`. Runtime installation remains one runtime at a time internally; the combined wrapper simply invokes those approved single-runtime workflows sequentially.
-
-## Decisions
-
-- Keep the application MVP-sized and understandable.
-- Prioritize safe single-runtime installation and restore over multi-runtime transactions.
-- Retain `-Runtime All` for build and verification.
-- Keep installation one runtime at a time internally.
-- Provide runtime-specific wrappers for Codex and Claude Code.
-- Provide `update-all-agents.ps1` as the recommended combined convenience command.
-- The combined command must remain sequential, fail fast, and avoid claiming all-or-nothing behavior.
-- Do not build transaction journals, recovery engines, dashboards, or enterprise deployment tooling for the MVP.
-- Keep the current staged temporary-file replacement approach, but describe its guarantees accurately rather than calling it fully atomic.
-- Add only the failure tests needed to cover material MVP risks.
-- Use Windows CI to prove compatibility with Windows PowerShell 5.1 and current PowerShell 7.
-- The v1.0.1 MVP safety-hardening backlog was approved on 2026-07-19.
-
-## Assumptions
-
-- The primary use case is controlled personal or small-team use on Windows.
-- Users can manually inspect backups when a rare rollback failure occurs.
-- Cross-runtime all-or-nothing deployment is not required for the MVP.
-- New runtime expansion is lower priority than hardening the existing supported runtimes.
-- Codex and Claude Code are the primary installed runtimes for the current workflow.
+- add or confirm Windows CI for Windows PowerShell 5.1 and current PowerShell 7;
+- expand top-level command tests for Git preconditions, pull failures, `-SkipPull`, `-Force`, `-Confirm`, exit code `3`, partial success, and restart output;
+- decide and document the next release version/tag;
+- continue keeping README, PRD, guides, and implementation behavior synchronized.
 
 ## Brainstorming
 
-Deferred ideas that should not be implemented during MVP hardening:
+Deferred ideas that are not part of the current milestone:
 
-- multi-runtime transactional installation;
-- transaction journals and resume-after-interruption workflows;
-- `recover-transaction.ps1`;
-- structured operation logging;
-- status dashboards or doctor commands;
-- backup retention management;
-- native Windows replacement API interop;
-- release signing;
-- automated requirements-traceability systems;
-- organization-wide deployment support.
+- transactional multi-runtime installation;
+- transaction journals and interrupted-operation recovery;
+- background synchronization services;
+- automatic runtime installation or restart;
+- structured operation logging and dashboards;
+- backup retention automation;
+- organization-wide deployment tooling;
+- future runtime adapters such as GitHub Copilot CLI, Cursor, Continue, Aider, and xAI.
+
+## Decisions
+
+- `setup-agent-system.ps1` is the recommended first-time installation command.
+- `sync-agent-system.ps1` is the recommended ongoing update command.
+- `sync-agent-system.ps1` performs `git pull --rebase origin main` by default.
+- `-SkipPull` is the approved developer override for using the current checkout.
+- Codex, Claude Code, and Gemini CLI are the automatic setup/sync allowlist for the current product version.
+- Runtime detection must derive from adapter installation metadata rather than duplicated path constants.
+- Missing runtime directories must not be created by setup or sync.
+- Runtime refresh remains sequential, fail-fast, and non-transactional.
+- Previously completed runtimes are not rolled back when a later runtime fails.
+- Low-level build, verify, install, restore, and compatibility wrapper commands remain supported as advanced tools.
+- The product must describe its guarantees conservatively and must not claim cross-runtime transactionality.
+
+## Assumptions
+
+- The primary use case remains controlled personal or small-team use on Windows.
+- Supported runtime applications are installed and launched separately before Agent System setup.
+- Restarting a runtime or opening a fresh session is required before behavioral verification.
+- Local Windows verification is valid evidence for current behavior, but CI is still required for durable cross-version compatibility proof.
 
 ## Open Questions
 
-None currently documented.
+- What version number or release tag should contain the completed setup/sync milestone?
+- Does the repository now have passing Windows CI for both Windows PowerShell 5.1 and current PowerShell 7?
+- Should future automatic runtime support remain a hard-coded product allowlist or move to a manifest capability flag after further discovery?
 
 ## Next Actions
 
-### MVP Hardening Task
+1. Add or verify a GitHub Actions Windows matrix that runs:
 
-**Target release:** `v1.0.1`  
-**Priority:** High  
-**Status:** `ready`  
-**Approved:** 2026-07-19
+   ```powershell
+   .\scripts\build-agent.ps1 -Runtime All -Check
+   .\scripts\verify-agent.ps1 -Scope All -Strict
+   .\tests\run-tests.ps1
+   ```
 
-#### 1. Make backup manifests durable
-
-Write the backup manifest immediately after creating and verifying a backup, before replacing the installed runtime file.
-
-Acceptance criteria:
-
-- A backup always has a valid manifest before the target changes.
-- Manifest-writing failure stops installation.
-- Backup hash and path are recorded.
-- Tests cover backup and manifest failure.
-
-#### 2. Add restore rollback
-
-Before restoring, back up and verify the current target. If restore fails, reinstate the previous target and verify its original hash.
-
-Acceptance criteria:
-
-- Failed restore returns the target to its original hash.
-- Rollback success or failure is clearly reported.
-- Tests cover replacement and final hash-verification failure.
-
-#### 3. Validate restore destinations
-
-Require the backup manifest's recorded original path to match the current runtime target.
-
-Acceptance criteria:
-
-- Mismatched targets are rejected.
-- Matching targets restore normally.
-- No target-migration override is required for the MVP.
-
-#### 4. Harden approved-path validation
-
-Improve the current path checks without introducing a large filesystem-security framework.
-
-Validate:
-
-- normalized target remains inside the approved runtime directory;
-- target filename matches the adapter;
-- target is not a reparse point;
-- existing parent directories below the approved root are not reparse points;
-- traversal and sibling-prefix paths are rejected.
-
-Acceptance criteria:
-
-- Tests cover traversal, sibling-prefix attacks, target reparse points, parent reparse points, and valid runtime paths.
-- Unsafe paths are rejected before backups or target changes.
-
-#### 5. Strengthen backup manifest validation
-
-Validate the fields required by the MVP:
-
-- backup ID;
-- runtime ID;
-- original path;
-- backup filename and path;
-- SHA-256 hash;
-- file size;
-- backup path remains inside the selected backup directory;
-- duplicate runtime entries are rejected.
-
-Acceptance criteria:
-
-- Missing or malformed required fields are rejected.
-- Escaped paths are rejected.
-- Incorrect hash or size is rejected.
-- A JSON Schema is optional and should be used only when it reduces complexity.
-
-#### 6. Correct replacement wording
-
-Describe the existing approach as:
-
-> Same-directory staged replacement with post-write hash verification.
-
-Acceptance criteria:
-
-- Scripts and documentation do not claim stronger atomic guarantees than the implementation provides.
-- No native Windows interop is introduced for the MVP.
-
-#### 7. Add simple Windows CI
-
-Create one GitHub Actions workflow covering Windows PowerShell 5.1 and current PowerShell 7.
-
-Required commands:
-
-```powershell
-.\scripts\build-agent.ps1 -Runtime All -Check
-.\scripts\verify-agent.ps1 -Scope All -Strict
-.\tests\run-tests.ps1
-```
-
-Acceptance criteria:
-
-- Pull requests run the complete checks.
-- Stale generated files fail CI.
-- Tests never access real runtime directories.
-- CI passes before release.
-
-#### 8. Add targeted failure tests
-
-Cover only the highest-risk cases.
-
-Installation:
-
-- backup failure;
-- manifest failure;
-- temporary copy failure;
-- final hash mismatch;
-- rollback success.
-
-Restore:
-
-- corrupt backup;
-- original-path mismatch;
-- replacement failure;
-- final hash mismatch;
-- rollback success.
-
-Security:
-
-- traversal;
-- sibling-prefix path;
-- target reparse point;
-- parent reparse point;
-- backup path escaping its directory.
-
-Acceptance criteria:
-
-- Each scenario has an automated test.
-- Tests assert exit code and final target hash.
-- No production runtime paths are accessed.
-
-#### 9. Update PRD and operational documentation
-
-Document:
-
-- one-runtime-at-a-time installation remains the internal deployment model;
-- combined convenience wrappers are sequential and non-transactional;
-- install and restore use staged replacement and hash verification;
-- interrupted-operation recovery is not included;
-- rare rollback failure may require manual recovery from the backup directory.
-
-Acceptance criteria:
-
-- Product claims match the implementation.
-- Known limitations are visible in installation and operational guidance.
-- Deferred enterprise features are not presented as MVP requirements.
-
-### Definition of Done
-
-The MVP hardening release is complete when:
-
-- deterministic build and verification pass;
-- Codex and Claude install successfully one runtime at a time internally;
-- the combined wrapper successfully verifies both installed runtimes sequentially;
-- an existing target is backed up before replacement;
-- failed installation restores the previous file where possible;
-- failed restore restores the pre-restore file;
-- unsafe paths and invalid manifests are rejected;
-- Windows PowerShell 5.1 and PowerShell 7 tests pass in CI;
-- documentation accurately describes guarantees and limitations.
-
-A strong MVP target is approximately 8.5–9/10 overall. Chasing a theoretical 10/10 through enterprise complexity is explicitly not required.
+2. Add top-level setup/sync integration coverage for Git safety, command switches, exit codes, partial success, and restart guidance.
+3. Run the complete suite in Windows PowerShell 5.1 and current PowerShell 7 and record the evidence.
+4. Choose and publish the next release version when CI and release verification pass.
+5. Preserve the two-command user experience and avoid unrelated refactoring or enterprise transaction infrastructure.
