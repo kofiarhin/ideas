@@ -12,7 +12,7 @@ This is the only canonical project index for the Ideas Hub.
 | [Amas Kitchen](projects/amas-kitchen.md) | Project details not yet documented | https://github.com/kofiarhin/amas-kitchen | — | Needs overview and current status |
 | [DevKofi](projects/devkofi.md) | MERN mentorship and learning platform | https://github.com/kofiarhin/devkofi | https://devkofi.com/ | Includes mentee onboarding and internal tooling |
 | [Memory Sequence Game](projects/memory-sequence-game.md) | Responsive visual sequence-recall browser game | https://github.com/kofiarhin/memory-game | — | Exploring; MVP audited and fixes merged; CI passing; deployment pending |
-| [Ideas Hub](projects/ideas.md) | Markdown-first brainstorming workspace and durable cross-tool reference layer | https://github.com/kofiarhin/ideas | — | This repository |
+| [Ideas Hub](projects/ideas.md) | Markdown-first brainstorming workspace and durable cross-tool reference layer | https://github.com/kofiarhin/ideahub | — | This repository |
 | [Context API](projects/context-api.md) | Centralized API for structured, reusable user, engineering, project, workflow, glossary, and learning context | https://github.com/kofiarhin/context-api | — | Active; MVP PRD added; implementation foundation is next |
 | [Codex Workflow Kit](projects/codex-workflow.md) | Reusable AI engineering workflow system | https://github.com/kofiarhin/codex-workflow-kit | — | Supports Codex, Claude Code, Cursor, and similar agents |
 | [Agent System](projects/agent-system.md) | Runtime-agnostic agent instruction system with deterministic generation and native runtime outputs | https://github.com/kofiarhin/agent-system | — | Active; streamlined setup/sync implemented and user-verified; CI/release evidence next |
