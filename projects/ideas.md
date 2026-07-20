@@ -1,6 +1,6 @@
 # Ideas Hub
 
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-20
 
 ## Snapshot
 
@@ -8,8 +8,8 @@ Ideas Hub is this Markdown-first repository for brainstorming, project context, 
 
 ## Links
 
-- Repository: https://github.com/kofiarhin/ideas
-- SSH: `git@github.com:kofiarhin/ideas.git`
+- Repository: https://github.com/kofiarhin/ideahub
+- SSH: `git@github.com:kofiarhin/ideahub.git`
 - Live: Not documented
 
 ## Current State
@@ -17,6 +17,7 @@ Ideas Hub is this Markdown-first repository for brainstorming, project context, 
 - Lifecycle: Not documented
 - Stack: Markdown
 - Current priority: Not documented
+- The repository was renamed from `kofiarhin/ideas` to `kofiarhin/ideahub` on 2026-07-20.
 - Deterministic Ideas Hub update routing is defined in [`AGENTS.md`](../AGENTS.md).
 
 ## Current Focus
