@@ -6,14 +6,16 @@
 
 - **Lifecycle:** Active
 - **Summary:** AI-powered software organization that coordinates specialist agents to move software from idea through implementation, verification, release preparation, and launch.
-- **Repository:** Not created
+- **Repository:** https://github.com/kofiarhin/forge
 - **Owner:** Kofi Arhin
 
 ## Links
 
+- Repository: https://github.com/kofiarhin/forge
 - Context API: [context-api.md](context-api.md)
 - Zoro: [zoro.md](zoro.md)
-- MVP PRD: Drafted in the approved project discussion; repository-local document not created yet
+- Approved MVP PRD pull request: https://github.com/kofiarhin/forge/pull/1
+- Repository-local MVP PRD: `docs/forge-mvp-prd.md` on PR #1 until merged
 
 ## Current State
 
@@ -22,13 +24,17 @@
 - The Context API is the shared organizational memory and system of record used by Forge agents.
 - The approved MVP organization includes Zoro, Architect, Builder, Reviewer, QA, Legal, Marketing, and SEO.
 - Architect, Builder, Reviewer, QA, Legal, Marketing, and SEO begin as Forge modules rather than separate top-level projects.
-- A draft MVP PRD has been produced covering the organization, lifecycle, agent responsibilities, authority boundaries, evidence requirements, failure behavior, and MVP edge cases.
+- Kofi Arhin explicitly approved the Forge MVP PRD on 2026-07-21.
+- The Forge GitHub repository now exists and has been bootstrapped with an initial `main` commit.
+- Draft pull request [kofiarhin/forge#1](https://github.com/kofiarhin/forge/pull/1) adds the approved repository-local MVP PRD and links it from the README.
+- The PRD approval does not authorize source-code implementation by itself. Implementation remains gated on approved foundation specifications and tasks explicitly marked `ready`.
+- The Context API task `forge-001 — Finalize and approve the Forge MVP PRD` was previously recorded as `backlog` / `needs_approval`; its approval state still needs to be persisted through the Context API.
 - A copy-and-paste Zoro setup prompt has been prepared to create Forge, create or link Zoro, link Context API, create module records and documentation, and establish the initial backlog through the Context API.
 - Zoro completed a preflight check against the Context API: Forge did not exist, Context API existed, and no existing Zoro project record was found. No write operations had been performed at that checkpoint.
 
 ## Current Focus
 
-Establish Forge as a durable project in the Context API, create the Zoro project record, link Context API and Zoro to Forge, create the MVP module records and documentation, and define the initial governed backlog without beginning implementation.
+Review and merge the approved MVP PRD pull request, persist the approval in the Context API, and define the foundation specifications required before any implementation task can become `ready`.
 
 ## Brainstorming
 
@@ -46,6 +52,8 @@ Establish Forge as a durable project in the Context API, create the Zoro project
 - Zoro remains a separately maintained project because it has a distinct orchestration purpose and can evolve independently.
 - The MVP specialist roles are Architect, Builder, Reviewer, QA, Legal, Marketing, and SEO.
 - Specialist roles other than Zoro start as Forge modules, not separate projects.
+- The Forge MVP PRD was approved by Kofi Arhin on 2026-07-21.
+- The repository-local PRD becomes the authoritative Forge MVP product document after PR #1 is merged.
 - Only tasks with status `ready` may be implemented.
 - One Builder may actively own a task at a time.
 - Builders cannot approve or complete their own work; Reviewer and QA provide independent verification.
@@ -63,17 +71,18 @@ Establish Forge as a durable project in the Context API, create the Zoro project
 ## Open Questions
 
 - Which Context API entities should hold Forge modules, documentation, evidence, relationships, and agent authority rules?
-- Should Forge receive its own repository now or only after the MVP specification is approved?
 - How should Context API and Ideas Hub synchronization avoid competing sources of truth?
 - Which runtime will execute specialist agents during the first end-to-end demonstration?
 - What constitutes a formal release event for the Marketing and SEO gates in the MVP?
 
 ## Next Actions
 
+- Review and merge https://github.com/kofiarhin/forge/pull/1.
+- Persist the PRD approval and updated `forge-001` status in the Context API.
 - Complete and verify creation of the Forge and Zoro project records in the Context API.
 - Link the existing Context API project to Forge as shared memory and system of record.
-- Create the Forge module records and operating documentation.
-- Finalize and approve the Forge MVP PRD.
-- Define the Context API data model, task transitions, evidence schema, and agent authority boundaries.
+- Define and approve the Forge module contracts.
+- Define and approve the Context API data model, task transitions, evidence schema, and agent authority boundaries.
+- Create the Forge module records and operating documentation after their contracts are approved.
 - Keep implementation tasks out of `ready` until approved specifications and acceptance criteria exist.
-- Design the first end-to-end Forge demonstration after the foundation is approved.
+- Design and approve the first end-to-end Forge demonstration specification before implementation.
