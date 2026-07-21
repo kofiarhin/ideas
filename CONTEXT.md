@@ -1,6 +1,6 @@
 # Workspace Context
 
-**Last updated:** 2026-07-20
+**Last updated:** 2026-07-21
 
 ## Purpose
 
@@ -38,6 +38,9 @@ Default engineering preferences unless a project says otherwise:
 
 ### Personal systems and AI workflows
 
+- **Forge** — an active AI-powered software organization that coordinates specialist agents from idea through implementation, verification, legal review, release preparation, marketing, and SEO; the MVP operating model is defined and Context API setup is next.
+- **Zoro** — Forge's Chief Orchestrator and a Context API-connected Custom GPT; live project CRUD has been verified through OpenAI Actions.
+- **Context API** — Forge's shared organizational memory and system of record; public CRUD is implemented and project create, retrieve, patch, and archive operations have been verified through Zoro.
 - **Brain** — a MERN personal operating system with MongoDB-backed memory and AI-assisted workflows.
 - **Codex Workflow Kit** — a reusable workflow system for AI coding agents.
 - **Agent System** — an active runtime-agnostic agent instruction system; streamlined setup and synchronization are implemented and user-verified across Codex, Claude Code, and Gemini CLI, with CI and release evidence next.
@@ -69,6 +72,7 @@ Default engineering preferences unless a project says otherwise:
 - Brain: https://brain-pi-black.vercel.app/
 - KareBraids: https://karebraids.vercel.app/
 - DevKofi: https://devkofi.com/
+- Context API: https://context-api-3b9dfadf403e.herokuapp.com/
 
 ## Current Priorities
 
@@ -76,6 +80,7 @@ Not documented yet. Agents must not infer priorities from repository order, rece
 
 ## Workspace Gaps
 
+- Forge still needs its durable Context API records, approved repository-local PRD, agent authority model, evidence model, task transition rules, and first end-to-end demonstration.
 - Several projects still need a clear purpose, lifecycle status, current focus, and next actions.
 - Current priorities and cross-project dependencies have not been documented.
 - The inbox will need occasional review so useful ideas move into durable project notes.
