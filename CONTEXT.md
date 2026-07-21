@@ -38,7 +38,7 @@ Default engineering preferences unless a project says otherwise:
 
 ### Personal systems and AI workflows
 
-- **Forge** — an active AI-powered software organization that coordinates specialist agents from idea through implementation, verification, legal review, release preparation, marketing, and SEO; the MVP operating model is defined and Context API setup is next.
+- **Forge** — an active AI-powered software organization that coordinates specialist agents from idea through implementation, verification, legal review, release preparation, marketing, and SEO; the MVP PRD is approved and its repository-local authority document is open for review in Forge PR #1, with foundation specifications next.
 - **Zoro** — Forge's Chief Orchestrator and a Context API-connected Custom GPT; live project CRUD has been verified through OpenAI Actions.
 - **Context API** — Forge's shared organizational memory and system of record; public CRUD is implemented and project create, retrieve, patch, and archive operations have been verified through Zoro.
 - **Brain** — a MERN personal operating system with MongoDB-backed memory and AI-assisted workflows.
@@ -80,7 +80,7 @@ Not documented yet. Agents must not infer priorities from repository order, rece
 
 ## Workspace Gaps
 
-- Forge still needs its durable Context API records, approved repository-local PRD, agent authority model, evidence model, task transition rules, and first end-to-end demonstration.
+- Forge still needs the approved PRD pull request merged, its approval persisted in the Context API, repository-local module contracts, an approved Context API data model, evidence and task-transition schemas, agent authority rules, and a first end-to-end demonstration specification.
 - Several projects still need a clear purpose, lifecycle status, current focus, and next actions.
 - Current priorities and cross-project dependencies have not been documented.
 - The inbox will need occasional review so useful ideas move into durable project notes.
