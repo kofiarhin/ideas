@@ -4,7 +4,7 @@
 
 The Ideas Hub stores command-specific Architect workflows and durable run artifacts. ChatGPT Architect project settings remain the global governance layer for discovery, Shared Understanding Handoffs, approval gates, implementation safety, repository isolation, verification, reporting, and context maintenance.
 
-Workflow files may narrow command behavior, but cannot bypass discovery, approval, security, verification, repository-isolation, or source-of-truth rules.
+Workflow files may narrow command behavior, but cannot bypass discovery, approval, security, verification, repository-isolation, reconciliation, deduplication, or source-of-truth rules.
 
 ## Command Resolution
 
@@ -26,6 +26,23 @@ Only aliases listed in this registry are valid command triggers.
 | `good morning` | `morning audit` | [commands/good-morning.md](commands/good-morning.md) | Portfolio audit and durable task queue |
 | `run all tasks` | `resume all tasks`, `continue all tasks` | [commands/run-all-tasks.md](commands/run-all-tasks.md) | Approval-aware execution, verification, reporting, and context updates |
 
+## Reconciliation Contract
+
+All audits and task queues must follow [`RECONCILIATION.md`](RECONCILIATION.md).
+
+Before a task may become `ready`, Architect must record and revalidate:
+
+- the repository and default branch;
+- the audited implementation revision;
+- the approved authority document and revision;
+- the stable `work_key` and applicable `requirement_key`;
+- evidence that the implementation gap still exists;
+- searches of prior runs plus open and merged pull requests for equivalent work;
+- explicit acceptance criteria and verification requirements; and
+- any required approval, including direct-`main` authorization.
+
+A task with missing evidence, duplicate work, or unresolved authority conflict must not become `ready`.
+
 ## Run Resolution
 
 - Use an explicitly named run when supplied; otherwise prefer the latest valid incomplete run.
@@ -44,9 +61,9 @@ Contains run metadata, source fingerprint, portfolio scan, deep-audit selection 
 
 ### `tasks.md`
 
-Contains an ordered durable queue. Every task must include its task ID, title, project, repository, task type, priority, priority rationale, status, source document, source section or requirement, audited revision or commit, evidence, scope, out-of-scope work, dependencies, required approval, acceptance criteria, verification requirements, branch, pull request, verification evidence, and final outcome.
+Contains an ordered durable queue. Every task must include its task ID, stable work key, applicable requirement key, duplicate/supersession metadata, title, project, repository, task type, priority, priority rationale, status, source document, source section or requirement, audited revision or commit, evidence, scope, out-of-scope work, dependencies, required approval, acceptance criteria, verification requirements, branch, pull request, verification evidence, and final outcome.
 
-Task IDs use `<run-id>-<project-slug>-TNNN`.
+Task IDs use `<run-id>-<project-slug>-TNNN`. Stable work keys use `<project-slug>:<semantic-key>` and remain the same across runs.
 
 ### `report.md`
 
@@ -85,7 +102,16 @@ A task must be traceable to at least one of the following:
 - a security finding; or
 - confirmed implementation/documentation drift.
 
-Do not permit implementation tasks based only on unsupported inference.
+Do not permit implementation tasks based only on unsupported inference. A merged pull request proves merge state only; deployment and runtime claims require separate evidence.
+
+## Deduplication Requirements
+
+Before creating or promoting any task, search current and historical task queues, project records, relevant commits, and open and merged pull requests for its `work_key` or equivalent work.
+
+- Do not generate a new task when the same work is active.
+- Do not reimplement completed or merged work.
+- Record duplicate and superseded relationships explicitly.
+- When evidence shows a project `Next Action` is already complete, reconcile the project record instead of generating implementation work.
 
 ## Priority Rules
 
