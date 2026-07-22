@@ -13,34 +13,41 @@ The application covers notes, tasks, plans, reviews, goals, projects, ideas, con
 - Repository: https://github.com/kofiarhin/brain
 - SSH: `git@github.com:kofiarhin/brain.git`
 - Live: https://brain-pi-black.vercel.app/
+- Product requirements: https://github.com/kofiarhin/brain/blob/main/docs/PRD.md
+- Technical specification: https://github.com/kofiarhin/brain/blob/main/docs/TECHNICAL_SPEC.md
+- Codebase audit: https://github.com/kofiarhin/brain/blob/main/docs/CODEBASE_AUDIT.md
 
 ## Reconciliation
 
 ```yaml
 repository: kofiarhin/brain
 default_branch: main
-authority_document: not_documented
-authority_revision: not_available
+authority_document: docs/PRD.md
+authority_revision: documentation_baseline_2026-07-22
 implementation_revision: 1302ad67912091ab806f0b08b607e8c14d4f3d93
 last_reconciled: 2026-07-22
 reconciliation_status: unverified
 ```
 
-The repository and pull-request state were reconciled. Product-authority documentation, test execution, deployment state, and runtime behavior still require separate verification.
+The repository now has a PRD, technical specification, and codebase audit derived from current repository evidence. Test execution, deployed revision, and runtime behavior still require separate verification.
 
 ## Current State
 
 - Lifecycle: Not documented
-- Stack: React, Vite, Node.js, Express, MongoDB, Mongoose
+- Stack: React, Vite, Node.js 22.x, Express, MongoDB, Mongoose
 - AI workflow: Codex CLI reads and updates MongoDB-backed context
 - Chat access: authenticated read-only conversational route backed by application context
+- Write behavior: CRUD routes and explicit Codex-command workflows; the frontend chat is not an autonomous write surface
+- Deployment patterns documented: Heroku single-app and Vercel frontend with Heroku backend
 - Current priority: Not documented
+- A repository-derived PRD, technical specification, and codebase audit were added to `main` on 2026-07-22.
 - PR #9, `Audit app brain data flow and UX states`, merged into `main` on 2026-07-18 as commit `1302ad67912091ab806f0b08b607e8c14d4f3d93`.
 - PR #9 reports fixes for structured list rendering, Dashboard loading/error/empty states, and Europe/London day calculations. Its description states that the test suite was not run in the implementation environment, so those behaviors remain implementation evidence rather than verified runtime state.
+- Vercel reported a successful deployment status for the final documentation commit, but this does not verify application tests or confirm that the linked production runtime matches the documented implementation revision.
 
 ## Current Focus
 
-Document the current production status, authoritative product documentation, and immediate milestone.
+Establish release and runtime evidence for the current application, confirm the immediate product milestone, and maintain requirements-to-code and requirements-to-tests traceability from the new authority documents.
 
 ## Requirement Ledger
 
@@ -60,25 +67,28 @@ _No durable brainstorming notes captured yet._
 - Codex-command workflows perform AI-assisted updates.
 - The authenticated chat interface is read-only unless write behavior is explicitly implemented later.
 - Day planning is separate from the memory-only `update brain` workflow.
+- Repository-local `docs/PRD.md` and `docs/TECHNICAL_SPEC.md` now provide the documentation baseline for product and technical intent; implementation and runtime evidence remain independently verifiable.
 - PR #10 was closed without merging because its chat direction is superseded by current `main`.
 - PR #6 was closed without merging because its modular agent-instruction proposal is superseded.
 
 ## Assumptions
 
 - Closing PRs #10 and #6 does not remove any current behavior already present on `main`.
-- The PR #9 merge commit remains the current default-branch head as of the reconciliation date.
+- Commit `1302ad67912091ab806f0b08b607e8c14d4f3d93` remains relevant implementation evidence for the reconciled UX requirements.
 
 ## Open Questions
 
 - Which Brain workflow is the current priority?
 - What should remain inside Brain versus this GitHub Ideas Hub?
 - Which data should other agents be allowed to read or update?
-- Which repository-local ORD, PRD, or specification is authoritative for Brain?
-- Has commit `1302ad67912091ab806f0b08b607e8c14d4f3d93` passed the full test suite and been deployed to the linked production environment?
+- Has the current application revision passed the full server and client test suites?
+- Which commit is currently deployed to the linked production environment?
+- Which requirements in the new PRD and technical specification already have code and test evidence?
 
 ## Next Actions
 
-- Identify and record the authoritative ORD, PRD, or specification.
-- Run or obtain test and CI evidence for the current `main` revision.
-- Verify the deployed production revision and the PR #9 behaviors.
-- Document the current production status and immediate milestone.
+1. Run `npm test` from a clean checkout and record server and client results.
+2. Verify the deployed production revision and smoke-test the documented health, version, authentication, CRUD, and read-only chat boundaries.
+3. Map the new PRD and technical specification requirements to implementation files and tests.
+4. Confirm and document the immediate product milestone and lifecycle state.
+5. Reconcile this record with the verified code and deployment revision.
