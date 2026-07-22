@@ -48,11 +48,13 @@
 - A GitHub App for Zoro has been created and installed with access to all repositories. Its approved repository permissions are metadata read, contents read/write, and pull requests read/write.
 - The GitHub App credentials have been stored as Heroku config variables for the `context-api` application. Secret key material is not stored in Ideas Hub or the repository.
 - The detailed GitHub Gateway specification and implementation plan are approved and committed directly to `main`.
-- As of 2026-07-22, `main` contains the approved GitHub Gateway documents but no committed runtime GitHub Gateway implementation. The feature is not yet deployed or available through Zoro's Action.
+- A Claude Code implementation session is currently working through the approved GitHub Gateway specification and implementation plan in the local `context-api` repository.
+- This implementation task is still in progress. No final Claude completion report, verified runtime commit, successful deployment release, updated live Zoro Action, or end-to-end GitHub smoke-test evidence has been recorded yet.
+- As of 2026-07-22, `main` contains the approved GitHub Gateway documents but no verified committed runtime GitHub Gateway implementation. The feature is not yet confirmed as deployed or available through Zoro's Action.
 
 ## Current Focus
 
-Implement and verify the approved GitHub Gateway, deploy it to the existing Heroku Context API, then extend Zoro's Action schema with the authenticated GitHub operations.
+Allow Claude Code to complete the implementation, then independently review its changes, run the required verification, commit and deploy only verified work, and extend Zoro's Action schema with the authenticated GitHub operations.
 
 ## Brainstorming
 
@@ -108,9 +110,9 @@ Implement and verify the approved GitHub Gateway, deploy it to the existing Hero
 
 ## Next Actions
 
-- Complete the runtime implementation defined by `docs/GITHUB_GATEWAY_SPEC.md` and `docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md`.
-- Add the dedicated bearer-auth middleware, GitHub App installation client, validation, policy enforcement, serializers, services, controllers, and routes.
-- Add comprehensive Jest and Supertest coverage without calling the live GitHub API.
+- Wait for Claude Code to finish and provide its complete implementation and verification report.
+- Review the resulting working tree and commits against `docs/GITHUB_GATEWAY_SPEC.md` and `docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md` before treating any implementation claim as verified.
+- Complete any missing bearer-auth middleware, GitHub App installation client, validation, policy enforcement, serializers, services, controllers, routes, and tests.
 - Run `npm test`, `npm run lint`, and `npm run format:check`; resolve all failures before claiming completion.
 - Commit the verified implementation to `main` without committing secrets or `.env` values.
 - Deploy the verified `main` revision to the `context-api` Heroku application and perform safe read and controlled write smoke tests.
