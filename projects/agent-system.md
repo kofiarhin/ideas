@@ -1,6 +1,6 @@
 # Agent System
 
-**Last updated:** 2026-07-20
+**Last updated:** 2026-07-22
 
 ## Snapshot
 
@@ -17,6 +17,7 @@
 - Installation guide: https://github.com/kofiarhin/agent-system/blob/main/docs/INSTALLATION.md
 - Operations guide: https://github.com/kofiarhin/agent-system/blob/main/docs/OPERATIONS.md
 - Setup and sync specification: https://github.com/kofiarhin/agent-system/blob/main/docs/SETUP_AND_SYNC_SPEC.md
+- Codebase audit: https://github.com/kofiarhin/agent-system/blob/main/docs/CODEBASE_AUDIT.md
 - Verified refresh hardening commit: https://github.com/kofiarhin/agent-system/commit/45d6393af0fcc0acb743535b3332be5aeea24b23
 
 ## Current State
@@ -26,42 +27,17 @@ The shared-source architecture, deterministic generation, runtime adapters, sour
 The primary user workflow has been simplified to two commands:
 
 ```powershell
-# First-time installation into detected runtimes.
 .\scripts\setup-agent-system.ps1
-
-# Ongoing repository and runtime synchronization.
 .\scripts\sync-agent-system.ps1
 ```
 
 `sync-agent-system.ps1 -SkipPull` is available for development against the current checkout. Both high-level commands support PowerShell preview and confirmation semantics, use adapter-derived runtime detection, process Codex, Claude Code, and Gemini CLI sequentially, stop on the first failure, and report only changed runtimes as requiring restart.
 
-Runtime detection is based on the existing parent directory of each adapter-defined install target. Missing runtime directories are not created automatically.
+The documentation set includes the README, PRD, installation guide, operations guide, runtime adapter guide, setup/sync specification, implementation record, and a 2026-07-22 codebase audit.
 
-The documentation set was aligned with this product direction, including the README, PRD, installation guide, operations guide, runtime adapter guide, setup/sync specification, and implementation record.
+The audit confirmed that documentation is generally strong and aligned with the implemented source-of-truth and safety model. Remaining documentation and verification gaps are runtime compatibility reporting, requirements-to-test traceability, and explicit recovery guidance for partial success when a later runtime fails.
 
-A local PowerShell verification pass found and fixed three implementation issues:
-
-- PowerShell parsed `$code:` as an invalid drive-qualified variable in the child-script error message; it now uses `${code}`.
-- The no-detected-runtime path could not receive an empty collection; `RuntimeRecords` now permits empty collections and returns structured exit code `2` behavior.
-- Test counters leaked between repeated runs in the same PowerShell session; the harness now starts each run with fresh state.
-
-Commit `45d6393af0fcc0acb743535b3332be5aeea24b23` records these fixes and targeted tests.
-
-User-confirmed verification on Windows:
-
-- the full test suite passed after the fixes, including repeated execution in the same PowerShell session;
-- setup preview detected Codex, Claude Code, and Gemini CLI without writing installed files;
-- real setup completed successfully;
-- Codex and Claude Code were already current;
-- Gemini CLI was updated and installed-hash verification passed;
-- generated and installed Codex hashes matched;
-- fresh Codex and Claude Code sessions demonstrated repository inspection, discovery-first behavior, explicit approval gates, and verification-oriented workflow.
-
-Observed runtime style difference:
-
-- Codex tended to provide a concise audit of concrete repository facts before explaining the workflow.
-- Claude Code tended to provide a richer architecture summary before explaining the workflow.
-- Both followed the same installed discovery, handoff, approval, implementation, and verification lifecycle.
+User-confirmed Windows verification remains valid evidence for current behavior, but durable cross-version CI evidence and a release tag remain outstanding.
 
 ## Current Focus
 
@@ -71,21 +47,21 @@ Priority areas:
 
 - add or confirm Windows CI for Windows PowerShell 5.1 and current PowerShell 7;
 - expand top-level command tests for Git preconditions, pull failures, `-SkipPull`, `-Force`, `-Confirm`, exit code `3`, partial success, and restart output;
+- document recovery steps for partial multi-runtime updates;
+- add a runtime compatibility and verification matrix;
 - decide and document the next release version/tag;
 - continue keeping README, PRD, guides, and implementation behavior synchronized.
 
 ## Brainstorming
 
-Deferred ideas that are not part of the current milestone:
-
-- transactional multi-runtime installation;
-- transaction journals and interrupted-operation recovery;
-- background synchronization services;
-- automatic runtime installation or restart;
-- structured operation logging and dashboards;
-- backup retention automation;
-- organization-wide deployment tooling;
-- future runtime adapters such as GitHub Copilot CLI, Cursor, Continue, Aider, and xAI.
+- transactional multi-runtime installation
+- transaction journals and interrupted-operation recovery
+- background synchronization services
+- automatic runtime installation or restart
+- structured operation logging and dashboards
+- backup retention automation
+- organization-wide deployment tooling
+- future runtime adapters such as GitHub Copilot CLI, Cursor, Continue, Aider, and xAI
 
 ## Decisions
 
@@ -116,15 +92,9 @@ Deferred ideas that are not part of the current milestone:
 
 ## Next Actions
 
-1. Add or verify a GitHub Actions Windows matrix that runs:
-
-   ```powershell
-   .\scripts\build-agent.ps1 -Runtime All -Check
-   .\scripts\verify-agent.ps1 -Scope All -Strict
-   .\tests\run-tests.ps1
-   ```
-
+1. Add or verify a GitHub Actions Windows matrix for build, strict verification, and the full test suite.
 2. Add top-level setup/sync integration coverage for Git safety, command switches, exit codes, partial success, and restart guidance.
-3. Run the complete suite in Windows PowerShell 5.1 and current PowerShell 7 and record the evidence.
-4. Choose and publish the next release version when CI and release verification pass.
-5. Preserve the two-command user experience and avoid unrelated refactoring or enterprise transaction infrastructure.
+3. Add a runtime compatibility matrix and requirements-to-tests mapping.
+4. Document recovery for partial success and interrupted operations without claiming transactionality.
+5. Run the complete suite in Windows PowerShell 5.1 and current PowerShell 7 and record evidence.
+6. Choose and publish the next release version after CI and release verification pass.
