@@ -1,6 +1,6 @@
 # Ideas Hub
 
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-22
 
 ## Snapshot
 
@@ -8,16 +8,19 @@ Ideas Hub is this Markdown-first repository for brainstorming, project context, 
 
 ## Links
 
-- Repository: https://github.com/kofiarhin/ideas
-- SSH: `git@github.com:kofiarhin/ideas.git`
+- Repository: https://github.com/kofiarhin/ideahub
+- Historical repository alias: https://github.com/kofiarhin/ideas
+- SSH: `git@github.com:kofiarhin/ideahub.git`
 - Live: Not documented
 
 ## Current State
 
 - Lifecycle: Not documented
-- Stack: Markdown
+- Stack: Markdown with dependency-free Node.js validation and catalog tooling
 - Current priority: Not documented
 - Deterministic Ideas Hub update routing is defined in [`AGENTS.md`](../AGENTS.md).
+- Machine-readable retrieval catalogs are generated from `PROJECTS.md` and `projects/*.md`.
+- Catalog generation, validation, drift detection, tests, and classification-aware dry-run updates are available through the root npm scripts.
 
 ## Current Focus
 
@@ -101,6 +104,7 @@ GitHub Issues are optional for this MVP. They may be created when requested or w
 - `PROJECTS.md` changes only for project index fields such as name, summary, repository, live URL, or lifecycle.
 - `CONTEXT.md` changes only when broad workspace context changes.
 - Architect operational history remains under `architect/runs/`.
+- Generated catalog files change only through `npm run hub:index` after their Markdown sources change.
 
 ## Brainstorming
 
@@ -116,6 +120,8 @@ _No durable brainstorming notes captured yet._
 - GitHub Issues are optional execution records, not a second source of project truth.
 - Verified implementation updates project current state; unverified claims do not.
 - `update Ideas Hub` remains a governed write request rather than a registered Architect command.
+- Generated JSON catalogs are disposable retrieval views and never replace canonical Markdown.
+- Project updates should use dry-run, classification-aware tooling when the change fits the supported update contract.
 
 ## Assumptions
 
@@ -131,3 +137,4 @@ _No durable brainstorming notes captured yet._
 - Apply the routing rules whenever approved project knowledge is captured or updated.
 - Keep project context and links current as approved and verified project information changes.
 - Use the active run report as the exact resume point for execution.
+- Keep generated catalogs current and require `npm run hub:check` for durable changes.

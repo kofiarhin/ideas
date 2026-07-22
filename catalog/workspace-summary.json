@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "source": "PROJECTS.md + projects/*.md",
+  "projectsIndexUpdatedAt": "2026-07-22",
+  "projectCount": 18,
+  "lifecycleCounts": {
+    "Exploring": 1,
+    "Active": 6,
+    "Paused": 0,
+    "Maintenance": 0,
+    "Shipped": 0,
+    "Archived": 2,
+    "Not documented": 9
+  },
+  "activeProjectIds": [
+    "piano360",
+    "forge",
+    "zoro",
+    "context-api",
+    "agent-system",
+    "archon"
+  ],
+  "projectsWithoutRepository": [
+    "forge",
+    "zoro"
+  ],
+  "projectsWithoutLiveUrl": [
+    "piano360",
+    "amas-kitchen",
+    "memory-sequence-game",
+    "ideas",
+    "forge",
+    "zoro",
+    "codex-workflow",
+    "agent-system",
+    "archon",
+    "taxify",
+    "kflix",
+    "banging-prices",
+    "moggoff",
+    "projectos"
+  ]
+}

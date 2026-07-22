@@ -1,6 +1,6 @@
 # Projects
 
-**Last updated:** 2026-07-21
+**Last updated:** 2026-07-22
 
 This is the only canonical project index for the Ideas Hub.
 
@@ -9,21 +9,21 @@ This is the only canonical project index for the Ideas Hub.
 | [Piano360](projects/piano360.md) | Guided piano-learning course application | https://github.com/kofiarhin/piano360 | — | MongoDB-backed course MVP |
 | [Brain](projects/brain.md) | MERN personal operating system with AI-assisted workflows | https://github.com/kofiarhin/brain | https://brain-pi-black.vercel.app/ | MongoDB is the durable application memory |
 | [KareBraids](projects/karebraids.md) | Braid services, availability, booking, enquiries, and admin management | https://github.com/kofiarhin/karebraids | https://karebraids.vercel.app/ | MERN booking platform |
-| [Amas Kitchen](projects/amas-kitchen.md) | Project details not yet documented | https://github.com/kofiarhin/amas-kitchen | — | Needs overview and current status |
+| [Amas Kitchen](projects/amas-kitchen.md) | Premium Ghanaian kitchen ordering, services, testimonials, contact, and checkout application | https://github.com/kofiarhin/amas-kitchen | — | Homepage design direction awaits approval |
 | [DevKofi](projects/devkofi.md) | MERN mentorship and learning platform | https://github.com/kofiarhin/devkofi | https://devkofi.com/ | Includes mentee onboarding and internal tooling |
 | [Memory Sequence Game](projects/memory-sequence-game.md) | Responsive visual sequence-recall browser game | https://github.com/kofiarhin/memory-game | — | Exploring; MVP audited and fixes merged; CI passing; deployment pending |
-| [Ideas Hub](projects/ideas.md) | Markdown-first brainstorming workspace and durable cross-tool reference layer | https://github.com/kofiarhin/ideas | — | This repository |
+| [Ideas Hub](projects/ideas.md) | Markdown-first brainstorming workspace and durable cross-tool reference layer | https://github.com/kofiarhin/ideahub | — | This repository; `kofiarhin/ideas` remains a historical alias |
 | [Forge](projects/forge.md) | AI-powered software organization coordinating specialist agents from idea through verified launch preparation | — | — | Active; MVP operating model and edge-case rules defined; Context API setup next |
 | [Zoro](projects/zoro.md) | Forge Chief Orchestrator and Context API-connected Custom GPT | — | — | Active; project CRUD verified through OpenAI Actions; Forge linkage next |
 | [Context API](projects/context-api.md) | Centralized API for structured, reusable user, engineering, project, workflow, glossary, and learning context | https://github.com/kofiarhin/context-api | https://context-api-3b9dfadf403e.herokuapp.com | Active; public CRUD MVP and Zoro project CRUD verified; Forge data model next |
 | [Codex Workflow Kit](projects/codex-workflow.md) | Reusable AI engineering workflow system | https://github.com/kofiarhin/codex-workflow-kit | — | Supports Codex, Claude Code, Cursor, and similar agents |
 | [Agent System](projects/agent-system.md) | Runtime-agnostic agent instruction system with deterministic generation and native runtime outputs | https://github.com/kofiarhin/agent-system | — | Active; streamlined setup/sync implemented and user-verified; CI/release evidence next |
 | [Archon](projects/archon.md) | AI-powered software architecture studio that turns ideas into implementation-ready engineering blueprints | https://github.com/kofiarhin/archon | — | Active; MVP specification approved; Phase 1 foundation is next |
-| [Taxify](projects/taxify.md) | Project details not yet documented | https://github.com/kofiarhin/taxify | — | Needs overview and current status |
+| [Taxify](projects/taxify.md) | Archived project; no work is planned unless explicitly reactivated | https://github.com/kofiarhin/taxify | — | Archived; reassess security and deployment state before reactivation |
 | [Kflix](projects/kflix.md) | Project details not yet documented | https://github.com/kofiarhin/kflix | — | Needs overview and current status |
 | [Banging Prices](projects/banging-prices.md) | Project details not yet documented | https://github.com/kofiarhin/banging-prices | — | Needs overview and current status |
 | [MoggOff](projects/moggoff.md) | Project details not yet documented | https://github.com/kofiarhin/moggedoff | — | Repository slug differs from project display name |
-| [ProjectOS](projects/projectos.md) | CLI-first autonomous development operating system for a multi-repository local workspace | https://github.com/kofiarhin/projectos | — | Phase 0 foundation validated; Phase 1 Domain and Persistence is next |
+| [ProjectOS](projects/projectos.md) | Archived autonomous development operating system for multi-repository local workspaces | https://github.com/kofiarhin/projectos | — | Archived; fresh security and repository review required before reactivation |
 
 ## Lifecycle Guidance
 

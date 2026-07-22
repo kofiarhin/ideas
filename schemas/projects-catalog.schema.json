@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kofiarhin/ideahub/schemas/projects-catalog.schema.json",
+  "title": "Ideas Hub Projects Catalog",
+  "type": "object",
+  "required": ["schemaVersion", "source", "projectsIndexUpdatedAt", "projects"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "source": { "type": "string" },
+    "projectsIndexUpdatedAt": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "summary",
+          "record",
+          "lifecycle",
+          "updatedAt",
+          "aliases",
+          "relatedProjects"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "repository": { "type": ["string", "null"] },
+          "liveUrl": { "type": ["string", "null"] },
+          "notes": { "type": "string" },
+          "record": { "type": "string", "pattern": "^projects/.+\\.md$" },
+          "recordTitle": { "type": ["string", "null"] },
+          "lifecycle": {
+            "enum": [
+              "Exploring",
+              "Active",
+              "Paused",
+              "Maintenance",
+              "Shipped",
+              "Archived",
+              "Not documented"
+            ]
+          },
+          "lifecycleRaw": { "type": "string" },
+          "updatedAt": {
+            "type": ["string", "null"],
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "aliases": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          },
+          "relatedProjects": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

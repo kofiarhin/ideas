@@ -1,0 +1,18 @@
+{
+  "name": "ideahub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Markdown-first project context with deterministic catalogs and agent-safe update tooling.",
+  "scripts": {
+    "test": "node --test",
+    "hub:index": "node scripts/build-catalog.mjs",
+    "hub:validate": "node scripts/validate-hub.mjs",
+    "hub:drift": "node scripts/check-drift.mjs",
+    "hub:check": "npm run hub:validate && npm run hub:index -- --check && npm run hub:drift && npm test",
+    "hub:update": "node scripts/update-project.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

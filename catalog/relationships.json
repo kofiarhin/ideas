@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "source": "PROJECTS.md + projects/*.md",
+  "projectsIndexUpdatedAt": "2026-07-22",
+  "relationships": [
+    {
+      "source": "context-api",
+      "target": "forge",
+      "type": "related"
+    },
+    {
+      "source": "context-api",
+      "target": "zoro",
+      "type": "related"
+    },
+    {
+      "source": "forge",
+      "target": "context-api",
+      "type": "related"
+    },
+    {
+      "source": "forge",
+      "target": "zoro",
+      "type": "related"
+    },
+    {
+      "source": "zoro",
+      "target": "context-api",
+      "type": "related"
+    },
+    {
+      "source": "zoro",
+      "target": "forge",
+      "type": "related"
+    }
+  ]
+}

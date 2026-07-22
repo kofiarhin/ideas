@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "source": "PROJECTS.md + projects/*.md",
+  "projectsIndexUpdatedAt": "2026-07-22",
+  "repositories": {
+    "kofiarhin/agent system": "agent-system",
+    "kofiarhin/amas kitchen": "amas-kitchen",
+    "kofiarhin/archon": "archon",
+    "kofiarhin/banging prices": "banging-prices",
+    "kofiarhin/brain": "brain",
+    "kofiarhin/codex workflow kit": "codex-workflow",
+    "kofiarhin/context api": "context-api",
+    "kofiarhin/devkofi": "devkofi",
+    "kofiarhin/ideahub": "ideas",
+    "kofiarhin/karebraids": "karebraids",
+    "kofiarhin/kflix": "kflix",
+    "kofiarhin/memory game": "memory-sequence-game",
+    "kofiarhin/moggedoff": "moggoff",
+    "kofiarhin/piano360": "piano360",
+    "kofiarhin/projectos": "projectos",
+    "kofiarhin/taxify": "taxify"
+  }
+}
