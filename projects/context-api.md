@@ -17,6 +17,7 @@
 - Live API: https://context-api-3b9dfadf403e.herokuapp.com
 - PRD: https://github.com/kofiarhin/context-api/blob/main/docs/PRD.md
 - Specification: https://github.com/kofiarhin/context-api/blob/main/docs/SPEC.md
+- Codebase audit: https://github.com/kofiarhin/context-api/blob/main/docs/CODEBASE_AUDIT.md
 - GitHub Gateway specification: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_SPEC.md
 - GitHub Gateway implementation plan: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md
 - Maintained Zoro Action schema: https://github.com/kofiarhin/context-api/blob/main/docs/openapi/zoro-action.yaml
@@ -30,12 +31,12 @@
 - Public context CRUD and the authenticated GitHub Gateway runtime are committed to `main`.
 - The GitHub Gateway exposes repository, content, branch, file, and pull-request operations beneath `/api/v1/github` using GitHub App installation authentication and a dedicated Bearer credential.
 - The gateway enforces UTF-8 text-only writes, workflow-path blocking, non-force branch updates, branch protection, and optimistic concurrency for file replacement, deletion, branch updates, and pull-request merges.
-- The maintained OpenAPI schema now uses the production URL `https://context-api-3b9dfadf403e.herokuapp.com`, declares 27 operations, and remains within the GPT Action limit.
-- A repository release validator and aggregate `npm run verify` command are committed. The validator checks the production URL, operation count, operation-ID uniqueness, required GitHub operations, Bearer declarations, and required specification files.
-- The `express-rate-limit` regression assertion now matches the configured draft-7 `RateLimit` header and confirms legacy `X-RateLimit-*` headers are absent.
+- The maintained OpenAPI schema uses the production URL, declares 27 operations, and remains within the GPT Action limit.
+- A repository release validator and aggregate `npm run verify` command are committed.
 - Optional defense-in-depth repository restriction is implemented through `GITHUB_REPOSITORY_ALLOWLIST`; leaving it empty preserves the approved all-repository default.
-- A release checklist documents repository verification, deployment, safe reads, disposable-branch write/delete testing, GPT Builder handoff, the MongoDB startup boundary, and allowlist configuration.
 - GitHub request routing bypasses the MongoDB request guard, but `src/server.js` still requires MongoDB before binding the process. This route-level versus process-level availability limitation is documented and intentionally unchanged.
+- The 2026-07-22 documentation audit found that Context API already has one of the portfolio's strongest documentation sets: README, PRD, specification, implementation plan, deployment guidance, gateway specification, OpenAPI schema, and release controls.
+- The audit identified runtime-version drift between the README and executable manifest and aligned the README with the Node.js 24.x requirement in `package.json`.
 - Repository changes are committed, but no green execution output for `npm run verify` has been recorded through the available GitHub connector. The feature must not be marked fully verified until those commands run successfully.
 - The GPT Builder Action and final Zoro read/write smoke test remain manual work and have not been completed.
 
@@ -48,11 +49,11 @@
 - Added a GitHub Gateway release checklist covering verification, deployment, GPT Builder configuration, safe reads, disposable writes, cleanup, and evidence capture.
 - Preserved the approved security controls: Bearer authentication, optimistic concurrency, non-force updates, branch-protection enforcement, and blocked workflow-file writes.
 - Documented the MongoDB startup dependency without expanding scope into a process-architecture redesign.
-- Updated the Ideas Hub records to distinguish completed repository remediation from outstanding live verification.
+- Added a codebase and documentation audit and corrected README runtime-version drift.
 
 ## Current Focus
 
-Run the complete repository verification command from a clean checkout, resolve any remaining seed-data failures, deploy the verified revision, then complete GPT Builder configuration and the controlled Zoro smoke test.
+Run the complete repository verification command from a clean checkout, resolve any remaining failures, deploy the verified revision, then complete GPT Builder configuration and the controlled Zoro smoke test.
 
 ## Brainstorming
 
@@ -79,7 +80,6 @@ Run the complete repository verification command from a clean checkout, resolve 
 - GitHub branch protection remains authoritative and must not be bypassed.
 - Zoro must not modify `.github/workflows/*`, manage Actions, access secrets, administer repositories or organizations, manage collaborators, force-push, or bypass branch protection.
 - File updates and deletions require the current blob SHA; branch updates and pull-request merges require optimistic concurrency checks.
-- Direct implementation on `main` was explicitly authorized for this remediation scope.
 - Route-level MongoDB independence is retained; process-level decoupling is deferred to a separately approved architecture change.
 - Repository allowlisting is optional defense in depth. Empty configuration preserves the approved all-repository behavior.
 
@@ -95,20 +95,17 @@ Run the complete repository verification command from a clean checkout, resolve 
 - What authentication model should eventually replace public writes across non-GitHub Context API endpoints?
 - Should the maintained OpenAPI schema eventually be hosted by the Context API for stable import?
 - Which Context API entities should represent Forge modules, authority boundaries, project relationships, evidence, and task locks?
-- Do any seed-data regression failures remain after the rate-limit assertion correction?
+- Do any repository verification failures remain after the documented corrections?
 - Is route-level MongoDB independence sufficient long term?
 
 ## Next Actions
 
-### GitHub Gateway Audit Tasks
-
-- [x] **Task 1 — Correct the maintained Action schema:** production URL committed; 27-operation contract retained; static validation added.
-- [ ] **Task 2 — Establish repository verification evidence:** from a clean checkout run `npm ci` and `npm run verify`; repair any remaining seed-data failures and preserve exact passing output.
-- [ ] **Task 3 — Deploy the verified revision:** deploy only after Task 2 passes and preserve the Heroku release and startup evidence.
-- [ ] **Task 4 — Configure the live Zoro Action:** paste the corrected schema into GPT Builder and configure `ZORO_GITHUB_API_KEY` as Bearer authentication.
-- [ ] **Task 5 — Verify non-destructive reads through Zoro:** list repositories and read `README.md` from `kofiarhin/context-api` on `main`.
-- [ ] **Task 6 — Run the controlled write smoke test:** use a disposable branch, create a temporary UTF-8 file, retrieve its SHA, delete it with that SHA, and confirm `main` was unchanged.
-- [ ] **Task 7 — Record completion evidence:** capture verification output, deployment, Action setup, reads, writes, deletion, and cleanup before marking the feature complete.
-- [x] **Task 8 — Add repository-scope hardening:** optional `GITHUB_REPOSITORY_ALLOWLIST` support, tests, example configuration, and documentation committed while preserving the current default.
-- [ ] Create and verify the Forge and Zoro project records through Zoro.
-- [ ] Define the Forge Context API data model, valid task transitions, single-owner enforcement, approval gates, and evidence schemas.
+1. From a clean checkout, run `npm ci` and `npm run verify`; preserve exact passing output or repair failures.
+2. Deploy only the verified revision and record the deployed commit SHA and startup evidence.
+3. Configure the live Zoro Action with the maintained schema and Bearer authentication.
+4. Verify non-destructive repository reads through Zoro.
+5. Run the disposable-branch create/read/delete smoke test and confirm `main` remains unchanged.
+6. Record completion evidence before marking the GitHub Gateway fully verified.
+7. Create and verify the Forge and Zoro project records through Zoro.
+8. Define the Forge Context API data model, valid task transitions, single-owner enforcement, approval gates, and evidence schemas.
+9. Extend requirements-to-tests traceability from the GitHub Gateway to the context domains.
