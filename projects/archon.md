@@ -1,6 +1,6 @@
 # Archon
 
-**Last updated:** 2026-07-18
+**Last updated:** 2026-07-22
 
 ## Snapshot
 
@@ -16,7 +16,8 @@ Archon transforms a plain-language product idea into a structured, reviewable, i
 - **Repository:** https://github.com/kofiarhin/archon
 - **Approved PRD and architecture:** https://github.com/kofiarhin/archon/pull/1
 - **Approved implementation specification and plan:** https://github.com/kofiarhin/archon/pull/2
-- **Latest verified merge:** https://github.com/kofiarhin/archon/commit/f89140062b069487c35319b525cc15aae100dc8b
+- **Latest verified specification merge:** https://github.com/kofiarhin/archon/commit/f89140062b069487c35319b525cc15aae100dc8b
+- **Codebase audit:** https://github.com/kofiarhin/archon/blob/main/docs/CODEBASE_AUDIT.md
 
 ## Current State
 
@@ -33,7 +34,7 @@ The approved MVP direction includes:
 - private workspace projects
 - Markdown export with text-based Mermaid diagrams
 
-No application implementation has been verified yet.
+The 2026-07-22 codebase audit confirmed that Archon remains a specification-first repository. Its documentation is strong and internally structured, but no runnable application, manifest-backed runtime, database migration, API implementation, worker, test execution, deployment, or production behavior has been verified.
 
 ## Current Focus
 
@@ -62,6 +63,7 @@ Implementation must follow the approved specifications and remain isolated in re
 - Markdown is the required MVP export format.
 - Coding-agent prompts may only target explicitly approved implementation tasks and do not authorize execution.
 - The implementation specification and plan were approved and merged in PR #2 at commit `f89140062b069487c35319b525cc15aae100dc8b`.
+- Documentation quality does not constitute implementation evidence; current-state claims require code and verification.
 
 ## Assumptions
 
@@ -81,4 +83,5 @@ Implementation must follow the approved specifications and remain isolated in re
 1. Create and approve the first Phase 1 implementation task from `docs/specs/IMPLEMENTATION_PLAN.md`.
 2. Implement the repository and CI foundation in a dedicated branch and pull request.
 3. Verify clean installation, local web and worker startup, safe configuration failure, and required CI checks.
-4. Update this project record only after the implementation work is verified and merged.
+4. Record the implementation revision and requirement-to-test evidence after verification.
+5. Update this project record only after the implementation work is verified and merged.
