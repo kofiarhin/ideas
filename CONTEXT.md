@@ -1,6 +1,6 @@
 # Workspace Context
 
-**Last updated:** 2026-07-21
+**Last updated:** 2026-07-22
 
 ## Purpose
 
@@ -38,15 +38,15 @@ Default engineering preferences unless a project says otherwise:
 
 ### Personal systems and AI workflows
 
-- **Forge** — an active AI-powered software organization that coordinates specialist agents from idea through implementation, verification, legal review, release preparation, marketing, and SEO; the MVP operating model is defined and Context API setup is next.
+- **Forge** — an active AI-powered software organization with a repository-local PRD, proposed technical specification, and codebase audit; it remains a documentation scaffold and the executable MVP has not started.
 - **Zoro** — Forge's Chief Orchestrator and a Context API-connected Custom GPT; live project CRUD has been verified through OpenAI Actions.
-- **Context API** — Forge's shared organizational memory and system of record; public CRUD is implemented and project create, retrieve, patch, and archive operations have been verified through Zoro.
-- **Brain** — a MERN personal operating system with MongoDB-backed memory and AI-assisted workflows.
-- **Codex Workflow Kit** — a reusable workflow system for AI coding agents.
-- **Agent System** — an active runtime-agnostic agent instruction system; streamlined setup and synchronization are implemented and user-verified across Codex, Claude Code, and Gemini CLI, with CI and release evidence next.
+- **Context API** — Forge's shared organizational memory and system of record; public CRUD and the authenticated GitHub Gateway are implemented, documentation is strong, and clean verification plus live Action smoke-test evidence remain outstanding.
+- **Brain** — a MERN personal operating system with MongoDB-backed memory and AI-assisted workflows; repository-local PRD, technical specification, and audit now exist, while test and deployed-revision evidence remain outstanding.
+- **Codex Workflow Kit** — a reusable workflow system for AI coding agents; PRD, technical specification, and audit now exist, with legacy artifact-path documentation reconciliation next.
+- **Agent System** — an active runtime-agnostic agent instruction system; setup and synchronization are implemented and user-verified across Codex, Claude Code, and Gemini CLI, with Windows CI, compatibility evidence, and release tagging next.
 - **Ideas Hub** — this repository; the shared reference and brainstorming layer across tools.
 - **Architect Command System** — Ideas Hub-backed workflows for portfolio auditing, durable task queues, approval-aware execution, verification, reporting, and context maintenance.
-- **Archon** — an active AI-powered software architecture studio with an approved MVP specification; Phase 1 foundation implementation is next.
+- **Archon** — an active AI-powered software architecture studio with strong approved MVP specifications; it remains specification-first and Phase 1 application implementation has not started.
 
 ### Learning and mentorship
 
@@ -76,15 +76,21 @@ Default engineering preferences unless a project says otherwise:
 
 ## Current Priorities
 
-Not documented yet. Agents must not infer priorities from repository order, recent commits, or project maturity.
+1. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
+2. Implement and verify that Forge slice without implying the full multi-agent organization exists.
+3. Complete repository and live verification evidence for Context API, Brain, and Agent System.
+4. Reconcile Codex Workflow Kit legacy documentation with its current run-scoped artifact model.
+5. Begin Archon Phase 1 only through its approved implementation plan and verification gates.
 
 ## Workspace Gaps
 
-- Forge still needs its durable Context API records, approved repository-local PRD, agent authority model, evidence model, task transition rules, and first end-to-end demonstration.
+- Forge has strong initial product documentation but no executable orchestration foundation, tests, CI, API, persistence model, or deployment evidence.
+- Context API, Brain, and Agent System need durable verification evidence tied to exact revisions and environments.
+- Codex Workflow Kit contains legacy architecture guidance that conflicts with its current `_workflow/runs/<run-id>/` model.
+- Archon has strong specifications but no verified application implementation.
 - Several projects still need a clear purpose, lifecycle status, current focus, and next actions.
-- Current priorities and cross-project dependencies have not been documented.
 - The inbox will need occasional review so useful ideas move into durable project notes.
-- Architect audits depend on project records linking to current authoritative PRDs, specifications, plans, and repositories.
+- Architect audits depend on project records linking to current authoritative PRDs, specifications, plans, repositories, implementation revisions, and verification evidence.
 
 ## Maintenance Rule
 
