@@ -15,15 +15,16 @@ Before processing:
 
 1. Read root [`AGENTS.md`](../../AGENTS.md).
 2. Read [`architect/README.md`](../README.md).
-3. Read this workflow.
-4. Resolve the explicitly named or latest valid incomplete run.
-5. Read `audit.md` and `tasks.md`.
-6. Validate the queue.
-7. Revalidate source revisions and repository SHAs.
-8. Confirm repository access.
-9. Stop if no durable queue exists.
-10. Never reconstruct a queue from chat memory.
-11. Stop if the run is completed unless the user explicitly starts a new audit.
+3. Read [`architect/RECONCILIATION.md`](../RECONCILIATION.md).
+4. Read this workflow.
+5. Resolve the explicitly named or latest valid incomplete run.
+6. Read `audit.md` and `tasks.md`.
+7. Validate the queue with `python scripts/validate_ideahub.py` when execution access permits.
+8. Revalidate source revisions and repository SHAs.
+9. Confirm repository access.
+10. Stop if no durable queue exists.
+11. Never reconstruct a queue from chat memory.
+12. Stop if the run is completed unless the user explicitly starts a new audit.
 
 ## Authorized Writes
 
@@ -37,6 +38,38 @@ May:
 - update `CONTEXT.md` only for broad workspace changes.
 
 May not silently approve discovery, PRDs/specifications/plans, migrations, breaking changes, security direction, lifecycle changes, or direct-main commits; implement `proposed` work; modify unrelated repositories; mark unverified work complete; or merge pull requests without explicit authority.
+
+## Queue Validation And Deduplication
+
+Before processing or promoting any task:
+
+1. Require `task_id`, stable `work_key`, applicable `requirement_key`, `duplicate_of`, and `supersedes` fields.
+2. Confirm the source document, source revision, audited implementation revision, acceptance criteria, and verification requirements are recorded.
+3. Search current and historical Architect runs for the same `work_key`.
+4. Search the project record for equivalent current focus, next action, requirement, or completed evidence.
+5. Search relevant open and merged pull requests and commits for equivalent work.
+6. Confirm the recorded implementation gap still exists on the current default-branch revision.
+7. Reject duplicate active work and do not reimplement completed, merged, or superseded work.
+8. Record duplicate or supersession relationships in the task and report.
+
+A queue with duplicate active `work_key` values is invalid. Route ambiguous equivalence to `needs_discovery`; route conclusive completed work to `completed` or `skipped` with evidence and reconcile stale project notes.
+
+## Readiness Gate
+
+A task may become or remain `ready` only when all applicable checks pass:
+
+- repository and default branch are known;
+- current implementation revision matches the audited evidence or has been safely reconciled;
+- approved authority document and revision are known;
+- requirement or approved change request is explicit;
+- implementation gap is verified;
+- no equivalent active or completed work exists;
+- no open or merged pull request already satisfies the work;
+- acceptance criteria and verification requirements are explicit;
+- authority and implementation are not materially conflicted; and
+- required approvals, including direct-`main` authorization, are recorded.
+
+Route failures to `needs_discovery`, `needs_spec`, `needs_approval`, or `blocked` according to [`RECONCILIATION.md`](../RECONCILIATION.md).
 
 ## Queue Processing
 
@@ -53,7 +86,7 @@ Pause the entire run only for a security incident, destructive migration, source
 
 ### `ready`
 
-Revalidate, set to `running`, then implement.
+Revalidate the readiness gate, set to `running`, then implement.
 
 ### `needs_discovery`
 
@@ -143,7 +176,7 @@ Create a separate pull request per repository. Each pull request must include th
 
 ## Report
 
-Maintain `architect/runs/<run-id>/report.md` and update it after every transition. Include run metadata and state; execution order; completed tasks; discovery handoffs; draft specifications/plans; approvals requested; blocked, failed, and skipped tasks; branches, commits, and pull requests; verification evidence; Ideas Hub updates; remaining risks; and the exact resume point.
+Maintain `architect/runs/<run-id>/report.md` and update it after every transition. Include run metadata and state; execution order; completed tasks; discovery handoffs; draft specifications/plans; approvals requested; duplicate and superseded work; blocked, failed, and skipped tasks; branches, commits, and pull requests; verification evidence; Ideas Hub updates; remaining risks; and the exact resume point.
 
 ## Ideas Hub Maintenance
 
@@ -151,17 +184,18 @@ After verified completion:
 
 1. Update the matching `projects/<project>.md`.
 2. Record what changed, verification evidence, current status, decisions, remaining work, risks or blockers, recommended next action, and commit/pull-request/issue/CI/document links.
-3. Update `Last updated`.
-4. Update `PROJECTS.md` only for name, repository, live URL, lifecycle, summary, or index-level status changes.
-5. Update `CONTEXT.md` only for broad workspace changes.
-6. Preserve facts, decisions, ideas, assumptions, and questions as separate categories.
-7. Never record drafts as approved or unverified implementation as completed.
-8. Never update unrelated records.
+3. Remove completed work from `Current Focus` and `Next Actions`.
+4. Update the project's `Reconciliation` section and `Last updated`.
+5. Update `PROJECTS.md` only for name, repository, live URL, lifecycle, summary, or index-level status changes.
+6. Update `CONTEXT.md` only for broad workspace changes.
+7. Preserve facts, decisions, ideas, assumptions, and questions as separate categories.
+8. Never record drafts as approved or unverified implementation as completed.
+9. Never update unrelated records.
 
 If Ideas Hub writing fails, place exact proposed updates in `report.md`, state that they were not written, and do not claim synchronization succeeded.
 
 ## Completion
 
-A run is complete only when every task is `completed`, `failed`, `blocked`, `needs_approval`, or `skipped`; none remain `running` or `verifying`; completed tasks have evidence; changed repositories have isolated branches and pull requests or explicitly authorized direct-main commits; Ideas Hub updates are written or exact unwritten updates are recorded; and the report contains final status and next action.
+A run is complete only when every task is `completed`, `failed`, `blocked`, `needs_approval`, or `skipped`; none remain `running` or `verifying`; completed tasks have evidence; duplicate checks and reconciliation pass; changed repositories have isolated branches and pull requests or explicitly authorized direct-main commits; Ideas Hub updates are written or exact unwritten updates are recorded; and the report contains final status and next action.
 
 Runs with approvals or blockers must be marked `paused`, not completed.
