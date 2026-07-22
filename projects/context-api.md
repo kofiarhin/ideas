@@ -19,6 +19,7 @@
 - Specification: https://github.com/kofiarhin/context-api/blob/main/docs/SPEC.md
 - GitHub Gateway specification: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_SPEC.md
 - GitHub Gateway implementation plan: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md
+- Maintained Zoro Action schema: https://github.com/kofiarhin/context-api/blob/main/docs/openapi/zoro-action.yaml
 - Public CRUD implementation: https://github.com/kofiarhin/context-api/commit/9f76f11356a80cd92e5f853e148df7f23b0c9340
 - GitHub Gateway specification commit: https://github.com/kofiarhin/context-api/commit/9e0c7e238e3fbc9c91c7193103a726562582fca1
 - GitHub Gateway plan commit: https://github.com/kofiarhin/context-api/commit/2646b86c3c88fd4d040453ca85e04fcd7575ff08
@@ -46,15 +47,19 @@
 - The complete MongoDB-backed integration suite still needs an environment run because the local verifier could not download the MongoDB test binary due DNS resolution failure.
 - Context API is an approved infrastructure component of **Forge**, serving as its shared organizational memory and system of record.
 - A GitHub App for Zoro has been created and installed with access to all repositories. Its approved repository permissions are metadata read, contents read/write, and pull requests read/write.
-- The GitHub App credentials have been stored as Heroku config variables for the `context-api` application. Secret key material is not stored in Ideas Hub or the repository.
+- The GitHub App credentials and dedicated `ZORO_GITHUB_API_KEY` bearer credential are stored as Heroku config variables for the `context-api` application. Secret key material is not stored in Ideas Hub or the repository.
 - The detailed GitHub Gateway specification and implementation plan are approved and committed directly to `main`.
-- A Claude Code implementation session is currently working through the approved GitHub Gateway specification and implementation plan in the local `context-api` repository.
-- This implementation task is still in progress. No final Claude completion report, verified runtime commit, successful deployment release, updated live Zoro Action, or end-to-end GitHub smoke-test evidence has been recorded yet.
-- As of 2026-07-22, `main` contains the approved GitHub Gateway documents but no verified committed runtime GitHub Gateway implementation. The feature is not yet confirmed as deployed or available through Zoro's Action.
+- The GitHub Gateway runtime implementation is now committed to `main`. The committed slices cover validated configuration and operational errors (`48d5001`), GitHub App client, policy, serialization, and upstream error translation (`508c040`), repository/branch/file/pull-request operations (`125fc45`), route-specific parsing and mounting (`57e7b81`), comprehensive gateway tests (`2e054b4`), documentation and the maintained Action schema (`e9cd1c9`), and the locked Octokit dependency (`dfabd94`).
+- The maintained OpenAPI schema at `docs/openapi/zoro-action.yaml` exposes 27 operations: 15 context operations and 12 authenticated GitHub operations.
+- The committed Action schema still contains the placeholder server URL `https://context-api.herokuapp.com`; it must be changed to the actual deployed URL before being pasted into GPT Builder.
+- Claude Code reported a successful Heroku deployment, healthy replacement dynos, authenticated GitHub App access, and a live repository-list read returning three repositories. This deployment/read evidence has not yet been independently reproduced through Zoro.
+- No controlled live file-write/delete smoke test has been completed, and the GPT Builder Action has not yet been updated with the new schema and bearer credential.
+- Claude reported five pre-existing test failures unrelated to the gateway, involving an `express-rate-limit` header rename and seed-data drift. These remain unresolved and should not be silently treated as passing verification.
+- The backend gateway is implemented, but the end-to-end Zoro GitHub feature is not complete until the Action configuration and controlled write verification succeed.
 
 ## Current Focus
 
-Allow Claude Code to complete the implementation, then independently review its changes, run the required verification, commit and deploy only verified work, and extend Zoro's Action schema with the authenticated GitHub operations.
+Complete the manual Zoro Action integration and controlled end-to-end verification: correct the production server URL in the maintained schema, configure GPT Builder bearer authentication, then verify repository reads and a disposable branch file create/delete sequence through a fresh Zoro conversation.
 
 ## Brainstorming
 
@@ -72,7 +77,7 @@ Allow Claude Code to complete the implementation, then independently review its 
 - Context is divided into independently retrievable domains.
 - API routes are versioned under `/api/v1`.
 - The simplified context MVP supports `POST`, `GET`, `PATCH`, and soft-delete `DELETE`; `PUT` is excluded.
-- Existing context endpoints remain public and unauthenticated for the current MVP; the new GitHub surface will use separate bearer authentication.
+- Existing context endpoints remain public and unauthenticated for the current MVP; the new GitHub surface uses separate bearer authentication.
 - Clients provide stable identifiers when creating context records; duplicate active or archived identifiers return `409`.
 - Stable identifiers and API-managed fields cannot be changed through `PATCH`.
 - Context record deletion archives rather than permanently removes data, and restore uses `PATCH` with a non-archived status.
@@ -82,8 +87,8 @@ Allow Claude Code to complete the implementation, then independently review its 
 - Jest and Supertest are the backend verification tools.
 - Context API is Forge's shared memory and system of record but remains an independently maintained infrastructure project.
 - Verified repository state and approved repository-local specifications take precedence when Context API records are stale or conflicting.
-- GitHub operations will be exposed beneath `/api/v1/github` through the existing Context API and protected by a dedicated `ZORO_GITHUB_API_KEY` bearer token.
-- GitHub App installation authentication will be used instead of a personal access token.
+- GitHub operations are exposed beneath `/api/v1/github` through the existing Context API and protected by a dedicated `ZORO_GITHUB_API_KEY` bearer token.
+- GitHub App installation authentication is used instead of a personal access token.
 - Zoro is approved to list and inspect repositories, read files and directories, create and update branches without force-pushing, create/update/delete UTF-8 files, write directly to repository default branches including `main` and `master`, and create/read/update/close/merge pull requests.
 - GitHub branch protection remains authoritative and must not be bypassed.
 - Zoro must not modify `.github/workflows/*`, manage Actions, access secrets, administer repositories or organizations, manage collaborators, force-push, or bypass branch protection.
@@ -98,6 +103,7 @@ Allow Claude Code to complete the implementation, then independently review its 
 - The current Heroku deployment URL may change and should remain configuration-specific rather than becoming a reusable Agent System default.
 - Existing project and task entities may be sufficient for the first Forge setup, but dedicated evidence or relationship structures may still be required.
 - The installed GitHub App permissions are sufficient for the approved content and pull-request operations, subject to each repository's branch protection and rulesets.
+- Claude's deployment and live read report is accurate, but end-to-end completion still requires direct Zoro verification.
 
 ## Open Questions
 
@@ -107,17 +113,14 @@ Allow Claude Code to complete the implementation, then independently review its 
 - What precedence rules should apply when project-specific conventions conflict with global conventions?
 - Should the maintained OpenAPI schema be hosted by the Context API so GPT Actions can import and refresh it from a stable URL?
 - Which Context API entities should represent Forge modules, authority boundaries, project relationships, evidence, and task locks?
+- Should the five pre-existing test failures be repaired before the GitHub Gateway is declared fully verified?
 
 ## Next Actions
 
-- Wait for Claude Code to finish and provide its complete implementation and verification report.
-- Review the resulting working tree and commits against `docs/GITHUB_GATEWAY_SPEC.md` and `docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md` before treating any implementation claim as verified.
-- Complete any missing bearer-auth middleware, GitHub App installation client, validation, policy enforcement, serializers, services, controllers, routes, and tests.
-- Run `npm test`, `npm run lint`, and `npm run format:check`; resolve all failures before claiming completion.
-- Commit the verified implementation to `main` without committing secrets or `.env` values.
-- Deploy the verified `main` revision to the `context-api` Heroku application and perform safe read and controlled write smoke tests.
-- Save the maintained OpenAPI 3.1 Action schema in the repository, paste the deployed schema into Zoro's GPT Action, and configure the bearer API key in the GPT Builder.
-- Verify repository reads, branch/file writes, direct default-branch writes, file deletion, and pull-request lifecycle operations end to end through Zoro.
+- **Next actionable task:** update `docs/openapi/zoro-action.yaml` to use `https://context-api-3b9dfadf403e.herokuapp.com`, paste the complete schema into Zoro's GPT Action, configure the bearer API key, start a fresh Zoro chat, and run the documented read plus disposable-branch file create/delete smoke test.
+- Record the exact Zoro smoke-test evidence, including repository listing, file read, branch creation, file creation, current blob SHA retrieval, and deletion.
+- After the controlled smoke test passes, update Ideas Hub to mark the GitHub Gateway available through Zoro and remove the remaining integration blocker.
+- Decide whether to fix the five pre-existing test failures immediately or track them as separate verified maintenance work.
 - Create and verify the Forge and Zoro project records through Zoro.
 - Define the Forge Context API data model, valid task transitions, single-owner enforcement, approval gates, and evidence schemas.
 - Run the complete MongoDB-backed integration suite in an environment with a working MongoDB test binary.
