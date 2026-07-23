@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "PROJECTS.md + projects/*.md",
-  "projectsIndexUpdatedAt": "2026-07-22",
+  "projectsIndexUpdatedAt": "2026-07-23",
   "relationships": [
     {
       "source": "context-api",
