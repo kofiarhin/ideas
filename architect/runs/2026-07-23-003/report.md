@@ -2,7 +2,7 @@
 
 ## Run Status
 
-- **Status:** Active — Phase 1 assignment setup
+- **Status:** Active — awaiting Zoro acknowledgement and Phase 1 implementation report
 - **Created:** 2026-07-23
 - **Origin:** Approved Shared Understanding Handoff
 - **Registered command:** None
@@ -36,6 +36,7 @@
 8. Confirmed run `2026-07-23-003` and assignment ID `ARCH-ZORO-2026-07-23-003` were unused.
 9. Created the run audit and authoritative task queue.
 10. Recorded the task as `ready` with explicit scope, acceptance criteria, verification requirements, and authority boundaries.
+11. Appended the Phase 1 assignment to `zoro-inbox.md` and confirmed readback of the message ID, run ID, task ID, work key, scope, authority, and merge prohibition.
 
 ## Ideas Hub Writes
 
@@ -44,9 +45,12 @@
 - `architect/runs/2026-07-23-003/tasks.md`
   - Commit: `85c8cc1167d3306fd5239a9b395e47bc0c93f560`
 - `architect/runs/2026-07-23-003/report.md`
-  - Created by this write; commit to be confirmed by repository readback.
+  - Initial commit: `f8a00cc293e131ce969895ff15ecd540db6cae83`
+  - Final assignment-setup update: created by this write and subject to readback
 - `zoro-inbox.md`
-  - Assignment append pending this setup sequence.
+  - Assignment commit: `396ed2e5874e17962e1ca0133d44d62f034836cd`
+  - Assignment: `ARCH-ZORO-2026-07-23-003`
+  - Readback blob: `26027aad51088a60fc3362003df71bf76a45724b`
 
 These control-plane writes are authorized direct-main records under the approved handoff. They do not authorize or perform direct-main implementation of the smoke-test document.
 
@@ -109,7 +113,8 @@ Zoro must commit, log, and report that follow-up. Architect must independently r
 - **Run audit created:** Yes
 - **Task queue created:** Yes
 - **Task `ready`:** Yes
-- **Assignment appended:** Pending
+- **Assignment appended:** Yes
+- **Assignment readback confirmed:** Yes
 - **Zoro acknowledgement:** No
 - **Implementation branch exists:** No
 - **Phase 1 commit exists:** No
@@ -135,8 +140,7 @@ Zoro must commit, log, and report that follow-up. Architect must independently r
 
 ## Exact Resume Point
 
-1. Append assignment `ARCH-ZORO-2026-07-23-003` to `zoro-inbox.md` and confirm readback.
-2. Kofi tells Zoro: `Check your Ideas Hub inbox.`
-3. Zoro acknowledges through `architect-inbox.md` and performs only the authorized Phase 1 work.
-4. Zoro reports branch, commit, pull request, changed files, activity entries, performed verification, unperformed verification, risks, and exact required Architect action.
-5. Architect reads the originating assignment, this run, and the matching Zoro report, then independently verifies Phase 1 before updating state or sending Phase 2 feedback.
+1. Kofi tells Zoro: `Check your Ideas Hub inbox.`
+2. Zoro acknowledges assignment `ARCH-ZORO-2026-07-23-003` through `architect-inbox.md` and performs only the authorized Phase 1 work.
+3. Zoro reports branch, commit, pull request, changed files, activity entries, performed verification, unperformed verification, risks, and exact required Architect action.
+4. Architect reads the originating assignment, this run, and the matching Zoro report, then independently verifies Phase 1 before updating authoritative state or sending Phase 2 feedback.
