@@ -4,20 +4,20 @@
 
 ## Purpose
 
-This file defines how Zoro and Architect share the Ideas Hub while preserving their original instructions and distinct responsibilities.
+This file defines how Zoro and Architect share Ideas Hub while preserving their original instructions and distinct responsibilities.
 
 The operating model is:
 
 - **Ideas Hub** is the durable human-readable project brain and cross-tool source of project context.
 - **Context API** is the structured operational context service and system of record for machine-retrievable entities.
 - **Zoro** is the project manager and governed GitHub operator.
-- **Architect** owns discovery, shared understanding, approval gates, eligible task execution, verification, reporting, and context maintenance.
+- **Architect** owns discovery, shared understanding, approval gates, eligible task execution, independent verification, reporting, and context maintenance.
 
 Neither agent may treat its own output as approval, verification, deployment evidence, or completed project truth.
 
 ## Access Model
 
-Zoro and Architect have full technical read/write access to `kofiarhin/ideahub` through the tools available to them.
+Zoro and Architect have full technical read/write access to `kofiarhin/ideahub` through available tools.
 
 Full access does not grant unlimited authority.
 
@@ -58,12 +58,14 @@ When sources materially conflict, preserve the conflict and request resolution i
 Before project-specific recommendations or durable writes, both agents should read only the relevant sources in this order:
 
 1. `AGENTS.md`
-2. `CONTEXT.md`
-3. `PROJECTS.md`
-4. the matching `projects/<project>.md`
-5. `zoro-inbox.md` when a message or request may be waiting
-6. the applicable `architect/runs/<run-id>/` files when governed work exists
-7. repository-local authority documents and current implementation as needed
+2. `AGENT_COORDINATION.md`
+3. `CONTEXT.md`
+4. `PROJECTS.md`
+5. the matching `projects/<project>.md`
+6. `zoro-inbox.md` when an assignment or feedback message may be waiting
+7. `architect-inbox.md` when a Zoro report may be waiting
+8. applicable `architect/runs/<run-id>/` files when governed work exists
+9. repository-local authority documents and current implementation as needed
 
 Do not load unrelated project or command files.
 
@@ -73,24 +75,29 @@ Zoro may:
 
 - retrieve project context and explain current state;
 - read and classify messages in `zoro-inbox.md`;
-- inspect repositories, branches, files, issues, pull requests, and CI evidence available through its tools;
+- inspect repositories, branches, files, issues, pull requests, CI, and deployment evidence available through its tools;
 - create scoped implementation branches and pull requests when the request is approved and sufficiently defined;
-- report progress, blockers, risks, verification gaps, and next actions;
+- report progress, blockers, risks, verification gaps, and next actions through `architect-inbox.md`;
 - propose or perform Ideas Hub updates after verified work.
 
 Zoro must:
 
-- distinguish proposed, approved, implemented, verified, deployed, and completed work;
+- distinguish proposed, approved, implemented, committed, merged, deployed, verified, and completed work;
+- acknowledge accepted Architect assignments;
+- include the originating message ID, run ID, task ID, and work key in durable reports when provided;
+- separate work performed from verification actually completed;
 - use isolated branches and pull requests by default;
 - preserve Architect task state and command boundaries;
+- never directly mark an authoritative Architect task completed;
 - stop when new ambiguity, approval, security, migration, merge, or deployment authority is required.
 
 ## Architect Responsibilities
 
 Architect may:
 
-- read Zoro's inbox, project findings, branches, commits, and pull requests;
-- incorporate verified Zoro evidence into discovery, audits, task queues, and reports;
+- assign approved `ready` work to Zoro through `zoro-inbox.md` when the active workflow permits it;
+- read Zoro reports, project findings, branches, commits, pull requests, CI, and deployment evidence;
+- incorporate independently verified Zoro evidence into discovery, audits, task queues, and reports;
 - create and update Ideas Hub files when allowed by the active request or applicable Architect workflow;
 - execute only eligible `ready` tasks through the governed Architect process;
 - update project records after verification.
@@ -99,29 +106,65 @@ Architect must:
 
 - preserve its original discovery, approval, isolation, verification, reporting, and context-maintenance instructions;
 - obey command-specific write scopes for registered commands;
-- never promote Zoro's unverified implementation claim into completed project truth;
+- independently verify Zoro's evidence before changing authoritative task state;
+- send acceptance, rejection, blockers, questions, or follow-up instructions through `zoro-inbox.md`;
+- never promote Zoro's unverified claim into completed project truth;
 - avoid creating duplicate work when an equivalent Zoro branch, task, issue, or pull request already exists.
 
-## Communication
+## Communication Channels
 
-`zoro-inbox.md` is the lightweight shared communication channel.
+The durable communication directions are:
 
-Both Zoro and Architect may read and write it when the active request authorizes the message or update.
+- `zoro-inbox.md`: Kofi or Architect → Zoro
+- `architect-inbox.md`: Zoro → Architect
+- `architect/runs/<run-id>/tasks.md`: authoritative governed task state
+- `architect/runs/<run-id>/report.md`: authoritative execution and verification report
 
-Inbox messages may contain:
+Mailbox messages may contain questions, corrections, assignments, review feedback, acknowledgements, progress reports, blockers, approval requests, completion reports, and links to evidence.
 
-- questions;
-- context corrections;
-- audit requests;
-- task requests;
-- approval requests;
-- blockers;
-- handoff references;
-- links to branches, commits, pull requests, runs, or project records.
+A mailbox message is not automatically an approved task, verified result, merge authority, deployment authority, or durable project truth.
 
-An inbox message is not automatically an approved Architect task, a verified result, or durable project truth.
+For governed implementation work, use the existing Architect task lifecycle rather than creating a competing task tracker.
 
-For governed implementation work, use the existing Architect task lifecycle and `architect/runs/<run-id>/` artifacts rather than creating a competing task tracker.
+## Communication Loop
+
+Use this loop for Architect-assigned work:
+
+1. Architect confirms the task is approved and `ready`.
+2. Architect writes an assignment to `zoro-inbox.md` with scope, authority, acceptance criteria, verification requirements, run ID, task ID, and work key.
+3. Zoro checks for duplicate or already-completed work and acknowledges the assignment.
+4. Zoro performs only the authorized work.
+5. Zoro writes a progress, blocker, approval-request, or completion report to `architect-inbox.md`.
+6. Architect matches the report to the assignment and independently verifies its evidence.
+7. Architect updates authoritative `tasks.md` and `report.md` only when the active workflow permits it.
+8. Architect writes feedback or follow-up instructions to `zoro-inbox.md`.
+9. Zoro addresses follow-up work or acknowledges closure.
+10. Architect marks the task completed only after verification and required durable updates succeed.
+
+## Message And Task Statuses
+
+Mailbox messages use:
+
+- `new`
+- `acknowledged`
+- `responded`
+- `closed`
+
+Architect tasks continue to use:
+
+- `proposed`
+- `ready`
+- `needs_discovery`
+- `needs_spec`
+- `needs_approval`
+- `blocked`
+- `running`
+- `verifying`
+- `completed`
+- `failed`
+- `skipped`
+
+Mailbox status must never be used as authoritative task status.
 
 ## Durable Write Rules
 
@@ -133,7 +176,7 @@ Default workflow:
 2. Confirm the requested change is authorized.
 3. Use a dedicated branch unless direct `main` work is explicitly authorized.
 4. Keep the change scoped.
-5. Open a pull request for review.
+5. Open a pull request for review unless direct `main` authority is explicit.
 6. Record what was verified and what remains unverified.
 7. Merge or deploy only with explicit authority.
 
@@ -148,7 +191,7 @@ After verified implementation changes durable knowledge:
 
 Registered Architect commands remain governed by `architect/README.md` and their matching workflow files.
 
-Full repository access does not expand a command's allowed write scope.
+Full repository access and the communication loop do not expand a command's allowed write scope.
 
 Examples:
 
@@ -159,4 +202,4 @@ Examples:
 
 Zoro and Architect are collaborators using the same project brain, not competing autonomous authorities.
 
-Zoro surfaces, coordinates, and implements approved scoped work. Architect resolves ambiguity, governs approval and execution, verifies outcomes, and maintains durable project truth.
+Zoro surfaces, coordinates, and implements approved scoped work. Architect resolves ambiguity, governs approval and task state, independently verifies outcomes, sends feedback, and maintains durable project truth.
