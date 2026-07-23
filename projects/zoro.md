@@ -13,6 +13,8 @@
 
 - Forge: [forge.md](forge.md)
 - Context API: [context-api.md](context-api.md)
+- Shared agent coordination policy: [../AGENT_COORDINATION.md](../AGENT_COORDINATION.md)
+- Zoro inbox: [../zoro-inbox.md](../zoro-inbox.md)
 - GitHub Gateway specification: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_SPEC.md
 - GitHub Gateway implementation plan: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md
 - Maintained Action schema: https://github.com/kofiarhin/context-api/blob/main/docs/openapi/zoro-action.yaml
@@ -39,6 +41,8 @@
 - Zoro did not execute shell verification because its connected tools do not provide a shell runner. No CI status is recorded for the PR head, so the change is implemented but unverified.
 - The repository-maintained Action schema still describes deletion through a request body. It must be reconciled with query-based deletion before the live Action can verify the fix.
 - Zoro's GitHub capability remains incomplete until pull request #2 is reviewed, verified, merged, deployed, represented in the live Action schema, exercised successfully through deletion, and cleaned up.
+- `zoro-inbox.md` is available on Ideas Hub `main` as a lightweight communication and request-intake channel.
+- Kofi approved full technical Ideas Hub read/write access for both Zoro and Architect with governed authority. The shared policy preserves their original instructions, branch and pull-request defaults, approval gates, command-specific scopes, and verification requirements.
 
 ## Accomplished
 
@@ -55,10 +59,12 @@
 - Verified branch creation, UTF-8 file creation, file readback, blob-SHA retrieval, and protection of `main`.
 - Demonstrated that Zoro can inspect a defect, create a focused branch, edit source and tests, commit changes, and open a pull request without merging or deploying.
 - Opened Context API pull request #2 with a documented root cause, implementation summary, test coverage, risks, manual verification instructions, and explicit unverified status.
+- Added `zoro-inbox.md` as the first shared human-to-agent communication channel.
+- Approved and documented a shared Zoro and Architect coordination model with full technical Ideas Hub access and governed write authority.
 
 ## Current Focus
 
-Review and locally verify pull request #2, update the maintained Action schema for query-based deletion, deploy only a verified merge, republish the Action, complete the delete smoke test, and remove the disposable branch.
+Add the shared coordination block to the bottom of the existing Zoro and Architect instructions without replacing their original instructions. Then test that both agents can read Ideas Hub, recognize each other's role and durable artifacts, and preserve approval and verification boundaries. In parallel, review and locally verify pull request #2, update the maintained Action schema for query-based deletion, deploy only a verified merge, republish the Action, complete the delete smoke test, and remove the disposable branch.
 
 ## Brainstorming
 
@@ -67,6 +73,7 @@ Review and locally verify pull request #2, update the maintained Action schema f
 - Add workflow dashboards, audit trails, and run summaries
 - Add per-project access profiles where a repository should not inherit the full installation scope
 - Generate the GPT Builder-compatible schema from the maintained repository schema to prevent manual drift
+- Add structured Zoro-to-Architect handoff messages after the single-file inbox workflow is proven
 
 ## Decisions
 
@@ -81,12 +88,18 @@ Review and locally verify pull request #2, update the maintained Action schema f
 - All Zoro GitHub routes require a dedicated Bearer credential separate from public context endpoints.
 - Optional repository allowlisting is supported as defense in depth without changing the current default.
 - A pull request created by Zoro is implementation evidence, not completion evidence; local or CI verification remains required before merge or deployment.
+- Zoro and Architect have full technical read/write access to Ideas Hub through their available tools.
+- Full access does not grant unlimited authority: durable changes must remain scoped to the active request or approved workflow, use branches and pull requests by default, and preserve approval, security, merge, deployment, and verification gates.
+- Zoro and Architect may read and write `zoro-inbox.md` when authorized, but the inbox does not replace Architect task state, approved specifications, verified implementation evidence, or durable project records.
+- Architect command-specific write boundaries remain authoritative even when Architect has broader technical repository access.
+- Their existing instruction sets remain intact; the shared coordination rules are appended as an additional block rather than replacing prior behavior.
 
 ## Assumptions
 
 - OpenAI Actions remain suitable for the first orchestration MVP.
 - The installed GitHub App permissions are sufficient for approved code and pull-request operations, subject to repository rules.
 - Query-based deletion will work through OpenAI Actions after the backend fix is verified, deployed, and represented in the live Action schema.
+- Both GPT instruction fields have enough capacity for the shared coordination addendum.
 
 ## Open Questions
 
@@ -97,6 +110,7 @@ Review and locally verify pull request #2, update the maintained Action schema f
 - Does pull request #2 pass the repository's clean verification commands?
 - Should the Builder-compatible schema be maintained directly or generated from the canonical OpenAPI source?
 - Has `README.md` readback through Zoro been explicitly completed, or only repository listing?
+- Should later versions add structured response and handoff files after the shared inbox is proven?
 
 ## Next Actions
 
@@ -112,6 +126,9 @@ Review and locally verify pull request #2, update the maintained Action schema f
 - [ ] **Task 6B — Repeat live deletion:** delete `tmp/zoro-smoke-test.txt` from `zoro-smoke-test` using blob SHA `98e0aa9e27c7f0fb860d44429e475fe12771cf8f`, verify absence, confirm `main` is unchanged, and delete the disposable branch.
 - [ ] **Task 7 — Close the delivery:** record verification, merge, deployment, Action configuration, read/write evidence, and cleanup before marking GitHub access available.
 - [x] **Task 8 — Add access hardening:** optional repository allowlist support and documentation committed without reducing the approved default capability.
+- [x] **Task 9 — Add shared inbox:** `zoro-inbox.md` is merged into Ideas Hub `main`.
+- [ ] **Task 10 — Install shared coordination instructions:** append the approved coordination addendum to both Zoro and Architect without replacing existing instructions, save both, and start fresh conversations.
+- [ ] **Task 11 — Verify mutual awareness:** confirm Zoro can read the Architect registry and applicable runs, and Architect can read the Zoro project record and inbox while both preserve governed authority.
 - [ ] Create and verify the Zoro project record in the Context API.
 - [ ] Link Zoro to Forge as Chief Orchestrator.
 - [ ] Finalize Zoro's Forge orchestration instructions, status transitions, approval rules, structured handoffs, and evidence records.
