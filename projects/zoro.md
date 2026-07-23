@@ -6,13 +6,16 @@
 
 - **Lifecycle:** Active
 - **Summary:** Custom GPT and Forge Chief Orchestrator that coordinates governed software workflows using the Context API.
-- **Repository:** Not created
+- **Repository:** Uses Ideas Hub for its command center; no separate implementation repository
 - **Owner:** Kofi Arhin
 
 ## Links
 
 - Forge: [forge.md](forge.md)
 - Context API: [context-api.md](context-api.md)
+- Zoro command center: [../zoro/README.md](../zoro/README.md)
+- Canonical Zoro instructions: [../zoro/INSTRUCTIONS.md](../zoro/INSTRUCTIONS.md)
+- GPT Builder bootstrap: [../zoro/BOOTSTRAP.md](../zoro/BOOTSTRAP.md)
 - Shared agent coordination policy: [../AGENT_COORDINATION.md](../AGENT_COORDINATION.md)
 - Zoro inbox: [../zoro-inbox.md](../zoro-inbox.md)
 - Architect inbox: [../architect-inbox.md](../architect-inbox.md)
@@ -46,6 +49,7 @@
 - Ideas Hub now has a two-way durable communication loop: `zoro-inbox.md` carries assignments and feedback to Zoro, while `architect-inbox.md` carries Zoro acknowledgements, progress, blockers, approval requests, and completion reports to Architect.
 - Architect run `tasks.md` and `report.md` remain authoritative for governed task and verification state. Zoro reports evidence but may not complete its own Architect task.
 - Architect created run `2026-07-23-001` and assigned ready task `2026-07-23-001-context-api-T001` through message `ARCH-ZORO-2026-07-23-001` for work key `context-api:zoro-action-query-deletion`.
+- Zoro's version-controlled command center is defined under [`zoro/`](../zoro/README.md). It is not active in the live GPT until this change is merged, the minimal bootstrap is installed in GPT Builder, and a fresh-conversation loading test passes.
 
 ## Progress Summary — 2026-07-23
 
@@ -81,6 +85,8 @@
 
 - Prepared compact copy-ready Zoro and Architect instructions under the 8,000-character configuration limit.
 - Preserved the original structure, discovery gates, execution boundaries, GitHub restrictions, and verification rules in both instruction sets.
+- Defined a version-controlled Zoro command center in Ideas Hub with a canonical entrypoint, full instructions, and a minimal GPT Builder bootstrap.
+- Kept repository implementation separate from live GPT activation; merge, installation, and fresh-conversation verification remain required.
 - Architect created the first live governed run and ready task for the maintained Action query-deletion schema update.
 - The assignment authorizes an isolated Context API branch, focused schema and directly required validation/documentation changes, a pull request, and a durable report to `architect-inbox.md`.
 - Merge, deployment, direct Context API `main` writes, live GPT Action updates, secret changes, and authentication-policy changes remain explicitly unauthorized.
@@ -106,7 +112,7 @@
 
 ## Current Focus
 
-Confirm the updated Zoro and Architect instruction fields are saved, then have Zoro pick up `ARCH-ZORO-2026-07-23-001`, implement only the approved query-deletion schema scope on an isolated Context API branch, open a focused pull request, and report through `architect-inbox.md`. Architect must then independently verify the evidence, update authoritative run state when permitted, and send feedback through `zoro-inbox.md`. In parallel, verify Context API pull request #2, deploy only verified changes, complete the deletion smoke test, and remove the disposable branch.
+Review and merge the Zoro command-center pull request, install the minimal bootstrap in GPT Builder, and verify instruction loading in a fresh conversation. Then have Zoro pick up `ARCH-ZORO-2026-07-23-001`, implement only the approved query-deletion schema scope on an isolated Context API branch, open a focused pull request, and report through `architect-inbox.md`. Architect must then independently verify the evidence, update authoritative run state when permitted, and send feedback through `zoro-inbox.md`. In parallel, verify Context API pull request #2, deploy only verified changes, complete the deletion smoke test, and remove the disposable branch.
 
 ## Brainstorming
 
@@ -139,13 +145,15 @@ Confirm the updated Zoro and Architect instruction fields are saved, then have Z
 - Architect must independently verify Zoro evidence before updating authoritative task state or durable project truth.
 - Architect command-specific write boundaries remain authoritative.
 - The shared coordination rules supplement rather than replace each agent's existing instructions.
+- Zoro's canonical operating instructions live in Ideas Hub under `zoro/README.md` and `zoro/INSTRUCTIONS.md`; GPT Builder retains only the minimal loader from `zoro/BOOTSTRAP.md`.
+- Repository instruction changes and live GPT installation are separate states and require fresh-conversation verification before being described as active.
 
 ## Assumptions
 
 - OpenAI Actions remain suitable for the first orchestration MVP.
 - The installed GitHub App permissions are sufficient for approved code and pull-request operations, subject to repository rules.
 - Query-based deletion will work through OpenAI Actions after the backend fix is verified, deployed, and represented in the live Action schema.
-- Both GPT instruction fields have enough capacity for the compact updated instructions.
+- The GPT instruction field has enough capacity for the minimal repository bootstrap.
 - The two-inbox protocol will initially use branch-and-PR writes unless direct-main authority is explicit.
 
 ## Open Questions
@@ -157,7 +165,7 @@ Confirm the updated Zoro and Architect instruction fields are saved, then have Z
 - Does pull request #2 pass the repository's clean verification commands?
 - Should the Builder-compatible schema be maintained directly or generated from the canonical OpenAPI source?
 - Has `README.md` readback through Zoro been explicitly completed, or only repository listing?
-- Have both compact instruction sets been saved and validated in fresh conversations?
+- Has the repository-backed Zoro bootstrap been merged, installed, and validated in a fresh conversation?
 - Will Zoro acknowledge and complete the assigned schema work without exceeding its stated authority?
 - Should mailbox writes become append-only direct-main operations after the loop is verified?
 - How should closed mailbox messages be archived without losing traceability?
@@ -179,7 +187,7 @@ Confirm the updated Zoro and Architect instruction fields are saved, then have Z
 - [x] **Task 9 — Add shared assignment inbox:** `zoro-inbox.md` is on Ideas Hub `main`.
 - [x] **Task 10 — Add durable return channel:** `architect-inbox.md` and the two-way communication protocol are on Ideas Hub `main`.
 - [x] **Task 11 — Prepare updated agent instructions:** compact copy-ready Zoro and Architect instructions were produced under the 8,000-character limit.
-- [ ] **Task 12 — Save and validate updated instructions:** confirm both instruction fields were saved and start fresh conversations.
+- [ ] **Task 12 — Merge and validate repository-backed instructions:** merge the command-center change, replace Zoro's full GPT instruction field with the minimal bootstrap, start a fresh conversation, and verify the reported instruction version and loaded files.
 - [x] **Task 13 — Create first governed assignment:** Architect run `2026-07-23-001`, task `2026-07-23-001-context-api-T001`, and assignment `ARCH-ZORO-2026-07-23-001` exist on Ideas Hub `main`.
 - [ ] **Task 14 — Zoro executes and reports:** Zoro acknowledges the ready schema task, opens the focused Context API PR, and writes the required report to `architect-inbox.md`.
 - [ ] **Task 15 — Architect verifies and responds:** Architect independently verifies Zoro evidence, updates run state when permitted, and sends feedback through `zoro-inbox.md`.
