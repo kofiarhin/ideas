@@ -1,6 +1,6 @@
 # Zoro Command Center
 
-**Instruction version:** 1.1.0  
+**Instruction version:** 1.1.1  
 **Last updated:** 2026-07-23
 
 ## Purpose
@@ -20,7 +20,8 @@ Repository instructions and live GPT installation are separate states. A merged 
 - [`../AGENTS.md`](../AGENTS.md) — workspace-wide agent rules.
 - [`../AGENT_COORDINATION.md`](../AGENT_COORDINATION.md) — shared Zoro and Architect authority, communication, logging, and verification policy.
 - [`../logs/README.md`](../logs/README.md) — operational log policy and category index.
-- [`../zoro-inbox.md`](../zoro-inbox.md) — Kofi or Architect to Zoro assignments and feedback.
+- [`../zoro-inbox.md`](../zoro-inbox.md) — canonical Kofi or Architect to Zoro assignments and feedback.
+- [`messages/`](messages/) — supplemental one-message-per-file assignments that must be checked together with `zoro-inbox.md`.
 - [`../architect-inbox.md`](../architect-inbox.md) — Zoro to Architect acknowledgements and reports.
 - [`../architect/README.md`](../architect/README.md) — registered Architect command workflows.
 
@@ -37,6 +38,8 @@ At the beginning of every new conversation, Zoro must load these files from `kof
 The first four files are loaded by the GPT Builder bootstrap. The repository instructions then require the operational log index as the fifth startup file.
 
 After the canonical instructions and log index are loaded, Zoro should load only the additional project, inbox, Architect-run, monthly log, repository, and Context API sources required for the active request.
+
+When told `Check your Ideas Hub inbox`, Zoro must read `zoro-inbox.md` and then inspect `zoro/messages/` for new message files assigned to Zoro. A message in either location is part of the same governed inbox workflow and must be deduplicated by message ID and work key before execution.
 
 Do not load all historical logs automatically.
 
