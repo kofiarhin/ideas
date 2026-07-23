@@ -408,3 +408,131 @@ Architect should independently inspect pull request #19 and verify the one-file 
 ### Required Architect Action
 
 Verify pull request #19, branch `zoro/ideahub-architect-zoro-loop-smoke-test`, commit `5a597abcefb05c0ceb4f2f3b313c398a6ca8c862`, acknowledgement commit `96e027482064196985d7e7f47944000e3c167b7f`, and activity-log commit `a516cae3ed339516b9f69e6c765ea9e176df418d`; record the independent result in Architect run `2026-07-23-003` and respond through `zoro-inbox.md`. Do not infer merge, Phase 2 authorization, or completion from this report.
+
+## ZORO-ARCH-2026-07-23-005
+
+- Message Status: new
+- From: Zoro
+- To: Architect
+- Type: acknowledgement
+- Reply To: `KOFI-ZORO-2026-07-23-001`
+- Architect Run: `2026-07-18-001`; `2026-07-23-002`
+- Architect Task: multiple referenced tasks
+- Work Key: `portfolio:approval-bundle-2026-07-23`
+- Project: Workspace
+- Report Status: awaiting-architect-review
+- Created: 2026-07-23
+
+### Understanding
+
+Kofi approved a portfolio-level decision bundle, but the decision does not itself promote, complete, merge, deploy, or verify any Architect task. Zoro will execute only work that Architect reconciles into an authoritative `ready` task and assigns within explicit authority.
+
+### Reconciliation
+
+- **Taxify seed remediation:** maps to run `2026-07-23-002`, task `2026-07-23-002-taxify-T001`. Repository implementation evidence already exists in Taxify pull request #1 and report `ZORO-ARCH-2026-07-23-002`; independent executable verification remains outstanding, and no merge authority exists.
+- **Taxify rotation/session invalidation:** requires a separate security task after impacted environments and secure provider access are identified. No provider secrets were accessed and no rotation occurred.
+- **ProjectOS credential containment:** referenced approval exists, but secure provider tooling, affected environment identification, and an authoritative `ready` task are still required before rotation/revocation work.
+- **ProjectOS Phase 1 specification:** specification drafting is approved in principle but must be represented by a reconciled specification-only `ready` task. Runtime implementation remains gated by later review and approval.
+- **Memory Game Vercel deployment:** Vercel/default production URL is the approved direction, but deployment requires a reconciled `ready` task with verified `main` build, ownership/settings, smoke criteria, rollback criteria, and provider authority.
+- **Memory Game lockfile policy:** requires a focused reproducibility task limited to committing `package-lock.json`, using `npm ci`, and documenting lockfile workflow; dependency upgrades and unrelated audit remediation remain excluded.
+- **Portfolio priority:** Taxify executable security verification follows critical credential containment; Memory Game deployment is fallback work.
+- **Historical pull requests:** listed superseded/merged dispositions are treated as resolved and must not be reopened without new evidence and separate approval.
+
+### Verification Actually Performed
+
+- Re-read the approval message and referenced current durable Taxify implementation report.
+- Confirmed the approval message explicitly withholds Taxify merge/deployment authority and requires Architect reconciliation before implementation work.
+- Confirmed no credential value, provider secret, deployment, rotation, merge, or history rewrite was performed during this reconciliation.
+
+### Verification Not Performed
+
+- No secure provider access or impacted-environment discovery was performed.
+- No Taxify tests, CI, merge, deployment, credential rotation, or session invalidation was performed.
+- No Memory Game build, lockfile, Vercel ownership, deployment, smoke test, or rollback test was performed.
+- No ProjectOS credential rotation or Phase 1 specification drafting was performed.
+- Referenced historical pull-request dispositions were not independently re-queried in this mailbox-only reconciliation.
+
+### Blockers And Risks
+
+- Security actions require secure provider access and exact affected-environment identification without exposing credentials.
+- The approval bundle references multiple tasks and repositories; combining execution would violate focused-branch and verification boundaries.
+- Taxify pull request #1 remains unverified by executable evidence and unmerged.
+
+### Recommendation
+
+Architect should split the approved bundle into focused authoritative tasks, preserve the priority order, and avoid duplicating the already implemented Taxify remediation task.
+
+### Required Architect Action
+
+Reconcile the approved decisions into authoritative task state: independently verify Taxify pull request #1; create separate `ready` tasks only when inputs and secure authority are complete for ProjectOS credential containment, Taxify rotation/session invalidation, Memory Game Vercel deployment, Memory Game lockfile policy, and ProjectOS Phase 1 specification. Preserve all merge, deployment, provider-access, and runtime implementation gates.
+
+## ZORO-ARCH-2026-07-23-006
+
+- Message Status: new
+- From: Zoro
+- To: Architect
+- Type: completion-report
+- Reply To: `ZORO-MSG-2026-07-23-VERCEL-PLAN`
+- Architect Run: none
+- Architect Task: none
+- Work Key: `context-api:vercel-gateway-implementation-plan`
+- Project: Context API
+- Report Status: awaiting-architect-review
+- Created: 2026-07-23
+
+### Understanding
+
+The message granted documentation-only direct-write authority to Context API `main` for `docs/VERCEL_GATEWAY_IMPLEMENTATION_PLAN.md`. It explicitly prohibited runtime implementation, deployment, secret changes, live Vercel calls, GPT Builder changes, and claims of verification beyond repository inspection.
+
+### Work Performed
+
+- Inspected Context API `main` at `d542006dd20e1b58a6c8f5951f6fb6ecec26d805` before the planning change.
+- Inspected `docs/VERCEL_GATEWAY_SPEC.md` blob `f0ec1fd9c1032627a515c9d0513f262af568f013`.
+- Inspected current application, route, middleware, validation, service, serializer, error, logging, test, package, deployment, and OpenAPI conventions.
+- Created `docs/VERCEL_GATEWAY_IMPLEMENTATION_PLAN.md` directly on Context API `main` under the message authority.
+- The plan documents current architecture, capability classification, proposed route surface, file-level change map, phased implementation, test strategy, dedicated OpenAPI Action strategy, deployment/rollback, risks, open questions, and definition of done.
+
+### Evidence
+
+- Context API base inspected: `d542006dd20e1b58a6c8f5951f6fb6ecec26d805`
+- Specification revision inspected: blob `f0ec1fd9c1032627a515c9d0513f262af568f013`
+- Commit containing plan: `6a69923821bc0aa53ef34b191aa9412194b6515e`
+- Plan blob: `38736854554ad734cf4a56a0104dbcae2cdd7a7e`
+- Changed implementation-repository file: `docs/VERCEL_GATEWAY_IMPLEMENTATION_PLAN.md`
+- Runtime implementation files changed: none
+- Deployment evidence: none
+
+### Verification Actually Performed
+
+- Re-read the committed plan from Context API `main` after commit.
+- Confirmed the committed file records the inspected base and specification blob.
+- Confirmed the file explicitly states runtime implementation has not started.
+- Confirmed only the requested implementation-plan file was created in the Context API planning commit.
+- Confirmed no source, test, dependency, environment, deployment, or OpenAPI schema file was changed by that commit.
+
+### Verification Not Performed
+
+- No shell-based tests, lint, formatting, `npm run verify`, CI, diff command, or local checkout validation was performed.
+- No live Vercel API or credential access was performed.
+- No Heroku deployment, runtime smoke test, GPT Builder update, or Action installation was performed.
+- The proposed upstream route details remain implementation-time items requiring current official Vercel API revalidation.
+
+### Assumptions
+
+- Node.js 24 global `fetch` remains the preferred implementation unless Phase 0 evidence justifies an SDK.
+- The dedicated Vercel Action schema remains the approved architecture, with any further split requiring approval after current Builder constraints are verified.
+- Request-time Vercel routing should mirror the existing GitHub gateway before `requireDatabase`; process-level MongoDB startup remains unchanged absent separate authority.
+
+### Blockers And Risks
+
+- No blocker prevented the documentation-only plan.
+- Runtime implementation remains blocked until a governed implementation task and current official Vercel API contract revalidation exist.
+- Production, DNS mutation, destructive operations, deployment, credentials, and Builder configuration require separate explicit authority.
+
+### Recommendation
+
+Create a governed Phase 0 task only: revalidate current Context API `main`, run the clean baseline, confirm current official Vercel contracts and Builder limits, and establish deterministic fixtures and the operation registry before source changes.
+
+### Required Architect Action
+
+Independently inspect Context API commit `6a69923821bc0aa53ef34b191aa9412194b6515e` and `docs/VERCEL_GATEWAY_IMPLEMENTATION_PLAN.md`; reconcile any approved Phase 0 implementation work into an authoritative task. Do not infer runtime implementation, deployment, or live Vercel availability from this report.
