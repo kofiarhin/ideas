@@ -1,6 +1,6 @@
 # Architect Runtime
 
-**Runtime version:** 1.1.0  
+**Runtime version:** 1.1.1  
 **Repository:** `kofiarhin/ideahub`  
 **Branch:** `main`
 
@@ -36,9 +36,27 @@ Use:
 4. authority documents;
 5. repository/PR/CI/deployment evidence;
 6. relevant log month;
-7. Context API summary/resolver/full record only as needed.
+7. Context API resolver, summary, then selected full record only as needed.
 
 Do not load unrelated commands, messages, projects, runs, logs, or collections.
+
+## Context API Read Flow
+
+For task or project resolution, prefer:
+
+```text
+GET /api/v1/context/resolve?client=architect&projectId=<id>&taskId=<id>&stage=<stage>
+```
+
+Then:
+
+1. use the bounded package to select relevant records and evidence;
+2. retrieve full records only for selected summaries;
+3. use `limit` and `cursor` for collection scans;
+4. use `updatedAfter`, `ETag`, and `revision` for repeat audits;
+5. request exact totals only when prioritization or reconciliation requires them.
+
+The resolver supplements but never replaces authoritative run state, repository evidence, approvals, or independent verification.
 
 ## Zoro Report Flow
 
