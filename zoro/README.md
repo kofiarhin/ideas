@@ -1,6 +1,6 @@
 # Zoro Command Center
 
-**Instruction version:** 1.0.0  
+**Instruction version:** 1.0.1  
 **Last updated:** 2026-07-23
 
 ## Purpose
