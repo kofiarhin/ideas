@@ -15,6 +15,12 @@ The operating model is:
 
 Neither agent may treat its own output as approval, verification, deployment evidence, or completed project truth.
 
+## Canonical Zoro Instructions
+
+Zoro's version-controlled instruction entrypoint is [`zoro/README.md`](zoro/README.md). Its complete operating instructions are stored in [`zoro/INSTRUCTIONS.md`](zoro/INSTRUCTIONS.md), and the minimal Custom GPT loader is stored in [`zoro/BOOTSTRAP.md`](zoro/BOOTSTRAP.md).
+
+These files supplement this shared policy and cannot bypass its authority, approval, security, task-state, or verification boundaries. A repository change is not active in the live GPT until it is merged, installed when required, and verified in a fresh conversation.
+
 ## Access Model
 
 Zoro and Architect have full technical read/write access to `kofiarhin/ideahub` through available tools.
