@@ -275,3 +275,123 @@ Append an acknowledgement, progress, blocker, approval-request, or completion re
 - Work key: `context-api:zoro-action-query-deletion`
 
 For a completion or blocker report, include branch, commit SHA, pull request URL, files changed, verification actually performed, verification not performed, risks and blockers, recommendation, and the exact required Architect action.
+
+## ARCH-ZORO-2026-07-23-002
+
+- Message Status: new
+- From: Architect
+- To: Zoro
+- Type: task-assignment
+- Architect Run: `2026-07-23-002`
+- Architect Task: `2026-07-23-002-taxify-T001`
+- Work Key: `taxify:seed-credential-remediation`
+- Project: Taxify
+- Task Status: ready
+- Priority: critical
+- Approval: implementation-approved
+- Created: 2026-07-23
+
+### Objective
+
+Remediate unsafe seeded-credential handling in Taxify and complete a focused repository-visible security audit, then open a focused pull request for independent Architect verification.
+
+### Authority
+
+- Read repositories: approved for Ideas Hub and `kofiarhin/taxify`.
+- Write Ideas Hub: approved only to append the required acknowledgement, progress, blocker, approval-request, or completion report to `architect-inbox.md`.
+- Modify implementation repository: approved only on an isolated Taxify branch for the seed script, authentication-related or seed-related tests, and directly related environment examples or documentation.
+- Direct main: approved only for the required append to Ideas Hub `architect-inbox.md`; direct writes to Taxify `main` are not approved.
+- Secret rotation: not approved.
+- Deployment-provider secret access: not approved.
+- MongoDB credential or database access: not approved.
+- GitHub Actions workflow changes: not approved.
+- History rewrite or force-push: not approved.
+- Merge: not approved.
+- Deploy: not approved.
+
+### Scope
+
+1. Read `AGENTS.md`, `AGENT_COORDINATION.md`, `CONTEXT.md`, `PROJECTS.md`, `projects/taxify.md`, `projects/zoro.md`, both inboxes, `architect/README.md`, and every file in Architect run `2026-07-23-002`.
+2. Revalidate current Taxify `main`, branches, commits, open and merged pull requests, and equivalent work before editing.
+3. Create an isolated branch from the current Taxify `main` branch.
+4. Remove every hard-coded fallback seed password.
+5. Require `SEED_PASSWORD` explicitly before seeded users can be created or updated.
+6. Remove password and credential-value logging.
+7. Preserve the existing production-seeding safeguard and explicit production opt-in.
+8. Review whether rerunning the seed can reset passwords for existing seeded users unintentionally.
+9. Make existing-user password reset behavior safe by default and require an explicit configuration before any reset.
+10. Review and document whether password hashing is correctly applied when seeded users are created and when an explicitly authorized password update occurs.
+11. Add or update focused tests for missing `SEED_PASSWORD`, production seed protection, no credential logging, safe existing-user update behavior, and directly required hashing behavior.
+12. Inspect tracked environment examples and directly related documentation for seed-control accuracy.
+13. Document additional repository-visible credential risks by redacted file path and commit evidence without reproducing values.
+14. Inspect the final diff, changed files, commit text, and pull-request text for secrets, credential values, unrelated changes, workflow changes, and history-rewrite instructions.
+15. Open a focused pull request into Taxify `main`.
+16. Write a durable report to `architect-inbox.md`.
+
+### Out Of Scope
+
+- Rotating any credential.
+- Accessing deployment-provider secrets.
+- Accessing MongoDB credentials or databases.
+- Reading or printing untracked `.env` contents.
+- Modifying GitHub Actions workflows.
+- Writing directly to Taxify `main`.
+- Merging.
+- Deploying.
+- Adding unrelated features or broad authentication refactors.
+- Rewriting Git history or force-pushing.
+- Deleting branches.
+- Claiming tests, lint, builds, CI, runtime behavior, merge, deployment, or rotation passed without executable evidence.
+- Copying any repository-visible credential value into source, tests, fixtures, snapshots, logs, commits, pull-request text, or Ideas Hub reports.
+
+### Acceptance Criteria
+
+1. No fallback seed password remains.
+2. Seeding fails safely when `SEED_PASSWORD` is absent.
+3. No password or credential value is printed to logs.
+4. Production seeding remains disabled unless explicitly enabled.
+5. Existing seeded users cannot have passwords reset unintentionally without explicit configuration.
+6. Password hashing behavior for seeded-user creation and authorized update is reviewed and documented with source and test evidence.
+7. Focused tests are added or updated for missing `SEED_PASSWORD`, production protection, no credential logging, and safe existing-user update behavior.
+8. The pull request, commit messages, changed files, tests, fixtures, snapshots, and documentation contain no secret or credential values.
+9. Additional repository-visible credential risks are documented by redacted path and commit evidence without exposing values.
+10. A focused Taxify pull request is opened into `main` from an isolated branch.
+11. The durable report includes the originating assignment ID, Architect run ID, Architect task ID, work key, branch, commit SHA, pull request URL, files changed, verification actually performed, verification not performed, risks and blockers, recommendation, and exact required Architect action.
+
+### Verification Requirements
+
+- Re-read the current seed script and record the exact Taxify base SHA before editing.
+- Revalidate that no equivalent open, merged, or branch-based remediation already exists.
+- Confirm missing `SEED_PASSWORD` fails before database connection or mutation.
+- Confirm no fallback credential literal or equivalent defaulting expression remains.
+- Confirm production protection still rejects execution unless the existing explicit opt-in is present.
+- Confirm no console, logger, error, test snapshot, fixture, commit, pull-request text, or report reveals a credential value.
+- Confirm existing-user password changes are disabled by default and require a distinct explicit reset configuration.
+- Confirm creation of a missing seeded user hashes the supplied seed password exactly once.
+- Confirm an explicitly authorized existing-user password update hashes the new value exactly once and remains verifiable through the model comparison path.
+- Confirm rerunning the seed without explicit reset configuration preserves an existing seeded user's password.
+- Run focused Jest tests and the relevant full backend test command when a real command runner is available.
+- Report exact commands, exit states, failures, skipped checks, and unavailable execution honestly.
+- Inspect the final pull-request diff and changed-file list for unrelated changes.
+- Report CI only when actually observed.
+- Do not claim historical exposure was removed, credentials were rotated, the pull request was merged, or the change was deployed.
+
+### Constraints
+
+- Use the stable work key `taxify:seed-credential-remediation` in branch, pull-request, and report context where practical.
+- Treat the public current commit and tracked workflow artifacts as redacted audit evidence only; never repeat their credential values.
+- Do not modify `.github/workflows`.
+- Do not access provider or database secrets to test this change.
+- A pull request and report are implementation evidence only. Do not mark the Architect task completed.
+- Stop and report a blocker if current behavior differs materially, equivalent work exists, safe tests require prohibited access, or the requested guarantees cannot be met within authority.
+
+### Required Response
+
+Append an acknowledgement, progress, blocker, approval-request, or completion report to `architect-inbox.md` and reference:
+
+- Originating assignment ID: `ARCH-ZORO-2026-07-23-002`
+- Architect run ID: `2026-07-23-002`
+- Architect task ID: `2026-07-23-002-taxify-T001`
+- Work key: `taxify:seed-credential-remediation`
+
+For a completion or blocker report, include branch, commit SHA, pull request URL, files changed, verification actually performed, verification not performed, risks and blockers, recommendation, and the exact required Architect action.
