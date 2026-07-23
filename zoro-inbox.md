@@ -560,3 +560,109 @@ After Phase 1 implementation, append a completion report to `architect-inbox.md`
 - blockers and risks;
 - recommendation; and
 - the exact required Architect action: independently verify Phase 1 and, only if it passes, send the controlled Phase 2 `Follow-up required` feedback.
+
+## KOFI-ZORO-2026-07-23-001
+
+- Message Status: new
+- From: Kofi
+- To: Zoro
+- Type: decision
+- Architect Run: `2026-07-18-001`; `2026-07-23-002`
+- Architect Task: `2026-07-18-001-projectos-T002`; `2026-07-18-001-projectos-T005`; `2026-07-18-001-memory-sequence-game-T014`; `2026-07-18-001-memory-sequence-game-T016`; `2026-07-18-001-ideas-T018`; `2026-07-23-002-taxify-T001`
+- Work Key: `portfolio:approval-bundle-2026-07-23`
+- Project: Workspace
+- Task Status: none
+- Priority: urgent
+- Approval: implementation-approved
+- Created: 2026-07-23
+
+### Objective
+
+Record Kofi's approval of the current recommendation bundle, notify Architect of the decisions, and process only work that has been reconciled into an authoritative `ready` task. Do not treat this mailbox decision as task-state completion or permission to bypass verification.
+
+### Approved Decisions
+
+1. **ProjectOS credential containment:** approve identifying the affected MongoDB credential and environment, rotating and revoking the old value through an approved secure provider interface, updating only approved secret stores, and verifying that the old credential fails and the replacement works. Never expose either credential in source, logs, commits, reports, or chat.
+2. **Taxify security follow-up:** approve independent executable verification of Taxify pull request #1 and approve credential rotation/session invalidation as a separately tracked security action after affected environments are identified. Taxify pull request #1 must not be merged until Architect independently verifies tests, CI or equivalent executable evidence, final scope, and secret safety. Zoro does not have merge authority from this message.
+3. **Memory Game deployment direction:** select Vercel as the static hosting target, deploy from the verified `main` build, use a Kofi-owned project/account, and use the default Vercel production URL unless Kofi separately approves a custom domain or cost. Deployment may proceed only through a reconciled `ready` task after build checks and production smoke criteria are recorded.
+4. **Portfolio focus:** set Taxify security verification as the primary focus and Memory Game deployment as the fallback focus after critical credential containment work.
+5. **Memory Game dependency policy:** approve committing `package-lock.json`, using `npm ci` in CI and clean verification, and documenting the lockfile update workflow. Do not upgrade dependencies or force unrelated audit fixes as part of this policy task.
+6. **ProjectOS Phase 1 specification:** approve drafting the implementation-ready domain and persistence specification. Source implementation remains gated until the completed specification is reviewed, explicitly approved, and promoted to a `ready` implementation task.
+7. **Resolved historical items:** Brain pull requests #6 and #10, Amas Kitchen pull request #4, and KareBraids pull request #1 remain closed as superseded. Piano360 pull request #2 and Amas Kitchen pull request #5 remain merged. Do not reopen or duplicate these items without new evidence and separate approval.
+
+### Authority
+
+- Read Ideas Hub and the referenced repositories, runs, tasks, pull requests, CI, deployment evidence, and provider metadata required to reconcile these decisions: approved.
+- Append an acknowledgement, reconciliation report, blocker, or approval request to `architect-inbox.md`: approved.
+- Modify implementation repositories: approved only after Architect reconciles the applicable task, confirms it is `ready`, and preserves the exact approved scope.
+- Use isolated branches and focused pull requests: approved where repository changes are required.
+- Direct implementation writes to repository `main`: not approved.
+- Taxify merge: not approved by this message; requires independent Architect verification and a separate explicit merge instruction.
+- Taxify deployment: not approved.
+- Taxify or ProjectOS Git-history rewrite, force-push, or destructive history remediation: not approved.
+- ProjectOS credential rotation and revocation: approved only through secure provider tooling with no credential disclosure.
+- Taxify credential rotation and relevant session invalidation: approved as a separately reconciled security task after impacted environments are identified; no credential values may be read into reports or repository artifacts.
+- Memory Game Vercel deployment: approved only after the deployment task is authoritative and `ready`, the verified build passes, ownership/settings are confirmed, and smoke/rollback criteria are recorded.
+- Paid services, custom domains, migrations, unrelated product changes, and workflow-file changes: not approved unless directly required by an approved task and separately confirmed.
+
+### Scope
+
+- Reconcile each approved decision against current repository, pull-request, deployment, provider, and Architect-run evidence.
+- Detect stale, completed, duplicated, superseded, or materially changed work before action.
+- Ask Architect to promote only fully defined, non-duplicate work into authoritative `ready` state.
+- Execute only the portions later assigned to Zoro through an authoritative `ready` task.
+- Preserve redaction and least-privilege handling for all credential work.
+- Report exact blockers when secure provider access, account ownership, environment identification, executable verification, or task-state authority is unavailable.
+
+### Out Of Scope
+
+- Treating this approval bundle as proof that any work is implemented, merged, deployed, rotated, verified, or completed.
+- Reopening superseded pull requests.
+- Merging Taxify pull request #1 before independent verification and separate merge instruction.
+- Rewriting public Git history.
+- Exposing or copying secrets.
+- Selecting a paid Vercel plan or custom domain.
+- Implementing ProjectOS Phase 1 before its specification receives explicit final approval.
+- Changing unrelated project scope, lifecycle, priority, authentication, database contents, or deployment configuration.
+
+### Acceptance Criteria
+
+1. Zoro acknowledges this message and preserves its ID, referenced runs, tasks, and work key.
+2. Zoro reports which approvals map to current authoritative tasks, which require new or superseding tasks, and which are already resolved.
+3. No governed implementation starts unless its authoritative task is `ready`.
+4. Security work uses secure provider interfaces and never discloses credentials.
+5. Taxify pull request #1 remains unmerged until independent Architect verification and separate merge authority.
+6. Memory Game deployment uses Vercel, a verified `main` build, recorded ownership/settings, smoke criteria, and rollback criteria.
+7. Memory Game dependency work is limited to lockfile/reproducibility changes unless separately approved.
+8. ProjectOS Phase 1 remains specification-only until the final specification is explicitly approved.
+9. Superseded or merged historical pull requests are not duplicated or reopened.
+10. Zoro writes a durable reconciliation response to `architect-inbox.md` identifying the exact next Architect action.
+
+### Verification Requirements
+
+- Re-read every referenced Architect task before relying on its old status.
+- Revalidate Taxify pull request #1, its head, changed files, tests, and CI state.
+- Confirm secure provider access and impacted environments before any credential rotation.
+- Confirm the Memory Game repository's current build, lockfile, CI install command, Vercel configuration, and deployment ownership before changes or release.
+- Confirm the ProjectOS authority documents and baseline before drafting the Phase 1 specification.
+- Confirm the listed historical pull-request dispositions remain unchanged.
+- Record performed and unperformed verification separately.
+- Do not claim completion from this decision alone.
+
+### Constraints
+
+- This message records Kofi's approvals but does not directly mutate authoritative Architect task status.
+- Architect must reconcile and update task state through the permitted workflow.
+- Zoro must not mark any Architect task completed.
+- Use separate branches, pull requests, reports, and activity entries for unrelated repositories and tasks.
+- Stop and report when authority, secure access, acceptance criteria, or current evidence is insufficient.
+
+### Required Response
+
+Append an acknowledgement and reconciliation report to `architect-inbox.md` referencing:
+
+- Message ID: `KOFI-ZORO-2026-07-23-001`
+- Work key: `portfolio:approval-bundle-2026-07-23`
+- Referenced Architect runs: `2026-07-18-001`, `2026-07-23-002`
+
+The report must identify current task mappings, stale or resolved items, required new or superseding tasks, security/provider-access blockers, recommended execution order, and the exact required Architect action.
