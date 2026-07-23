@@ -62,6 +62,8 @@ Write the entry only after confirming the action succeeded. Never pre-log intend
 
 For a series of tightly related writes performed as one atomic operation, one summary entry may cover the operation. Separate later state transitions such as CI completion, merge, deployment, rollback, or runtime verification require separate entries.
 
+Operational-log maintenance commits are not recursively logged. The entry describing the original repository event is sufficient. Mailbox and report-only updates are also excluded unless they themselves represent a material shared-system change.
+
 ## Required Repository Activity Fields
 
 Use this structure when applicable:
@@ -120,6 +122,7 @@ For Architect-governed work:
 - Do not silently rewrite history.
 - Correct a material error with a new correction entry that references the original entry.
 - Avoid duplicate entries for unchanged states.
+- Do not recursively log commits whose only purpose is appending or correcting operational logs.
 - Use UTC monthly files named `YYYY-MM.md`.
 - Create the next monthly file when the first qualifying event occurs.
 
