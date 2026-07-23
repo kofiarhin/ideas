@@ -14,7 +14,9 @@ It exists so any GitHub-enabled AI agent can quickly understand the current proj
 - Use `PROJECTS.md` for the authoritative project list.
 - Open project files for deeper context.
 - Treat `INBOX.md` as unprocessed brainstorming, not confirmed direction.
-- Do not write changes without explicit approval.
+- Use [`zoro-inbox.md`](zoro-inbox.md) as lightweight communication and request intake for Zoro and Architect.
+- Follow [`AGENT_COORDINATION.md`](AGENT_COORDINATION.md) for the shared Zoro and Architect access, authority, communication, and write policy.
+- Do not write changes without explicit approval or an approved workflow that authorizes the scoped change.
 - Use [`architect/README.md`](architect/README.md) to resolve registered Architect commands.
 - Treat [`architect/runs/`](architect/runs/README.md) as operational audit, task, and report history, not canonical project truth.
 
@@ -44,7 +46,8 @@ Default engineering preferences unless a project says otherwise:
 - **Brain** — a MERN personal operating system with MongoDB-backed memory and AI-assisted workflows; repository-local PRD, technical specification, and audit now exist, while test and deployed-revision evidence remain outstanding.
 - **Codex Workflow Kit** — a reusable workflow system for AI coding agents; PRD, technical specification, and audit now exist, with legacy artifact-path documentation reconciliation next.
 - **Agent System** — an active runtime-agnostic agent instruction system; setup and synchronization are implemented and user-verified across Codex, Claude Code, and Gemini CLI, with Windows CI, compatibility evidence, and release tagging next.
-- **Ideas Hub** — this repository; the shared reference and brainstorming layer across tools.
+- **Ideas Hub** — this repository; the shared reference, communication, and brainstorming layer across tools.
+- **Zoro–Architect Coordination** — Kofi approved full technical Ideas Hub read/write access for both agents with governed authority. Their original instructions remain authoritative, branches and pull requests are the default for durable writes, and approval, command-scope, verification, merge, deployment, and direct-`main` gates remain in force.
 - **Architect Command System** — Ideas Hub-backed workflows for portfolio auditing, durable task queues, approval-aware execution, verification, reporting, and context maintenance.
 - **Archon** — a paused AI-powered software architecture studio with approved MVP specifications; Phase 1 implementation has not started and no work should resume until explicit reactivation.
 
@@ -76,14 +79,16 @@ Default engineering preferences unless a project says otherwise:
 
 ## Current Priorities
 
-1. Review and verify Context API pull request #2, reconcile the Action schema with query-based deletion, deploy the verified fix, and complete Zoro's delete-and-cleanup smoke test.
-2. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
-3. Implement and verify that Forge slice without implying the full multi-agent organization exists.
-4. Complete remaining repository and deployed-revision evidence for Brain and Agent System.
-5. Reconcile Codex Workflow Kit legacy documentation with its current run-scoped artifact model.
+1. Append the approved shared coordination addendum to the existing Zoro and Architect instructions without replacing their original instructions, then verify mutual Ideas Hub awareness and governed write behavior.
+2. Review and verify Context API pull request #2, reconcile the Action schema with query-based deletion, deploy the verified fix, and complete Zoro's delete-and-cleanup smoke test.
+3. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
+4. Implement and verify that Forge slice without implying the full multi-agent organization exists.
+5. Complete remaining repository and deployed-revision evidence for Brain and Agent System.
+6. Reconcile Codex Workflow Kit legacy documentation with its current run-scoped artifact model.
 
 ## Workspace Gaps
 
+- The approved Zoro and Architect coordination policy is documented, but its instruction addendum has not yet been pasted into both GPT instruction fields and tested in fresh conversations.
 - Forge has strong initial product documentation but no executable orchestration foundation, tests, CI, API, persistence model, or deployment evidence.
 - Zoro can now perform live GitHub reads and partial writes, but file deletion is blocked until Context API pull request #2 is verified, merged, deployed, represented in the Action schema, and proven through a final smoke test.
 - Context API pull request #2 has focused implementation and regression tests but no recorded shell or CI verification.
