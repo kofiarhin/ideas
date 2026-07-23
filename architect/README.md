@@ -1,23 +1,56 @@
 # Architect Command System
 
+**Instruction version:** 1.0.0  
+**Last updated:** 2026-07-23
+
 ## Purpose
 
-The Ideas Hub stores command-specific Architect workflows, durable run artifacts, and shared operational logs. ChatGPT Architect project settings remain the global governance layer for discovery, Shared Understanding Handoffs, approval gates, implementation safety, repository isolation, verification, reporting, and context maintenance.
+The Ideas Hub stores Architect's canonical operating instructions, command-specific workflows, durable run artifacts, and shared operational logs.
+
+The Architect ChatGPT Project instruction field should contain only the minimal loader in [`BOOTSTRAP.md`](BOOTSTRAP.md). Architect's complete governance and operating behaviour live in [`INSTRUCTIONS.md`](INSTRUCTIONS.md). Normal instruction changes are version-controlled in Ideas Hub and are picked up by a fresh conversation after they reach `main`.
+
+Repository instructions and live Project installation are separate states. A repository change is not active in the live Architect Project until the bootstrap is installed when required and verified in a fresh conversation.
 
 Workflow files may narrow command behavior, but cannot bypass discovery, approval, security, verification, repository-isolation, reconciliation, deduplication, source-of-truth, communication-loop, or operational-log rules.
+
+## Canonical Files
+
+- [`INSTRUCTIONS.md`](INSTRUCTIONS.md) — Architect's complete discovery, approval, execution, verification, reporting, and context-maintenance instructions.
+- [`BOOTSTRAP.md`](BOOTSTRAP.md) — the one-time instruction copied into Architect Project settings.
+- [`../AGENTS.md`](../AGENTS.md) — workspace-wide agent rules.
+- [`../AGENT_COORDINATION.md`](../AGENT_COORDINATION.md) — shared Architect and Zoro authority, communication, logging, and verification policy.
+- [`../logs/README.md`](../logs/README.md) — operational-log policy and category index.
+- [`RECONCILIATION.md`](RECONCILIATION.md) — task reconciliation and deduplication contract.
+- [`commands/`](commands/) — registered command workflows.
+- [`runs/`](runs/) — durable audit, task, execution, and verification state.
+
+## Required Startup Load Order
+
+At the beginning of every new Architect conversation, load these files from `kofiarhin/ideahub` on `main`, in order:
+
+1. `AGENTS.md`
+2. `AGENT_COORDINATION.md`
+3. `architect/README.md`
+4. `architect/INSTRUCTIONS.md`
+5. `logs/README.md`
+
+After startup, load only the command workflow, Architect run, project records, inbox messages, monthly logs, repository evidence, PRDs/specifications, and Context API records needed for the active request.
+
+Do not load all command files, runs, projects, or historical logs automatically.
 
 ## Command Resolution
 
 1. Read root [`AGENTS.md`](../AGENTS.md).
 2. Read [`AGENT_COORDINATION.md`](../AGENT_COORDINATION.md).
 3. Read `architect/README.md`.
-4. Resolve the canonical command or an approved alias.
-5. Open only the matching workflow under `architect/commands/`.
-6. Resolve the applicable run.
-7. Read [`../logs/README.md`](../logs/README.md) before repository execution, Zoro-report processing, reconciliation of repository activity, or operational-log maintenance.
-8. Follow the command’s documented read/write scope.
-9. Do not load unrelated command workflows or monthly logs.
-10. Use normal Architect discovery when no command matches.
+4. Read [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
+5. Resolve the canonical command or an approved alias.
+6. Open only the matching workflow under `architect/commands/`.
+7. Resolve the applicable run.
+8. Read [`../logs/README.md`](../logs/README.md) before repository execution, Zoro-report processing, reconciliation of repository activity, or operational-log maintenance.
+9. Follow the command’s documented read/write scope.
+10. Do not load unrelated command workflows or monthly logs.
+11. Use normal Architect discovery when no command matches.
 
 Only aliases listed in this registry are valid command triggers.
 
@@ -149,8 +182,21 @@ Do not infer priority from project order, repository activity volume, or project
 - `architect/runs/<run-id>/audit.md`
 - `architect/runs/<run-id>/tasks.md`
 
-It may not modify project records, operational logs, PRDs, specifications, plans, issues, pull requests, or source repositories.
+It may not modify project records, operational logs, PRDs, specifications, plans, issues, pull requests, source repositories, or either inbox.
 
 `run all tasks` may update the active run’s task statuses; create or update `report.md`; process matching Zoro reports; send feedback through `zoro-inbox.md`; create isolated project branches, commits, and pull requests for eligible tasks; append permitted operational log entries; and update Ideas Hub project records only after verified work.
 
 It may never silently approve product direction, scope, PRDs, specifications, plans, migrations, breaking changes, security-sensitive changes, lifecycle changes, direct commits to `main`, merges, or deployments.
+
+## Installation Verification
+
+After installing the loader from [`BOOTSTRAP.md`](BOOTSTRAP.md), start a fresh Architect conversation and ask it to report:
+
+- instruction version;
+- repository and branch;
+- core files loaded;
+- operational-log index loaded;
+- command registry and available commands;
+- loading failures.
+
+Do not describe version `1.0.0` as active in the live Architect Project until the fresh-conversation test passes.
