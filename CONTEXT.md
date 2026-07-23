@@ -14,11 +14,12 @@ It exists so any GitHub-enabled AI agent can quickly understand the current proj
 - Use `PROJECTS.md` for the authoritative project list.
 - Open project files for deeper context.
 - Treat `INBOX.md` as unprocessed brainstorming, not confirmed direction.
-- Use [`zoro-inbox.md`](zoro-inbox.md) as lightweight communication and request intake for Zoro and Architect.
-- Follow [`AGENT_COORDINATION.md`](AGENT_COORDINATION.md) for the shared Zoro and Architect access, authority, communication, and write policy.
+- Use [`zoro-inbox.md`](zoro-inbox.md) for Kofi/Architect assignments and feedback to Zoro.
+- Use [`architect-inbox.md`](architect-inbox.md) for Zoro acknowledgements, progress, blockers, approval requests, and completion reports to Architect.
+- Follow [`AGENT_COORDINATION.md`](AGENT_COORDINATION.md) for shared access, authority, communication, verification, and write policy.
 - Do not write changes without explicit approval or an approved workflow that authorizes the scoped change.
 - Use [`architect/README.md`](architect/README.md) to resolve registered Architect commands.
-- Treat [`architect/runs/`](architect/runs/README.md) as operational audit, task, and report history, not canonical project truth.
+- Treat [`architect/runs/`](architect/runs/README.md) as authoritative operational audit, task, and report history, not canonical project truth.
 
 ## Working Profile
 
@@ -47,7 +48,7 @@ Default engineering preferences unless a project says otherwise:
 - **Codex Workflow Kit** — a reusable workflow system for AI coding agents; PRD, technical specification, and audit now exist, with legacy artifact-path documentation reconciliation next.
 - **Agent System** — an active runtime-agnostic agent instruction system; setup and synchronization are implemented and user-verified across Codex, Claude Code, and Gemini CLI, with Windows CI, compatibility evidence, and release tagging next.
 - **Ideas Hub** — this repository; the shared reference, communication, and brainstorming layer across tools.
-- **Zoro–Architect Coordination** — Kofi approved full technical Ideas Hub read/write access for both agents with governed authority. Their original instructions remain authoritative, branches and pull requests are the default for durable writes, and approval, command-scope, verification, merge, deployment, and direct-`main` gates remain in force.
+- **Zoro–Architect Coordination** — both agents have governed Ideas Hub access. Architect assigns approved ready work through `zoro-inbox.md`; Zoro reports through `architect-inbox.md`; Architect independently verifies evidence, updates authoritative run state when permitted, and sends feedback through `zoro-inbox.md`.
 - **Architect Command System** — Ideas Hub-backed workflows for portfolio auditing, durable task queues, approval-aware execution, verification, reporting, and context maintenance.
 - **Archon** — a paused AI-powered software architecture studio with approved MVP specifications; Phase 1 implementation has not started and no work should resume until explicit reactivation.
 
@@ -79,7 +80,7 @@ Default engineering preferences unless a project says otherwise:
 
 ## Current Priorities
 
-1. Append the approved shared coordination addendum to the existing Zoro and Architect instructions without replacing their original instructions, then verify mutual Ideas Hub awareness and governed write behavior.
+1. Install the updated Zoro and Architect instructions, start fresh conversations, and verify the complete two-way assignment, reporting, independent verification, feedback, and closure loop.
 2. Review and verify Context API pull request #2, reconcile the Action schema with query-based deletion, deploy the verified fix, and complete Zoro's delete-and-cleanup smoke test.
 3. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
 4. Implement and verify that Forge slice without implying the full multi-agent organization exists.
@@ -88,16 +89,16 @@ Default engineering preferences unless a project says otherwise:
 
 ## Workspace Gaps
 
-- The approved Zoro and Architect coordination policy is documented, but its instruction addendum has not yet been pasted into both GPT instruction fields and tested in fresh conversations.
+- The two-way Zoro–Architect communication protocol is documented on Ideas Hub `main`, but the updated compact instruction sets still need to be pasted into both ChatGPT instruction fields and tested in fresh conversations.
+- The first live communication-loop task has not yet proven assignment matching, Zoro durable reporting, Architect independent verification, feedback, and closure.
 - Forge has strong initial product documentation but no executable orchestration foundation, tests, CI, API, persistence model, or deployment evidence.
-- Zoro can now perform live GitHub reads and partial writes, but file deletion is blocked until Context API pull request #2 is verified, merged, deployed, represented in the Action schema, and proven through a final smoke test.
+- Zoro can perform live GitHub reads and partial writes, but file deletion is blocked until Context API pull request #2 is verified, merged, deployed, represented in the Action schema, and proven through a final smoke test.
 - Context API pull request #2 has focused implementation and regression tests but no recorded shell or CI verification.
 - The disposable `zoro-smoke-test` branch and `tmp/zoro-smoke-test.txt` remain and must be removed after successful deletion evidence is captured.
 - Brain and Agent System need durable verification evidence tied to exact revisions and environments.
 - Codex Workflow Kit contains legacy architecture guidance that conflicts with its current `_workflow/runs/<run-id>/` model.
 - Archon is paused with strong specifications but no verified application implementation.
 - Several projects still need a clear purpose, lifecycle status, current focus, and next actions.
-- The inbox will need occasional review so useful ideas move into durable project notes.
 - Architect audits depend on project records linking to current authoritative PRDs, specifications, plans, repositories, implementation revisions, and verification evidence.
 
 ## Maintenance Rule
