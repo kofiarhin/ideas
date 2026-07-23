@@ -13,11 +13,11 @@
       "record": "projects/piano360.md",
       "lifecycle": "Active",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [],
       "aliases": [
         "kofiarhin/piano360",
         "piano360"
       ],
+      "relatedProjects": [],
       "recordTitle": "Piano360",
       "lifecycleRaw": "Active"
     },
@@ -31,11 +31,11 @@
       "record": "projects/brain.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [],
       "aliases": [
         "brain",
         "kofiarhin/brain"
       ],
+      "relatedProjects": [],
       "recordTitle": "Brain",
       "lifecycleRaw": "Not documented"
     },
@@ -49,11 +49,11 @@
       "record": "projects/karebraids.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "karebraids",
         "kofiarhin/karebraids"
       ],
+      "relatedProjects": [],
       "recordTitle": "KareBraids",
       "lifecycleRaw": "Not documented"
     },
@@ -67,11 +67,11 @@
       "record": "projects/amas-kitchen.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "amas kitchen",
         "kofiarhin/amas kitchen"
       ],
+      "relatedProjects": [],
       "recordTitle": "Amas Kitchen",
       "lifecycleRaw": "Not documented"
     },
@@ -85,11 +85,11 @@
       "record": "projects/devkofi.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "devkofi",
         "kofiarhin/devkofi"
       ],
+      "relatedProjects": [],
       "recordTitle": "DevKofi",
       "lifecycleRaw": "Not documented"
     },
@@ -103,12 +103,12 @@
       "record": "projects/memory-sequence-game.md",
       "lifecycle": "Exploring",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "kofiarhin/memory game",
         "memory game",
         "memory sequence game"
       ],
+      "relatedProjects": [],
       "recordTitle": "Memory Sequence Game",
       "lifecycleRaw": "Exploring"
     },
@@ -122,13 +122,13 @@
       "record": "projects/ideas.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [],
       "aliases": [
         "ideahub",
         "ideas",
         "ideas hub",
         "kofiarhin/ideahub"
       ],
+      "relatedProjects": [],
       "recordTitle": "Ideas Hub",
       "lifecycleRaw": "Not documented"
     },
@@ -142,13 +142,13 @@
       "record": "projects/forge.md",
       "lifecycle": "Active",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [
-        "context-api",
-        "zoro"
-      ],
       "aliases": [
         "forge",
         "kofiarhin/forge"
+      ],
+      "relatedProjects": [
+        "context-api",
+        "zoro"
       ],
       "recordTitle": "Forge",
       "lifecycleRaw": "Active"
@@ -163,13 +163,13 @@
       "record": "projects/zoro.md",
       "lifecycle": "Active",
       "updatedAt": "2026-07-23",
-      "relatedProjects": [
-        "context-api",
-        "forge"
-      ],
       "aliases": [
         "kofiarhin/zoro",
         "zoro"
+      ],
+      "relatedProjects": [
+        "context-api",
+        "forge"
       ],
       "recordTitle": "Zoro",
       "lifecycleRaw": "Active"
@@ -184,13 +184,13 @@
       "record": "projects/context-api.md",
       "lifecycle": "Active",
       "updatedAt": "2026-07-23",
-      "relatedProjects": [
-        "forge",
-        "zoro"
-      ],
       "aliases": [
         "context api",
         "kofiarhin/context api"
+      ],
+      "relatedProjects": [
+        "forge",
+        "zoro"
       ],
       "recordTitle": "Context API",
       "lifecycleRaw": "Active"
@@ -205,12 +205,12 @@
       "record": "projects/codex-workflow.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [],
       "aliases": [
         "codex workflow",
         "codex workflow kit",
         "kofiarhin/codex workflow kit"
       ],
+      "relatedProjects": [],
       "recordTitle": "Codex Workflow Kit",
       "lifecycleRaw": "Not documented"
     },
@@ -224,11 +224,11 @@
       "record": "projects/agent-system.md",
       "lifecycle": "Active",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [],
       "aliases": [
         "agent system",
         "kofiarhin/agent system"
       ],
+      "relatedProjects": [],
       "recordTitle": "Agent System",
       "lifecycleRaw": "Active"
     },
@@ -242,11 +242,11 @@
       "record": "projects/archon.md",
       "lifecycle": "Paused",
       "updatedAt": "2026-07-22",
-      "relatedProjects": [],
       "aliases": [
         "archon",
         "kofiarhin/archon"
       ],
+      "relatedProjects": [],
       "recordTitle": "Archon",
       "lifecycleRaw": "Paused"
     },
@@ -260,11 +260,11 @@
       "record": "projects/taxify.md",
       "lifecycle": "Archived",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "kofiarhin/taxify",
         "taxify"
       ],
+      "relatedProjects": [],
       "recordTitle": "Taxify",
       "lifecycleRaw": "Archived"
     },
@@ -278,11 +278,11 @@
       "record": "projects/kflix.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "kflix",
         "kofiarhin/kflix"
       ],
+      "relatedProjects": [],
       "recordTitle": "Kflix",
       "lifecycleRaw": "Not documented"
     },
@@ -296,11 +296,11 @@
       "record": "projects/banging-prices.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "banging prices",
         "kofiarhin/banging prices"
       ],
+      "relatedProjects": [],
       "recordTitle": "Banging Prices",
       "lifecycleRaw": "Not documented"
     },
@@ -314,12 +314,12 @@
       "record": "projects/moggoff.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "kofiarhin/moggedoff",
         "moggedoff",
         "moggoff"
       ],
+      "relatedProjects": [],
       "recordTitle": "MoggOff",
       "lifecycleRaw": "Not documented"
     },
@@ -333,11 +333,11 @@
       "record": "projects/projectos.md",
       "lifecycle": "Archived",
       "updatedAt": "2026-07-18",
-      "relatedProjects": [],
       "aliases": [
         "kofiarhin/projectos",
         "projectos"
       ],
+      "relatedProjects": [],
       "recordTitle": "ProjectOS",
       "lifecycleRaw": "Archived"
     },
@@ -351,11 +351,11 @@
       "record": "projects/agency-landing-page.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-23",
-      "relatedProjects": [],
       "aliases": [
         "agency landing page",
         "kofiarhin/agency landing page"
       ],
+      "relatedProjects": [],
       "recordTitle": "Agency Landing Page",
       "lifecycleRaw": "Not documented"
     },
@@ -369,11 +369,11 @@
       "record": "projects/agenda-boys.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-23",
-      "relatedProjects": [],
       "aliases": [
         "agenda boys",
         "kofiarhin/agenda boys"
       ],
+      "relatedProjects": [],
       "recordTitle": "Agenda Boys",
       "lifecycleRaw": "Not documented"
     },
@@ -387,11 +387,11 @@
       "record": "projects/catalog/repository-catalog.md",
       "lifecycle": "Not documented",
       "updatedAt": "2026-07-23",
-      "relatedProjects": [],
       "aliases": [
         "repository catalog",
         "repository project catalog"
       ],
+      "relatedProjects": [],
       "recordTitle": "Repository Project Catalog",
       "lifecycleRaw": "Not documented"
     }
