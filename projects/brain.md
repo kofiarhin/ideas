@@ -23,7 +23,7 @@ The application covers notes, tasks, plans, reviews, goals, projects, ideas, con
 repository: kofiarhin/brain
 default_branch: main
 authority_document: docs/PRD.md
-authority_revision: documentation_baseline_2026-07-22
+authority_revision: 69830f4d25256f6d814087034a5552c65e44d567
 implementation_revision: 1302ad67912091ab806f0b08b607e8c14d4f3d93
 last_reconciled: 2026-07-22
 reconciliation_status: unverified

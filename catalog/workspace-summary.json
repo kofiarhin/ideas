@@ -1,28 +1,26 @@
 {
   "schemaVersion": 1,
   "source": "PROJECTS.md + projects/*.md",
-  "projectsIndexUpdatedAt": "2026-07-22",
-  "projectCount": 18,
+  "projectsIndexUpdatedAt": "2026-07-23",
+  "projectCount": 21,
   "lifecycleCounts": {
     "Exploring": 1,
-    "Active": 6,
-    "Paused": 0,
+    "Active": 5,
+    "Paused": 1,
     "Maintenance": 0,
     "Shipped": 0,
     "Archived": 2,
-    "Not documented": 9
+    "Not documented": 12
   },
   "activeProjectIds": [
     "piano360",
     "forge",
     "zoro",
     "context-api",
-    "agent-system",
-    "archon"
+    "agent-system"
   ],
   "projectsWithoutRepository": [
-    "forge",
-    "zoro"
+    "repository-catalog"
   ],
   "projectsWithoutLiveUrl": [
     "piano360",
@@ -38,6 +36,9 @@
     "kflix",
     "banging-prices",
     "moggoff",
-    "projectos"
+    "projectos",
+    "agency-landing-page",
+    "agenda-boys",
+    "repository-catalog"
   ]
 }

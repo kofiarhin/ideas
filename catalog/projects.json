@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "PROJECTS.md + projects/*.md",
-  "projectsIndexUpdatedAt": "2026-07-22",
+  "projectsIndexUpdatedAt": "2026-07-23",
   "projects": [
     {
       "id": "piano360",
@@ -30,7 +30,7 @@
       "notes": "MongoDB is the durable application memory",
       "record": "projects/brain.md",
       "lifecycle": "Not documented",
-      "updatedAt": "2026-07-18",
+      "updatedAt": "2026-07-22",
       "aliases": [
         "brain",
         "kofiarhin/brain"
@@ -136,14 +136,15 @@
       "id": "forge",
       "name": "Forge",
       "summary": "AI-powered software organization coordinating specialist agents from idea through verified launch preparation",
-      "repository": null,
+      "repository": "https://github.com/kofiarhin/forge",
       "liveUrl": null,
-      "notes": "Active; MVP operating model and edge-case rules defined; Context API setup next",
+      "notes": "Active; repository-local PRD/spec/audit added; executable MVP not implemented",
       "record": "projects/forge.md",
       "lifecycle": "Active",
-      "updatedAt": "2026-07-21",
+      "updatedAt": "2026-07-22",
       "aliases": [
-        "forge"
+        "forge",
+        "kofiarhin/forge"
       ],
       "relatedProjects": [
         "context-api",
@@ -156,13 +157,14 @@
       "id": "zoro",
       "name": "Zoro",
       "summary": "Forge Chief Orchestrator and Context API-connected Custom GPT",
-      "repository": null,
+      "repository": "https://github.com/kofiarhin/zoro",
       "liveUrl": null,
-      "notes": "Active; project CRUD verified through OpenAI Actions; Forge linkage next",
+      "notes": "Active; repository linked on 2026-07-23; Forge linkage next",
       "record": "projects/zoro.md",
       "lifecycle": "Active",
-      "updatedAt": "2026-07-22",
+      "updatedAt": "2026-07-23",
       "aliases": [
+        "kofiarhin/zoro",
         "zoro"
       ],
       "relatedProjects": [
@@ -178,10 +180,10 @@
       "summary": "Centralized API for structured, reusable user, engineering, project, workflow, glossary, and learning context",
       "repository": "https://github.com/kofiarhin/context-api",
       "liveUrl": "https://context-api-3b9dfadf403e.herokuapp.com",
-      "notes": "Active; public CRUD MVP and Zoro project CRUD verified; Forge data model next",
+      "notes": "Active; strong docs; repository and live gateway verification evidence next",
       "record": "projects/context-api.md",
       "lifecycle": "Active",
-      "updatedAt": "2026-07-22",
+      "updatedAt": "2026-07-23",
       "aliases": [
         "context api",
         "kofiarhin/context api"
@@ -199,10 +201,10 @@
       "summary": "Reusable AI engineering workflow system",
       "repository": "https://github.com/kofiarhin/codex-workflow-kit",
       "liveUrl": null,
-      "notes": "Supports Codex, Claude Code, Cursor, and similar agents",
+      "notes": "PRD/spec/audit added; legacy artifact-path documentation needs reconciliation",
       "record": "projects/codex-workflow.md",
       "lifecycle": "Not documented",
-      "updatedAt": "2026-07-18",
+      "updatedAt": "2026-07-22",
       "aliases": [
         "codex workflow",
         "codex workflow kit",
@@ -218,10 +220,10 @@
       "summary": "Runtime-agnostic agent instruction system with deterministic generation and native runtime outputs",
       "repository": "https://github.com/kofiarhin/agent-system",
       "liveUrl": null,
-      "notes": "Active; streamlined setup/sync implemented and user-verified; CI/release evidence next",
+      "notes": "Active; streamlined setup/sync verified locally; CI/release evidence next",
       "record": "projects/agent-system.md",
       "lifecycle": "Active",
-      "updatedAt": "2026-07-20",
+      "updatedAt": "2026-07-22",
       "aliases": [
         "agent system",
         "kofiarhin/agent system"
@@ -236,17 +238,17 @@
       "summary": "AI-powered software architecture studio that turns ideas into implementation-ready engineering blueprints",
       "repository": "https://github.com/kofiarhin/archon",
       "liveUrl": null,
-      "notes": "Active; MVP specification approved; Phase 1 foundation is next",
+      "notes": "Paused; approved specifications retained; Phase 1 has not started",
       "record": "projects/archon.md",
-      "lifecycle": "Active",
-      "updatedAt": "2026-07-18",
+      "lifecycle": "Paused",
+      "updatedAt": "2026-07-22",
       "aliases": [
         "archon",
         "kofiarhin/archon"
       ],
       "relatedProjects": [],
       "recordTitle": "Archon",
-      "lifecycleRaw": "Active"
+      "lifecycleRaw": "Paused"
     },
     {
       "id": "taxify",
@@ -338,6 +340,60 @@
       "relatedProjects": [],
       "recordTitle": "ProjectOS",
       "lifecycleRaw": "Archived"
+    },
+    {
+      "id": "agency-landing-page",
+      "name": "Agency Landing Page",
+      "summary": "Repository-backed project; purpose and scope not yet documented",
+      "repository": "https://github.com/kofiarhin/agency-landing-page",
+      "liveUrl": null,
+      "notes": "Dedicated project record added 2026-07-23",
+      "record": "projects/agency-landing-page.md",
+      "lifecycle": "Not documented",
+      "updatedAt": "2026-07-23",
+      "aliases": [
+        "agency landing page",
+        "kofiarhin/agency landing page"
+      ],
+      "relatedProjects": [],
+      "recordTitle": "Agency Landing Page",
+      "lifecycleRaw": "Not documented"
+    },
+    {
+      "id": "agenda-boys",
+      "name": "Agenda Boys",
+      "summary": "Repository-backed project; purpose and scope not yet documented",
+      "repository": "https://github.com/kofiarhin/agenda-boys",
+      "liveUrl": null,
+      "notes": "Dedicated project record added 2026-07-23",
+      "record": "projects/agenda-boys.md",
+      "lifecycle": "Not documented",
+      "updatedAt": "2026-07-23",
+      "aliases": [
+        "agenda boys",
+        "kofiarhin/agenda boys"
+      ],
+      "relatedProjects": [],
+      "recordTitle": "Agenda Boys",
+      "lifecycleRaw": "Not documented"
+    },
+    {
+      "id": "repository-catalog",
+      "name": "Repository Project Catalog",
+      "summary": "Approved inventory of 193 repository-backed projects not previously represented by dedicated records",
+      "repository": null,
+      "liveUrl": null,
+      "notes": "Repository existence verified; lifecycle, priority, stack, and scope remain undocumented",
+      "record": "projects/catalog/repository-catalog.md",
+      "lifecycle": "Not documented",
+      "updatedAt": "2026-07-23",
+      "aliases": [
+        "repository catalog",
+        "repository project catalog"
+      ],
+      "relatedProjects": [],
+      "recordTitle": "Repository Project Catalog",
+      "lifecycleRaw": "Not documented"
     }
   ]
 }

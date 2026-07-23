@@ -26,7 +26,7 @@ This is the only canonical project index for the Ideas Hub.
 | [ProjectOS](projects/projectos.md) | Archived autonomous development operating system for multi-repository local workspaces | https://github.com/kofiarhin/projectos | — | Archived; fresh security and repository review required before reactivation |
 | [Agency Landing Page](projects/agency-landing-page.md) | Repository-backed project; purpose and scope not yet documented | https://github.com/kofiarhin/agency-landing-page | — | Dedicated project record added 2026-07-23 |
 | [Agenda Boys](projects/agenda-boys.md) | Repository-backed project; purpose and scope not yet documented | https://github.com/kofiarhin/agenda-boys | — | Dedicated project record added 2026-07-23 |
-| [Repository Project Catalog](projects/repository-catalog.md) | Approved inventory of 193 repository-backed projects not previously represented by dedicated records | — | — | Repository existence verified; lifecycle, priority, stack, and scope remain undocumented |
+| [Repository Project Catalog](projects/catalog/repository-catalog.md) | Approved inventory of 193 repository-backed projects not previously represented by dedicated records | — | — | Repository existence verified; lifecycle, priority, stack, and scope remain undocumented |
 
 ## Repository Coverage
 

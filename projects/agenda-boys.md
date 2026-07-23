@@ -1,4 +1,4 @@
-# agenda-boys
+# Agenda Boys
 
 **Last updated:** 2026-07-23
 

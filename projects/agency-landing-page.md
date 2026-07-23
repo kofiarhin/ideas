@@ -1,4 +1,4 @@
-# agency-landing-page
+# Agency Landing Page
 
 **Last updated:** 2026-07-23
 
