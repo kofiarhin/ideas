@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "updatedAt": "2026-07-23T22:30:00Z",
+  "messages": [
+    {
+      "id": "ZORO-MSG-2026-07-23-001",
+      "status": "new",
+      "type": "review",
+      "priority": "normal",
+      "project": "Zoro",
+      "runId": null,
+      "taskId": null,
+      "workKey": "zoro:ideas-hub-inbox-read",
+      "messagePath": "inboxes/zoro/messages/ZORO-MSG-2026-07-23-001.md",
+      "created": "2026-07-23"
+    },
+    {
+      "id": "ARCH-ZORO-2026-07-23-001",
+      "status": "new",
+      "type": "task-assignment",
+      "priority": "high",
+      "project": "Context API",
+      "runId": "2026-07-23-001",
+      "taskId": "2026-07-23-001-context-api-T001",
+      "workKey": "context-api:zoro-action-query-deletion",
+      "messagePath": "inboxes/zoro/messages/ARCH-ZORO-2026-07-23-001.md",
+      "created": "2026-07-23"
+    },
+    {
+      "id": "ARCH-ZORO-2026-07-23-002",
+      "status": "new",
+      "type": "task-assignment",
+      "priority": "critical",
+      "project": "Taxify",
+      "runId": "2026-07-23-002",
+      "taskId": "2026-07-23-002-taxify-T001",
+      "workKey": "taxify:seed-credential-remediation",
+      "messagePath": "inboxes/zoro/messages/ARCH-ZORO-2026-07-23-002.md",
+      "created": "2026-07-23"
+    },
+    {
+      "id": "ARCH-ZORO-2026-07-23-003",
+      "status": "new",
+      "type": "task-assignment",
+      "priority": "normal",
+      "project": "Ideas Hub",
+      "runId": "2026-07-23-003",
+      "taskId": "2026-07-23-003-ideas-T001",
+      "workKey": "ideahub:architect-zoro-loop-smoke-test",
+      "messagePath": "inboxes/zoro/messages/ARCH-ZORO-2026-07-23-003.md",
+      "created": "2026-07-23"
+    },
+    {
+      "id": "KOFI-ZORO-2026-07-23-001",
+      "status": "new",
+      "type": "decision",
+      "priority": "urgent",
+      "project": "Workspace",
+      "runId": [
+        "2026-07-18-001",
+        "2026-07-23-002"
+      ],
+      "taskId": null,
+      "workKey": "portfolio:approval-bundle-2026-07-23",
+      "messagePath": "inboxes/zoro/messages/KOFI-ZORO-2026-07-23-001.md",
+      "created": "2026-07-23"
+    },
+    {
+      "id": "ZORO-MSG-2026-07-23-VERCEL-PLAN",
+      "status": "new",
+      "type": "task-assignment",
+      "priority": "high",
+      "project": "Context API / Zoro",
+      "runId": null,
+      "taskId": null,
+      "workKey": "context-api:vercel-gateway-implementation-plan",
+      "messagePath": "zoro/messages/ZORO-MSG-2026-07-23-VERCEL-PLAN.md",
+      "created": "2026-07-23"
+    }
+  ]
+}
