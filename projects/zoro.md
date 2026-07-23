@@ -1,6 +1,6 @@
 # Zoro
 
-**Last updated:** 2026-07-22
+**Last updated:** 2026-07-23
 
 ## Snapshot
 
@@ -17,6 +17,7 @@
 - GitHub Gateway implementation plan: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_IMPLEMENTATION_PLAN.md
 - Maintained Action schema: https://github.com/kofiarhin/context-api/blob/main/docs/openapi/zoro-action.yaml
 - Release checklist: https://github.com/kofiarhin/context-api/blob/main/docs/GITHUB_GATEWAY_RELEASE_CHECKLIST.md
+- Open deletion-fix pull request: https://github.com/kofiarhin/context-api/pull/2
 
 ## Current State
 
@@ -24,29 +25,40 @@
 - End-to-end project CRUD has been verified through Zoro against the existing context routes.
 - A dedicated GitHub App for Zoro is installed with metadata read, contents read/write, and pull-request read/write permissions.
 - GitHub App credentials and the dedicated Bearer credential are stored in Heroku configuration; secret values are excluded from Ideas Hub and the repository.
-- The GitHub Gateway implementation, tests, documentation, Octokit dependency, corrected maintained Action schema, release validator, release checklist, and optional repository allowlist are committed to `kofiarhin/context-api` `main`.
-- The maintained schema now points at `https://context-api-3b9dfadf403e.herokuapp.com` and declares 27 operations: 15 context operations and 12 authenticated GitHub operations.
-- The rate-limit header regression assertion has been corrected to match the configured draft-7 standard header.
-- Optional repository allowlisting is available through `GITHUB_REPOSITORY_ALLOWLIST` while empty configuration preserves the approved all-repository default.
-- Repository-side remediation is committed but not yet proven by recorded green `npm run verify` output.
-- The corrected schema and Bearer authentication have not yet been configured in GPT Builder.
-- No controlled live repository write/delete smoke test has been completed through Zoro.
-- Zoro's GitHub capability remains incomplete until repository verification, deployment confirmation, GPT Builder setup, and end-to-end evidence pass.
+- The GitHub Gateway implementation, tests, documentation, Octokit dependency, release validator, release checklist, and optional repository allowlist are committed to `kofiarhin/context-api` `main`.
+- The maintained repository schema points at `https://context-api-3b9dfadf403e.herokuapp.com` and declares 27 operations: 15 context operations and 12 authenticated GitHub operations.
+- GPT Builder rejected several valid OpenAPI composition patterns used by the maintained schema. A flattened Builder-compatible copy was created with inline parameters, operation-level path parameters, flattened request bodies, no YAML aliases, and no duplicate path/body identifier names.
+- The Builder-compatible schema was accepted and all 27 actions appeared in Zoro's Action editor.
+- Zoro's Action authentication is configured as API Key with Bearer transport using `ZORO_GITHUB_API_KEY`; the key value is not recorded here.
+- A fresh Zoro conversation successfully listed repositories available through the GitHub App installation.
+- The controlled write smoke test partially succeeded: Zoro created `zoro-smoke-test` from `main`, created and read `tmp/zoro-smoke-test.txt`, retrieved blob SHA `98e0aa9e27c7f0fb860d44429e475fe12771cf8f`, and confirmed `main` remained unchanged.
+- Deleting the temporary file failed with `ClientResponseError`. The branch and test file remain present.
+- The failure was traced to `DELETE /api/v1/github/files` relying on a JSON request body that OpenAI Actions did not reliably transmit. Existing branch forwarding, blob-SHA comparison, Octokit payload construction, and stale-SHA conflict handling were already correct.
+- Zoro then performed a real implementation workflow: it created `fix/github-file-deletion`, changed four focused files, added unit and integration regression tests, committed the work, and opened Context API pull request #2.
+- Pull request #2 is open and mergeable at head `654ebbc1bf8ada7b2ed339f342859204c6e88505`. It accepts query-based deletion input with JSON-body fallback and preserves workflow blocking, exact-SHA concurrency, branch forwarding, and safe error behavior.
+- Zoro did not execute shell verification because its connected tools do not provide a shell runner. No CI status is recorded for the PR head, so the change is implemented but unverified.
+- The repository-maintained Action schema still describes deletion through a request body. It must be reconciled with query-based deletion before the live Action can verify the fix.
+- Zoro's GitHub capability remains incomplete until pull request #2 is reviewed, verified, merged, deployed, represented in the live Action schema, exercised successfully through deletion, and cleaned up.
 
 ## Accomplished
 
-- Completed the repository-side GitHub Gateway remediation required for Zoro.
+- Completed the repository-side GitHub Gateway implementation required for Zoro.
 - Corrected the maintained Action schema to target the production Context API deployment.
 - Added release validation and an aggregate verification command for the backend repository.
 - Corrected the rate-limit regression assertion to match the configured standard headers.
 - Added optional repository allowlist enforcement, automated coverage, and configuration documentation without reducing the approved default capability.
 - Added a controlled release and smoke-test checklist for GPT Builder setup, repository reads, disposable writes, SHA-based deletion, cleanup, and evidence capture.
 - Preserved Zoro's approved GitHub safety boundaries, including branch protection, non-force branch updates, optimistic concurrency, and workflow-file write blocking.
-- Updated durable project context so completed repository work is separated from the remaining manual and live-verification steps.
+- Produced and installed a GPT Builder-compatible schema with all 27 actions visible.
+- Configured Bearer authentication in GPT Builder without exposing the secret.
+- Verified live repository listing through a fresh Zoro conversation.
+- Verified branch creation, UTF-8 file creation, file readback, blob-SHA retrieval, and protection of `main`.
+- Demonstrated that Zoro can inspect a defect, create a focused branch, edit source and tests, commit changes, and open a pull request without merging or deploying.
+- Opened Context API pull request #2 with a documented root cause, implementation summary, test coverage, risks, manual verification instructions, and explicit unverified status.
 
 ## Current Focus
 
-Obtain green repository verification and deployment evidence, then complete the private GPT Builder configuration and verify safe reads plus a disposable-branch file create/delete sequence through a fresh Zoro conversation.
+Review and locally verify pull request #2, update the maintained Action schema for query-based deletion, deploy only a verified merge, republish the Action, complete the delete smoke test, and remove the disposable branch.
 
 ## Brainstorming
 
@@ -54,6 +66,7 @@ Obtain green repository verification and deployment evidence, then complete the 
 - Add specialist-agent routing and structured handoffs
 - Add workflow dashboards, audit trails, and run summaries
 - Add per-project access profiles where a repository should not inherit the full installation scope
+- Generate the GPT Builder-compatible schema from the maintained repository schema to prevent manual drift
 
 ## Decisions
 
@@ -67,12 +80,13 @@ Obtain green repository verification and deployment evidence, then complete the 
 - Zoro must honor branch protection, optimistic concurrency, and the `.github/workflows` write prohibition.
 - All Zoro GitHub routes require a dedicated Bearer credential separate from public context endpoints.
 - Optional repository allowlisting is supported as defense in depth without changing the current default.
+- A pull request created by Zoro is implementation evidence, not completion evidence; local or CI verification remains required before merge or deployment.
 
 ## Assumptions
 
 - OpenAI Actions remain suitable for the first orchestration MVP.
 - The installed GitHub App permissions are sufficient for approved code and pull-request operations, subject to repository rules.
-- Earlier deployment and authenticated read reports are accurate, but Zoro-level evidence is still required.
+- Query-based deletion will work through OpenAI Actions after the backend fix is verified, deployed, and represented in the live Action schema.
 
 ## Open Questions
 
@@ -80,19 +94,23 @@ Obtain green repository verification and deployment evidence, then complete the 
 - How should Zoro acquire and enforce task locks for single-Builder ownership?
 - Which future workflows require explicit human approval versus workflow-level preauthorization?
 - Which repositories should eventually use narrower allowlists or per-project policies?
-- Do any Context API seed-data regression failures remain after the rate-limit assertion correction?
+- Does pull request #2 pass the repository's clean verification commands?
+- Should the Builder-compatible schema be maintained directly or generated from the canonical OpenAPI source?
+- Has `README.md` readback through Zoro been explicitly completed, or only repository listing?
 
 ## Next Actions
 
 ### Zoro GitHub Completion Tasks
 
 - [x] **Task 1 — Correct and validate the Action schema:** production URL committed; 27-operation contract retained; repository validator added.
-- [ ] **Task 2 — Confirm backend verification:** run `npm ci` and `npm run verify` from a clean checkout, fix any remaining seed failures, and preserve passing output.
-- [ ] **Task 3 — Confirm deployment:** deploy the verified `main` revision and retain the Heroku release and startup evidence.
-- [ ] **Task 4 — Configure GPT Builder:** paste the corrected schema, configure `ZORO_GITHUB_API_KEY` as Bearer authentication, save Zoro, and start a fresh conversation.
-- [ ] **Task 5 — Verify GitHub reads through Zoro:** list repositories and read `README.md` from `kofiarhin/context-api` on `main`.
-- [ ] **Task 6 — Verify GitHub writes through Zoro:** create a disposable branch, create a temporary UTF-8 file, retrieve its blob SHA, delete it with that SHA, and verify `main` was unchanged.
-- [ ] **Task 7 — Close the delivery:** record verification, deployment, Action configuration, read/write evidence, and cleanup before marking GitHub access available.
+- [ ] **Task 2 — Confirm backend verification:** run `npm ci`, focused deletion tests, and `npm run verify` from a clean checkout of `fix/github-file-deletion`; preserve passing output or repair failures.
+- [x] **Task 3 — Confirm current deployment:** Heroku release `v14` deployed `main` revision `bf378b82ed04c88152c3cbb7550a590e63a19601` and startup evidence showed MongoDB connection plus server listening. A new deployment is still required after the deletion fix is verified and merged.
+- [x] **Task 4 — Configure GPT Builder:** the Builder-compatible schema was accepted, API Key authentication was configured as Bearer, Zoro was saved, and a fresh conversation was started.
+- [ ] **Task 5 — Verify GitHub reads through Zoro:** repository listing is verified; explicitly read `README.md` from `kofiarhin/context-api` on `main` and retain the result if not already completed.
+- [ ] **Task 6 — Verify GitHub writes through Zoro:** branch creation, file creation, readback, SHA retrieval, and `main` protection passed; deletion failed and remains outstanding.
+- [ ] **Task 6A — Complete deletion remediation:** review and verify Context API pull request #2, update the maintained Action schema for query parameters, merge, deploy, and republish the Action.
+- [ ] **Task 6B — Repeat live deletion:** delete `tmp/zoro-smoke-test.txt` from `zoro-smoke-test` using blob SHA `98e0aa9e27c7f0fb860d44429e475fe12771cf8f`, verify absence, confirm `main` is unchanged, and delete the disposable branch.
+- [ ] **Task 7 — Close the delivery:** record verification, merge, deployment, Action configuration, read/write evidence, and cleanup before marking GitHub access available.
 - [x] **Task 8 — Add access hardening:** optional repository allowlist support and documentation committed without reducing the approved default capability.
 - [ ] Create and verify the Zoro project record in the Context API.
 - [ ] Link Zoro to Forge as Chief Orchestrator.
