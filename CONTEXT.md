@@ -49,7 +49,7 @@ Default engineering preferences unless a project says otherwise:
 - Added `AGENT_COORDINATION.md`, `zoro-inbox.md`, and `architect-inbox.md`, creating a governed two-way loop: Architect assigns approved `ready` work, Zoro reports evidence, Architect independently verifies it, and Architect sends durable feedback.
 - Defined mailbox IDs, run IDs, task IDs, work keys, authority boundaries, acceptance criteria, verification requirements, and the rule that mailbox status is never authoritative task status.
 - Prepared compact, copy-ready Zoro and Architect instruction sets that preserve each agent's original structure while adding the shared coordination and reporting model within the 8,000-character instruction limit.
-- Prepared the first real end-to-end test task: Architect assigns the Zoro Action query-deletion schema update, Zoro implements it on a branch and reports through `architect-inbox.md`, then Architect verifies and responds.
+- Created Architect run `2026-07-23-001` and assigned ready task `2026-07-23-001-context-api-T001` to Zoro through `ARCH-ZORO-2026-07-23-001` for work key `context-api:zoro-action-query-deletion`.
 
 ## Project Landscape
 
@@ -94,9 +94,9 @@ Default engineering preferences unless a project says otherwise:
 
 ## Current Priorities
 
-1. Save the updated compact Zoro and Architect instructions in their ChatGPT configuration fields, start fresh conversations, and execute the prepared real communication-loop task.
-2. Verify Context API pull request #2 and the future query-deletion schema PR independently before any merge.
-3. Reconcile the maintained Action schema with query-based deletion, deploy only a verified merge, republish the Action, and complete Zoro's delete-and-cleanup smoke test.
+1. Confirm the updated compact Zoro and Architect instructions are saved, then have Zoro pick up ready assignment `ARCH-ZORO-2026-07-23-001` and report through `architect-inbox.md`.
+2. Have Architect independently verify Zoro's schema pull request and send durable feedback through `zoro-inbox.md`.
+3. Verify Context API pull request #2, merge only after required checks and explicit authority, deploy the exact verified revision, republish the Action, and complete Zoro's delete-and-cleanup smoke test.
 4. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
 5. Implement and verify that Forge slice without implying the full multi-agent organization exists.
 6. Complete remaining repository and deployed-revision evidence for Brain and Agent System.
@@ -105,7 +105,8 @@ Default engineering preferences unless a project says otherwise:
 ## Workspace Gaps
 
 - The updated compact instruction sets have been prepared, but saving both configurations and validating them in fresh conversations has not been durably confirmed.
-- The first live communication-loop task has not yet proven assignment matching, Zoro durable reporting, Architect independent verification, feedback, and closure.
+- Architect created the first governed ready assignment, but Zoro has not yet durably acknowledged it, opened the schema pull request, or reported through `architect-inbox.md`.
+- The first communication-loop task has therefore not yet proven Zoro reporting, Architect independent verification, durable feedback, and closure.
 - Context API pull request #2 remains open and mergeable but has no recorded shell or CI verification and has not been merged or deployed.
 - The maintained Zoro Action schema still describes file deletion through a request body rather than the query-based interface proposed by pull request #2.
 - The disposable `zoro-smoke-test` branch and `tmp/zoro-smoke-test.txt` remain until deletion succeeds and cleanup evidence is retained.
