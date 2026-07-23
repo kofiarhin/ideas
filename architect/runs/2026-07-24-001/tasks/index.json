@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-07-24-001",
+  "updatedAt": "2026-07-24",
+  "tasks": [
+    {
+      "id": "2026-07-24-001-context-api-T001",
+      "status": "running",
+      "project": "Context API / Zoro",
+      "repository": "kofiarhin/context-api",
+      "workKey": "context-api:vercel-gateway",
+      "requirementKey": "context-api:vercel-gateway-spec-v1",
+      "taskPath": "architect/runs/2026-07-24-001/tasks/2026-07-24-001-context-api-T001.md"
+    }
+  ]
+}
