@@ -7,7 +7,7 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 
 const RUNTIMES = {
   zoro: {
-    version: '1.2.1',
+    version: '1.3.0',
     template: 'runtime/templates/zoro.md',
     output: 'runtime/zoro.md',
     sources: [
@@ -19,7 +19,7 @@ const RUNTIMES = {
     ],
   },
   architect: {
-    version: '1.1.1',
+    version: '1.2.0',
     template: 'runtime/templates/architect.md',
     output: 'runtime/architect.md',
     sources: [
