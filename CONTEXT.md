@@ -1,6 +1,6 @@
 # Workspace Context
 
-**Last updated:** 2026-07-23
+**Last updated:** 2026-07-24
 
 ## Purpose
 
@@ -50,6 +50,7 @@ Default engineering preferences unless a project says otherwise:
 - Defined mailbox IDs, run IDs, task IDs, work keys, authority boundaries, acceptance criteria, verification requirements, and the rule that mailbox status is never authoritative task status.
 - Prepared compact, copy-ready Zoro and Architect instruction sets that preserve each agent's original structure while adding the shared coordination and reporting model within the 8,000-character instruction limit.
 - Created Architect run `2026-07-23-001` and assigned ready task `2026-07-23-001-context-api-T001` to Zoro through `ARCH-ZORO-2026-07-23-001` for work key `context-api:zoro-action-query-deletion`.
+- Approved FeatureLoop Lab as a new project concept, preserved its PRD in Ideas Hub, and assigned repository creation plus PRD publication to Zoro.
 
 ## Project Landscape
 
@@ -60,6 +61,7 @@ Default engineering preferences unless a project says otherwise:
 - **Context API** — Forge's shared organizational memory and system of record; public CRUD and the authenticated GitHub Gateway are deployed. GPT Builder configuration and live reads are complete, while deletion remediation, repository verification, redeployment, and final write/cleanup evidence remain outstanding.
 - **Brain** — a MERN personal operating system with MongoDB-backed memory and AI-assisted workflows; repository-local PRD, technical specification, and audit now exist, while test and deployed-revision evidence remain outstanding.
 - **Codex Workflow Kit** — a reusable workflow system for AI coding agents; PRD, technical specification, and audit now exist, with legacy artifact-path documentation reconciliation next.
+- **FeatureLoop Lab** — a planned standalone MERN reference application for testing reusable discovery, specification, TDD implementation, Playwright verification, repair, and stop-condition loops; repository creation and PRD publication are assigned to Zoro.
 - **Agent System** — an active runtime-agnostic agent instruction system; setup and synchronization are implemented and user-verified across Codex, Claude Code, and Gemini CLI, with Windows CI, compatibility evidence, and release tagging next.
 - **Ideas Hub** — this repository; the shared reference, communication, and brainstorming layer across tools.
 - **Zoro–Architect Coordination** — both agents have governed Ideas Hub access. Architect assigns approved ready work through `zoro-inbox.md`; Zoro reports through `architect-inbox.md`; Architect independently verifies evidence, updates authoritative run state when permitted, and sends feedback through `zoro-inbox.md`.
@@ -97,10 +99,11 @@ Default engineering preferences unless a project says otherwise:
 1. Confirm the updated compact Zoro and Architect instructions are saved, then have Zoro pick up ready assignment `ARCH-ZORO-2026-07-23-001` and report through `architect-inbox.md`.
 2. Have Architect independently verify Zoro's schema pull request and send durable feedback through `zoro-inbox.md`.
 3. Verify Context API pull request #2, merge only after required checks and explicit authority, deploy the exact verified revision, republish the Action, and complete Zoro's delete-and-cleanup smoke test.
-4. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
-5. Implement and verify that Forge slice without implying the full multi-agent organization exists.
-6. Complete remaining repository and deployed-revision evidence for Brain and Agent System.
-7. Reconcile Codex Workflow Kit legacy documentation with its current run-scoped artifact model.
+4. Have Zoro create the FeatureLoop Lab repository, publish the approved PRD, and report primary GitHub evidence for independent verification.
+5. Approve the smallest executable Forge MVP slice, including state transitions, authority boundaries, evidence requirements, and acceptance criteria.
+6. Implement and verify that Forge slice without implying the full multi-agent organization exists.
+7. Complete remaining repository and deployed-revision evidence for Brain and Agent System.
+8. Reconcile Codex Workflow Kit legacy documentation with its current run-scoped artifact model.
 
 ## Workspace Gaps
 
@@ -110,6 +113,7 @@ Default engineering preferences unless a project says otherwise:
 - Context API pull request #2 remains open and mergeable but has no recorded shell or CI verification and has not been merged or deployed.
 - The maintained Zoro Action schema still describes file deletion through a request body rather than the query-based interface proposed by pull request #2.
 - The disposable `zoro-smoke-test` branch and `tmp/zoro-smoke-test.txt` remain until deletion succeeds and cleanup evidence is retained.
+- FeatureLoop Lab has an approved repository-foundation direction and durable PRD, but its target repository does not yet have verified existence, default-branch, commit, or readback evidence.
 - Forge has strong initial product documentation but no executable orchestration foundation, tests, CI, API, persistence model, or deployment evidence.
 - Brain and Agent System need durable verification evidence tied to exact revisions and environments.
 - Codex Workflow Kit contains legacy architecture guidance that conflicts with its current `_workflow/runs/<run-id>/` model.
