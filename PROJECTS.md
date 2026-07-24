@@ -1,6 +1,6 @@
 # Projects
 
-**Last updated:** 2026-07-23
+**Last updated:** 2026-07-24
 
 This is the only canonical project index for the Ideas Hub.
 
@@ -17,6 +17,7 @@ This is the only canonical project index for the Ideas Hub.
 | [Zoro](projects/zoro.md) | Forge Chief Orchestrator and Context API-connected Custom GPT | https://github.com/kofiarhin/zoro | — | Active; repository linked on 2026-07-23; Forge linkage next |
 | [Context API](projects/context-api.md) | Centralized API for structured, reusable user, engineering, project, workflow, glossary, and learning context | https://github.com/kofiarhin/context-api | https://context-api-3b9dfadf403e.herokuapp.com | Active; strong docs; repository and live gateway verification evidence next |
 | [Codex Workflow Kit](projects/codex-workflow.md) | Reusable AI engineering workflow system | https://github.com/kofiarhin/codex-workflow-kit | — | PRD/spec/audit added; legacy artifact-path documentation needs reconciliation |
+| [FeatureLoop Lab](projects/feature-loop-lab.md) | MERN reference application for testing reusable AI feature implementation and verification loops | — | — | Repository creation and PRD publication assigned to Zoro |
 | [Agent System](projects/agent-system.md) | Runtime-agnostic agent instruction system with deterministic generation and native runtime outputs | https://github.com/kofiarhin/agent-system | — | Active; streamlined setup/sync verified locally; CI/release evidence next |
 | [Archon](projects/archon.md) | AI-powered software architecture studio that turns ideas into implementation-ready engineering blueprints | https://github.com/kofiarhin/archon | — | Paused; approved specifications retained; Phase 1 has not started |
 | [Taxify](projects/taxify.md) | Archived project; no work is planned unless explicitly reactivated | https://github.com/kofiarhin/taxify | — | Archived; reassess security and deployment state before reactivation |
