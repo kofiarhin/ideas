@@ -1,13 +1,13 @@
 # Architect Command System
 
-**Instruction version:** 1.1.0  
-**Last updated:** 2026-07-23
+**Instruction version:** 1.2.0  
+**Last updated:** 2026-07-24
 
 ## Purpose
 
-Ideas Hub stores Architect's canonical detailed instructions, command workflows, durable run artifacts, indexed communication, and operational logs.
+Ideas Hub stores Architect's canonical detailed instructions, command workflows, durable run artifacts, indexed communication, shared presence, and operational logs.
 
-The live Architect Project instruction field should contain only [`BOOTSTRAP.md`](BOOTSTRAP.md). Architect now starts from the compact generated runtime under [`../runtime/`](../runtime/).
+The live Architect Project instruction field should contain only [`BOOTSTRAP.md`](BOOTSTRAP.md). Architect starts from the compact generated runtime under [`../runtime/`](../runtime/).
 
 ## Runtime And Canonical Sources
 
@@ -40,6 +40,17 @@ A fresh conversation loads:
 2. `runtime/architect.md`
 
 Fallback loads the five canonical detailed sources. Incomplete runtime and fallback means read-only operation.
+
+## Zoro Presence
+
+Architect reads:
+
+- [`../coordination/presence/README.md`](../coordination/presence/README.md)
+- [`../coordination/presence/zoro.json`](../coordination/presence/zoro.json)
+
+Presence is checked near the start of project work and before assigning, starting, resuming, or verifying potentially overlapping Zoro work. Architect compares repository, run ID, task ID, and work key; treats expired active leases as stale; avoids duplicate implementation while an overlapping lease is current; and still inspects indexed inbox messages and primary evidence.
+
+Presence is advisory and cannot change authoritative task state or prove implementation, verification, merge, deployment, or completion. Architect is read-only for Zoro presence unless Kofi explicitly authorizes a repair or reconciliation write.
 
 ## Command Registry
 
@@ -77,15 +88,17 @@ architect/runs/<run-id>/
 
 ## Reconciliation
 
-Before promotion to `ready`, verify authority, revisions, evidence, duplicates, work key, requirement key, acceptance criteria, verification requirements, and approvals.
+Before promotion to `ready`, verify authority, revisions, evidence, duplicates, active Zoro presence when applicable, work key, requirement key, acceptance criteria, verification requirements, and approvals.
 
-A message, log entry, branch, commit, or pull request is not task completion evidence.
+A presence record, message, log entry, branch, commit, or pull request is not task completion evidence.
 
 ## Command Boundaries
 
-`good morning` writes only its permitted run audit/task artifacts and matching generated task retrieval files.
+`good morning` may read Zoro presence and create or refresh only its permitted run audit/task artifacts and matching generated task retrieval files.
 
-`run all tasks` executes only eligible `ready` work and may perform only its documented run, indexed communication, repository, log, and verified context updates.
+`run all tasks` may read Zoro presence, execute only eligible `ready` work, and perform only its documented run, indexed communication, repository, log, and verified context updates.
+
+Neither command may modify Zoro presence without separate explicit authority.
 
 ## Installation Verification
 
@@ -97,6 +110,7 @@ After installing the loader, start a fresh Architect conversation and ask it to 
 - fallback files loaded, if any;
 - command registry;
 - indexed inbox paths;
+- Zoro presence path and interpreted status;
 - loading failures.
 
-Do not describe version `1.1.0` as active in the live Project until this test passes.
+Do not describe version `1.2.0` as active in the live Project until this test passes.
