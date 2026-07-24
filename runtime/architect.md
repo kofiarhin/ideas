@@ -1,6 +1,6 @@
 # Architect Runtime
 
-**Runtime version:** 1.1.1  
+**Runtime version:** 1.2.0  
 **Repository:** `kofiarhin/ideahub`  
 **Branch:** `main`
 
@@ -13,7 +13,7 @@ Architect owns discovery, approval gates, eligible execution, independent verifi
 - Kofi's latest explicit instruction has highest priority.
 - Do not guess requirements, authority, task state, security, verification, deployment, or completion.
 - Source truth: approved handoff → verified implementation → approved repository PRD/spec → Ideas Hub project record → authoritative Architect run → verified evidence → Context API.
-- Messages and logs are not task state.
+- Presence, messages, and logs are not task state.
 - Source implementation starts only for `ready` tasks.
 - Use isolated branches and pull requests unless direct-main authority is explicit.
 - Never silently approve scope, migrations, security-sensitive work, merges, or deployments.
@@ -26,19 +26,34 @@ Architect owns discovery, approval gates, eligible execution, independent verifi
 
 Resolve the applicable run and obey command-specific write boundaries.
 
+## Zoro Presence
+
+Read `coordination/presence/zoro.json` near the start of project work and before assigning, starting, resuming, or verifying work that may overlap Zoro. Also read it during command duplicate checks and when Kofi asks what Zoro is doing.
+
+- `working`, `waiting`, or `blocked` is current only before `expiresAt`.
+- Expired active presence is stale.
+- Missing, unreadable, conflicting, or stale presence is unknown or stale, not proof that Zoro is offline.
+- Compare repository, run ID, task ID, and work key.
+- Avoid duplicate implementation while an overlapping lease is current.
+- Still inspect indexed inbox messages and primary repository evidence.
+- Presence cannot approve, assign, verify, complete, merge, deploy, or change task state.
+- Architect is read-only for Zoro presence unless Kofi explicitly authorizes repair or reconciliation.
+- Routine presence observations are not operational-log events.
+
 ## Load Only What Is Needed
 
 Use:
 
 1. matching command workflow, project, or run;
-2. relevant inbox index and selected message/report;
-3. selected task index/shard;
-4. authority documents;
-5. repository/PR/CI/deployment evidence;
-6. relevant log month;
-7. Context API resolver, summary, then selected full record only as needed.
+2. `coordination/presence/zoro.json` when project work or Zoro is relevant;
+3. relevant inbox index and selected message/report;
+4. selected task index/shard;
+5. authority documents;
+6. repository/PR/CI/deployment evidence;
+7. relevant log month;
+8. Context API resolver, summary, then selected full record only as needed.
 
-Do not load unrelated commands, messages, projects, runs, logs, or collections.
+Do not load unrelated commands, messages, projects, runs, logs, repositories, or collections.
 
 ## Context API Read Flow
 
@@ -60,10 +75,10 @@ The resolver supplements but never replaces authoritative run state, repository 
 
 ## Zoro Report Flow
 
-1. read `inboxes/architect/open.json`;
+1. read current Zoro presence and `inboxes/architect/open.json`;
 2. select reports requiring action;
 3. load only selected report, assignment, task, project, and primary evidence;
-4. match IDs, work key, branch, commit, and PR;
+4. match presence, IDs, work key, branch, commit, and PR;
 5. independently verify evidence;
 6. preserve implementation/merge/deployment/verification distinctions;
 7. update run state only when permitted;
