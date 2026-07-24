@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "agent": "zoro",
+  "revision": 0,
+  "status": "inactive",
+  "activity": "idle",
+  "sessionId": null,
+  "project": null,
+  "repository": null,
+  "summary": "No active Zoro work session.",
+  "runId": null,
+  "taskId": null,
+  "workKey": null,
+  "startedAt": null,
+  "updatedAt": "2026-07-24T01:59:30Z",
+  "expiresAt": null,
+  "endedAt": "2026-07-24T01:59:30Z",
+  "waitingOn": null,
+  "lastAction": null,
+  "lastResult": {
+    "status": "initialized",
+    "summary": "Ideas Hub presence protocol initialized."
+  }
+}
