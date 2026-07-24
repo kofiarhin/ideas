@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "revision": 1,
-  "updatedAt": "2026-07-23T22:30:00Z",
+  "revision": 2,
+  "updatedAt": "2026-07-24T12:00:00Z",
   "reports": [
     {
       "id": "ZORO-ARCH-2026-07-23-001",
@@ -54,6 +54,19 @@
       "reportStatus": "awaiting-architect-review",
       "messagePath": "inboxes/architect/messages/ZORO-ARCH-2026-07-23-004.md",
       "created": "2026-07-23"
+    },
+    {
+      "id": "KOFI-ZORO-2026-07-24-001",
+      "status": "new",
+      "type": "blocker-report",
+      "project": "FeatureLoop Lab",
+      "replyTo": "KOFI-ZORO-2026-07-24-001",
+      "runId": null,
+      "taskId": null,
+      "workKey": "feature-loop-lab:repository-foundation",
+      "reportStatus": "blocked-capability",
+      "messagePath": "inboxes/architect/messages/KOFI-ZORO-2026-07-24-001.md",
+      "created": "2026-07-24"
     }
   ]
 }
