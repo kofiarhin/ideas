@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Audit the Ideas Hub portfolio and linked repositories, reconcile approved intent against current implementation, and create a durable, evidence-backed task queue. This command does **not** implement source-code changes.
+Audit the Ideas Hub portfolio and linked repositories, reconcile approved intent against current implementation, detect active Zoro work, and create a durable, evidence-backed task queue. This command does **not** implement source-code changes.
 
 ## Trigger
 
@@ -18,24 +18,28 @@ This command may create or refresh only:
 - `architect/runs/<run-id>/audit.md`
 - `architect/runs/<run-id>/tasks.md`
 
-It must not modify root `AGENTS.md`, `CONTEXT.md`, `PROJECTS.md`, `INBOX.md`, `projects/*.md`, linked PRDs/specifications/plans, linked source repositories, issues, pull requests, or lifecycle states.
+It must not modify root `AGENTS.md`, `CONTEXT.md`, `PROJECTS.md`, `INBOX.md`, `projects/*.md`, `coordination/presence/zoro.json`, linked PRDs/specifications/plans, linked source repositories, issues, pull requests, or lifecycle states.
 
 ## Required Read Order
 
 1. Root [`AGENTS.md`](../../AGENTS.md).
-2. [`architect/README.md`](../README.md).
-3. `architect/commands/good-morning.md`.
-4. Root [`CONTEXT.md`](../../CONTEXT.md).
-5. Root [`PROJECTS.md`](../../PROJECTS.md).
-6. Relevant `projects/<project>.md`.
-7. Linked project repositories and their authority documents.
-8. Relevant issues, pull requests, tests, CI, releases, deployments, and implementation evidence.
+2. [`AGENT_COORDINATION.md`](../../AGENT_COORDINATION.md).
+3. [`architect/README.md`](../README.md).
+4. `architect/commands/good-morning.md`.
+5. [`coordination/presence/zoro.json`](../../coordination/presence/zoro.json).
+6. Root [`CONTEXT.md`](../../CONTEXT.md).
+7. Root [`PROJECTS.md`](../../PROJECTS.md).
+8. Relevant `projects/<project>.md`.
+9. Linked project repositories and their authority documents.
+10. Relevant issues, pull requests, tests, CI, releases, deployments, and implementation evidence.
 
 Inspect [`INBOX.md`](../../INBOX.md) only when a durable project record or approved request explicitly points to relevant inbox material. Unprocessed inbox ideas are not approved work.
 
+Treat Zoro presence as advisory. Determine whether the lease is current, stale, inactive, or unknown; compare repository, run ID, task ID, and work key; and do not create duplicate implementation tasks for clearly overlapping current work. Presence does not change task status or prove implementation or completion.
+
 ## Portfolio Scan
 
-Perform a lightweight scan of every project in `PROJECTS.md`. Capture lifecycle, repository, live URL, current focus, decisions, open questions, next actions, blockers, risks, linked authority documents, open requests, documentation freshness, and whether deep inspection is justified.
+Perform a lightweight scan of every project in `PROJECTS.md`. Capture lifecycle, repository, live URL, current focus, decisions, open questions, next actions, blockers, risks, linked authority documents, open requests, documentation freshness, applicable Zoro presence, and whether deep inspection is justified.
 
 ## Deep-Audit Selection
 
@@ -75,22 +79,22 @@ For every deeply audited project:
 1. Record repository, branch, and commit SHA.
 2. Record authority-document paths and revisions.
 3. Extract approved requirements and acceptance criteria.
-4. Inspect implementation, tests, configuration, CI, open requests, and relevant recent activity.
+4. Inspect implementation, tests, configuration, CI, open requests, applicable Zoro presence, and relevant recent activity.
 5. Classify requirements as implemented and verified; implemented but unverified; partially implemented; not implemented; conflicting with implementation; obsolete or superseded; or unable to determine.
-6. Identify missing requirements, partial implementation, undocumented implemented behavior, behavior conflicting with approved intent, approved requests absent from plans, bugs/regressions, failing tests/lint/type-check/build/CI/deployment/production behavior, security or credential risks, destructive migration risks, stale documentation, unresolved blockers, and completed work not reflected in the Ideas Hub.
+6. Identify missing requirements, partial implementation, undocumented implemented behavior, behavior conflicting with approved intent, approved requests absent from plans, bugs/regressions, failing tests/lint/type-check/build/CI/deployment/production behavior, security or credential risks, destructive migration risks, stale documentation, unresolved blockers, active duplicate work, and completed work not reflected in the Ideas Hub.
 7. Record evidence for every finding.
 
-Do not treat code presence as proof that acceptance criteria pass.
+Do not treat code presence or presence state as proof that acceptance criteria pass.
 
 ## Task Classification
 
 ### `ready`
 
-Use only when direction is approved; an approved PRD, specification, or plan supports the work; acceptance criteria are clear; no approval, security, migration, or source conflict blocks execution; and verification requirements are known.
+Use only when direction is approved; an approved PRD, specification, or plan supports the work; acceptance criteria are clear; no approval, security, migration, source conflict, or overlapping current implementation blocks execution; and verification requirements are known.
 
 ### `needs_discovery`
 
-Use when desired behavior is unclear, user needs or scope are unconfirmed, several plausible directions exist, or approved intent is insufficient.
+Use when desired behavior is unclear, user needs or scope are unconfirmed, several plausible directions exist, approved intent is insufficient, or stale/unknown presence creates material ambiguity about duplicate work.
 
 ### `needs_spec`
 
@@ -135,7 +139,7 @@ Use `proposed` only for a defensible but not-yet-approved suggestion. `run all t
 
 ## Idempotency
 
-Build a source fingerprint from Ideas Hub project-record revisions, authority-document revisions, repository commit SHAs, relevant issue/pull-request revisions, and CI state.
+Build a source fingerprint from Ideas Hub project-record revisions, authority-document revisions, repository commit SHAs, relevant issue/pull-request revisions, CI state, and applicable Zoro presence revision.
 
 When rerun without material changes, refresh the current same-day incomplete run; do not duplicate equivalent tasks; preserve user edits, approvals, completed outcomes, and historical evidence; and mark obsolete tasks `skipped` with a reason instead of deleting them.
 
@@ -143,4 +147,4 @@ Create a new run when no valid incomplete run exists, the previous run is comple
 
 ## Chat Output
 
-Return the run ID; portfolio health summary; highest-priority findings; `ready` tasks; tasks needing discovery, specification, approval, or unblocking; security or production incidents; projects not deeply audited and why; a daily-focus question if priorities remain tied; confirmation that no source-code implementation occurred; and `run all tasks` as the next command only when actionable tasks exist.
+Return the run ID; portfolio health summary; Zoro presence summary when relevant; highest-priority findings; `ready` tasks; tasks needing discovery, specification, approval, or unblocking; security or production incidents; projects not deeply audited and why; a daily-focus question if priorities remain tied; confirmation that no source-code implementation occurred; and `run all tasks` as the next command only when actionable tasks exist.
