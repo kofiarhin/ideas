@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "revision": 1,
-  "updatedAt": "2026-07-23T22:30:00Z",
+  "revision": 2,
+  "updatedAt": "2026-07-24T12:00:00Z",
   "messages": [
     {
       "id": "ZORO-MSG-2026-07-23-001",
@@ -77,6 +77,18 @@
       "workKey": "context-api:vercel-gateway-implementation-plan",
       "messagePath": "zoro/messages/ZORO-MSG-2026-07-23-VERCEL-PLAN.md",
       "created": "2026-07-23"
+    },
+    {
+      "id": "KOFI-ZORO-2026-07-24-001",
+      "status": "new",
+      "type": "task-assignment",
+      "priority": "high",
+      "project": "FeatureLoop Lab",
+      "runId": null,
+      "taskId": null,
+      "workKey": "feature-loop-lab:repository-foundation",
+      "messagePath": "inboxes/zoro/messages/KOFI-ZORO-2026-07-24-001.md",
+      "created": "2026-07-24"
     }
   ]
 }
